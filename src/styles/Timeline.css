@@ -44,7 +44,8 @@
     position: relative;
     width: 100%;
     margin: 0 auto;
-    padding: 100px 0 0 0; /* Padding replaces first-child margin to strictly prevent CSS margin-collapse */
+    padding: 100px 0 0 0;
+    /* Padding replaces first-child margin to strictly prevent CSS margin-collapse */
 }
 
 /* Center Line */
@@ -82,7 +83,8 @@
 }
 
 .tl-row:first-of-type {
-    margin-top: 0; /* Handled by wrapper padding */
+    margin-top: 0;
+    /* Handled by wrapper padding */
 }
 
 .tl-row:last-child {
@@ -135,7 +137,8 @@
 }
 
 .tl-endpoint-start {
-    top: -20px; /* Reduced vertical pull to prevent overlapping and increase gap below text */
+    top: -20px;
+    /* Reduced vertical pull to prevent overlapping and increase gap below text */
     transform: translate(-50%, -50%);
 }
 
@@ -151,9 +154,11 @@
     z-index: 5;
     width: 40px;
     height: 40px;
-    background: var(--bg-primary); /* Fully opaque so the bright progress line doesn't bleed through visually */
+    background: var(--bg-primary);
+    /* Fully opaque so the bright progress line doesn't bleed through visually */
     border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 50%; /* Circle badge */
+    border-radius: 50%;
+    /* Circle badge */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -161,7 +166,8 @@
     font-size: 0.9rem;
     font-weight: 700;
     line-height: 1;
-    padding-bottom: 2px; /* Pulls the number visually center against the solid border */
+    padding-bottom: 2px;
+    /* Pulls the number visually center against the solid border */
     color: rgba(255, 255, 255, 0.7);
     transition: all 0.3s ease;
 }
@@ -179,8 +185,10 @@
 }
 
 .tl-row-left::before {
-    right: calc(50% + 20px); /* 20px is the radius of the marker */
-    width: 30px; /* 30px covers the exact distance to the 50px card padding */
+    right: calc(50% + 20px);
+    /* 20px is the radius of the marker */
+    width: 30px;
+    /* 30px covers the exact distance to the 50px card padding */
 }
 
 .tl-row-right::before {
@@ -304,10 +312,10 @@
 .tl-start-pill {
     position: relative;
     z-index: 5;
-    background: #011E1A; 
+    background: #011E1A;
     border: 2px solid rgba(0, 255, 200, 0.4);
     border-radius: 50%;
-    width: 50px; /* Slightly larger than the 40px event markers */
+    width: 50px;
     height: 50px;
     display: flex;
     align-items: center;
@@ -319,17 +327,25 @@
 }
 
 @keyframes pulse-glow {
-    0% { box-shadow: 0 0 10px rgba(0, 255, 200, 0.2), 0 0 0 0 rgba(0, 255, 200, 0.2); }
-    50% { box-shadow: 0 0 25px rgba(0, 255, 200, 0.5), 0 0 0 10px rgba(0, 255, 200, 0); }
-    100% { box-shadow: 0 0 10px rgba(0, 255, 200, 0.2), 0 0 0 0 rgba(0, 255, 200, 0); }
+    0% {
+        box-shadow: 0 0 10px rgba(0, 255, 200, 0.2), 0 0 0 0 rgba(0, 255, 200, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 0 25px rgba(0, 255, 200, 0.5), 0 0 0 10px rgba(0, 255, 200, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 10px rgba(0, 255, 200, 0.2), 0 0 0 0 rgba(0, 255, 200, 0);
+    }
 }
 
-.tl-start-pill-dot {
-    width: 14px;
-    height: 14px;
+.tl-start-pill-icon {
+    width: 70%;
+    height: 70%;
+    object-fit: cover;
     border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 12px var(--accent);
+    display: block;
     transition: all 0.3s ease;
 }
 
@@ -345,10 +361,9 @@
     animation: none;
 }
 
-.tl-start-pill.tour-active .tl-start-pill-dot {
-    background: var(--bg-primary);
-    box-shadow: none;
-    transform: scale(1.2);
+.tl-start-pill.tour-active .tl-start-pill-icon {
+    filter: invert(1) brightness(2);
+    transform: scale(1.15);
 }
 
 /* End marker style — matches regular dots */
@@ -359,12 +374,14 @@
 /* Responsiveness */
 @media (max-width: 768px) {
     .tl-vertical-wrap {
-        padding-top: 120px; /* Mobile safe buffer */
+        padding-top: 120px;
+        /* Mobile safe buffer */
     }
 
     .tl-center-line {
         left: 20px;
-        top: 15px; /* Match mobile start node's top offset so line doesn't bleed upwards */
+        top: 15px;
+        /* Match mobile start node's top offset so line doesn't bleed upwards */
     }
 
     .tl-row {
@@ -377,7 +394,8 @@
         display: none;
     }
 
-    .tl-row-left, .tl-row-right {
+    .tl-row-left,
+    .tl-row-right {
         flex-direction: row !important;
     }
 
@@ -395,23 +413,28 @@
     }
 
     .tl-endpoint-start {
-        top: 15px; /* Creates substantial mobile gap beneath text */
+        top: 15px;
+        /* Creates substantial mobile gap beneath text */
     }
 
     .tl-marker-wrap {
         left: 20px;
-        top: 34px; /* Align precisely with the card's date text padding */
+        top: 34px;
+        /* Align precisely with the card's date text padding */
         transform: translate(-50%, -50%);
     }
 
     .tl-row:first-of-type {
-        margin-top: 0; /* Handled by wrapper padding */
+        margin-top: 0;
+        /* Handled by wrapper padding */
     }
 
     .tl-row::before {
-        left: 40px !important; /* Starts exactly at the edge of the marker */
+        left: 40px !important;
+        /* Starts exactly at the edge of the marker */
         right: auto !important;
-        width: 20px !important; /* Spans 40px to 60px where card padding starts */
+        width: 20px !important;
+        /* Spans 40px to 60px where card padding starts */
         top: 34px !important;
         transform: translateY(-50%) !important;
     }
@@ -440,9 +463,11 @@
     .tl-container {
         max-width: 1650px;
     }
+
     .tl-card-title {
         font-size: 1.8rem;
     }
+
     .tl-card-desc {
         font-size: 1.1rem;
     }

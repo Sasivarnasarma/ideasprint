@@ -50,8 +50,8 @@
 .hero__panel {
   position: relative;
   z-index: 5;
-  width: 100%;
-  max-width: 100%;
+  width: 90%;
+  max-width: 1200px;
   height: 82dvh;
   max-height: 88dvh;
   box-sizing: border-box;
@@ -153,6 +153,9 @@
   color: rgba(251, 255, 254, 0.72);
   line-height: 1.65;
   text-align: justify;
+  text-justify: inter-word;
+  letter-spacing: -0.01em;
+  word-spacing: -0.04em;
   max-width: 480px;
   margin: 0;
 }
@@ -225,6 +228,37 @@
   box-shadow: 0 8px 22px rgba(0,0,0,0.15), 0 0 16px rgba(3,199,179,0.12);
 }
 
+/* Scroll Indicator */
+.hero-scroll-indicator {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+  gap: -2px;
+  opacity: 0.8;
+  align-self: center; /* Center relative to left column */
+}
+
+.hero-scroll-arrow {
+  width: 14px;
+  height: 14px;
+  border-right: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+  transform: rotate(45deg);
+  animation: heroScrollAnim 2s infinite;
+  margin-top: -5px;
+}
+
+.hero-scroll-arrow:nth-child(1) { animation-delay: 0s; }
+.hero-scroll-arrow:nth-child(2) { animation-delay: 0.15s; }
+.hero-scroll-arrow:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes heroScrollAnim {
+  0% { opacity: 0; transform: rotate(45deg) translate(-5px, -5px); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: rotate(45deg) translate(5px, 5px); }
+}
+
 /* ════════════════════════════════
    RIGHT column: Statue
    The right column height is entirely dictated by the panel.
@@ -251,6 +285,7 @@
     padding: clamp(1rem, 2.5vh, 2rem) clamp(1.5rem, 3vw, 2.5rem);
     max-height: 90dvh;
     width: 92%;
+    max-width: 960px;
   }
 
   .hero__content {
@@ -270,10 +305,11 @@
   .hero-section {
     height: 100dvh;
     align-items: center;
+    padding: 0 !important; /* Neutralize legacy global styling that squished 100% calculation by 4rem laterally */
   }
 
   .hero__panel {
-    width: 96%;
+    width: 92%;
     max-width: 480px;
     height: auto;
     max-height: 90dvh;
@@ -328,6 +364,10 @@
   .hero__btn {
     font-size: 0.82rem;
     padding: 0.75rem 1.6rem;
+  }
+
+  .hero-scroll-indicator {
+    display: flex;
   }
 }
 

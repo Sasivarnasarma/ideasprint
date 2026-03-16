@@ -12,7 +12,7 @@ export default function Hero({ visible }) {
             {/* Radial glow behind panel */}
             <div className="hero__glow" />
 
-            <div className="container" style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ height: '100%', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 {/* ═══ Hero Glass Panel ═══ */}
                 <div className="hero__panel">
                     {/* HUD Corner Accents */}
@@ -64,6 +64,12 @@ export default function Hero({ visible }) {
                                 >
                                     Booklet
                                 </a>
+                            </div>
+
+                            <div className="hero-scroll-indicator">
+                                <span className="hero-scroll-arrow"></span>
+                                <span className="hero-scroll-arrow"></span>
+                                <span className="hero-scroll-arrow"></span>
                             </div>
                         </div>
 

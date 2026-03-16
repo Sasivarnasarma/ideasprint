@@ -24,7 +24,7 @@ const faqData = [
     {
         id: 'guidelines',
         question: "Are there submission guidelines or templates?",
-        answer: "Yes. A formal proposal template and detailed submission guidelines will be provided to all registered teams. Adhering to these templates is mandatory for a valid submission."
+        answer: "Yes. A formal proposal template and detailed submission guidelines will be provided to all registered teams. Adhering to the provided template is mandatory for a valid submission."
     }
 ];
 
@@ -36,7 +36,7 @@ export default function FAQ() {
     return (
         <section id="faq" className="scroll-section faq-section-v2">
             <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-                
+
                 {/* Header */}
                 <div className="text-center mb-5">
                     <h2 className="section-title">F A <span className="accent">Q</span></h2>
@@ -47,12 +47,12 @@ export default function FAQ() {
 
                 {/* Dashboard-style Grid */}
                 <div className="faq-dashboard-grid">
-                    
+
                     {/* Left Column: Question List (Tabs & Mobile Accordion) */}
                     <div className="faq-questions-list">
                         {faqData.map((faq) => (
                             <div key={faq.id} className="faq-accordion-container">
-                                <div 
+                                <div
                                     className={`faq-tab-item ${activeId === faq.id ? 'active' : ''}`}
                                     onClick={() => setActiveId(activeId === faq.id ? null : faq.id)}
                                 >
@@ -81,7 +81,7 @@ export default function FAQ() {
                             </>
                         ) : (
                             <div style={{ display: 'flex', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
-                                <p className="faq-answer-text" style={{opacity: 0.5}}>Select a question to view its detailed answer.</p>
+                                <p className="faq-answer-text" style={{ opacity: 0.5 }}>Select a question to view its detailed answer.</p>
                             </div>
                         )}
                     </div>

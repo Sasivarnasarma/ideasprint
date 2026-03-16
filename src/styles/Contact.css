@@ -26,23 +26,13 @@
   overflow: hidden;
   cursor: grab;
   user-select: none;
-  touch-action: pan-y;
+  touch-action: none; /* Must be none — pan-y blocks horizontal swipe detection */
 }
 .contact-carousel:active { cursor: grabbing; }
 
 .contact-carousel__track {
   display: flex;
   width: max-content;
-  animation: marquee 25s linear infinite;
-}
-.contact-carousel__track:hover {
-  animation-play-state: paused;
-}
-
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  /* Since there are 3 copies of contacts, translating -33.333% shifts exactly one array length */
-  100% { transform: translateX(calc(-100% / 3)); }
 }
 
 .contact-carousel__slide {
@@ -68,7 +58,7 @@
 .contact-card__img-wrap {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
 }
 
@@ -95,7 +85,7 @@
 }
 
 .contact-card__body {
-  padding: 1.2rem 1.4rem 1.5rem;
+  padding: 1rem 1.2rem 1.2rem;
 }
 
 .contact-card__name {

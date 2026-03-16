@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import '../styles/Timeline.css';
+import iSymbol from '../assets/images/icon_info.png';
 
 /* ─── Event Data ─────────────────────────────────────────── */
 const EVENTS = [
-    { step: '01', date: 'March 16, 2026 00:00:00', displayDate: '16 MAR 2026', title: 'Registration Opens', desc: 'Team registration begins. Form your squad and secure your spot in the competition.' },
-    { step: '02', date: 'March 22, 2026 23:59:59', displayDate: '22 MAR 2026', title: 'Registration Closes', desc: 'Final deadline to register your team. Late entries will not be accepted.' },
+    { step: '01', date: 'March 17, 2026 00:00:00', displayDate: '17 MAR 2026', title: 'Registration Opens', desc: 'Team registration begins. Form your squad and secure your spot in the competition.' },
+    { step: '02', date: 'March 23, 2026 23:59:59', displayDate: '23 MAR 2026', title: 'Registration Closes', desc: 'Final deadline to register your team. Late entries will not be accepted.' },
     { step: '03', date: 'March 30, 2026 00:00:00', displayDate: '30 MAR 2026', title: 'Proposal Submissions Open', desc: 'Submit your innovative proposals and pitching videos following the official template and guidelines.' },
     { step: '04', date: 'April 24, 2026 23:59:59', displayDate: '24 APR 2026', title: 'Proposal Submissions Close', desc: 'All proposals and pitching videos must be finalized by this deadline. Evaluation begins immediately after.' },
     { step: '05', date: 'March 12, 2026 00:00:00', endDate: 'May 27, 2026 23:59:59', displayDate: '12 MAR — 27 MAY 2026', title: 'Workshop Series', desc: 'A series of workshops designed to help participants transform early ideas into well-developed, impactful solutions.' },
@@ -221,7 +222,7 @@ function Timeline() {
                     {/* Timeline Start Marker / Glowing Pill */}
                     <div className="tl-endpoint tl-endpoint-start">
                         <div className={`tl-start-pill ${isPlaying ? 'tour-active' : 'tour-interactive'}`} onClick={handlePlayClick} title="Play Timeline Journey">
-                            <span className="tl-start-pill-dot"></span>
+                            <img src={iSymbol} alt="Start" className="tl-start-pill-icon" />
                         </div>
                     </div>
 

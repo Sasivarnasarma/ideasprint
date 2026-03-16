@@ -31,9 +31,8 @@ export default function Footer() {
                     <div className="footer-col brand-col">
                         <img src={logoSrc} alt="ideasprint 2026" className="footer-main-logo" />
                         <p className="footer-desc">
-                            The Intra-Departmental Ideathon organised by the Industrial Management Science Students' Association.
+                            The Intra-Departmental Ideathon organized by the Industrial Management Science Students' Association.
                             Collaborate, explore real-world challenges, and develop innovative technology-driven solutions.
-                            Premier event of the Department of Industrial Management, University of Kelaniya.
                         </p>
                         <img src={deptLogos} alt="Department Logos" className="footer-dept-logos" />
                     </div>
@@ -77,7 +76,7 @@ export default function Footer() {
             <div className="footer-bottom">
                 <div className="container footer-bottom-flex">
                     <p className="footer-copyright-left">
-                        Organized by the Industrial Management Science Students' Association
+                        Organized by The Industrial Management Science Students' Association
                     </p>
                     <p className="footer-copyright-right">
                         &copy; ideasprint 2026. All rights reserved.

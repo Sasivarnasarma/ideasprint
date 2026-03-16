@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import '../styles/Contact.css';
 import tharinduImg from '../assets/images/contacts/tharindu.jpg';
 import thiliniImg from '../assets/images/contacts/thilini.jpg';
@@ -79,14 +79,112 @@ function ContactCard({ contact }) {
     );
 }
 
+const AUTO_SPEED = 0.6; // px per frame
+
 export default function Contact() {
-    // Clone contacts to create a seamless infinite loop
     const marqueeContacts = [...contacts, ...contacts, ...contacts];
+    const carouselRef = useRef(null);
+    const trackRef = useRef(null);
+
+    // Single position state held in a ref — updated every rAF frame
+    const posX = useRef(0);
+    const rafId = useRef(null);
+    const isDragging = useRef(false);
+    const dragStartX = useRef(0);
+    const dragStartPos = useRef(0);
+
+    const animate = useCallback(() => {
+        if (!trackRef.current) return;
+
+        if (!isDragging.current) {
+            // Auto-scroll: advance position
+            posX.current -= AUTO_SPEED;
+
+            // Seamless loop: once we've scrolled one-third of the total track, reset
+            const trackWidth = trackRef.current.scrollWidth;
+            const cycleWidth = trackWidth / 3;
+            if (Math.abs(posX.current) >= cycleWidth) {
+                posX.current += cycleWidth;
+            }
+        }
+
+        trackRef.current.style.transform = `translateX(${posX.current}px)`;
+        rafId.current = requestAnimationFrame(animate);
+    }, []);
+
+    // Start the rAF loop on mount, clean up on unmount
+    useEffect(() => {
+        rafId.current = requestAnimationFrame(animate);
+        return () => cancelAnimationFrame(rafId.current);
+    }, [animate]);
+
+    // Touch & mouse drag handlers
+    const startDrag = useCallback((clientX) => {
+        isDragging.current = true;
+        dragStartX.current = clientX;
+        dragStartPos.current = posX.current;
+        if (carouselRef.current) carouselRef.current.style.cursor = 'grabbing';
+    }, []);
+
+    const moveDrag = useCallback((clientX) => {
+        if (!isDragging.current) return;
+        const delta = clientX - dragStartX.current;
+        posX.current = dragStartPos.current + delta;
+    }, []);
+
+    const endDrag = useCallback(() => {
+        isDragging.current = false;
+        if (carouselRef.current) carouselRef.current.style.cursor = 'grab';
+    }, []);
+
+    // Non-passive native touch listeners (so we can call preventDefault)
+    useEffect(() => {
+        const el = carouselRef.current;
+        if (!el) return;
+
+        let startY = 0;
+
+        const onTouchStart = (e) => {
+            startY = e.touches[0].clientY;
+            startDrag(e.touches[0].clientX);
+        };
+
+        const onTouchMove = (e) => {
+            if (!isDragging.current) return;
+            const dx = Math.abs(e.touches[0].clientX - dragStartX.current);
+            const dy = Math.abs(e.touches[0].clientY - startY);
+            // Only block page scroll for clearly horizontal gestures
+            if (dx > dy) e.preventDefault();
+            moveDrag(e.touches[0].clientX);
+        };
+
+        const onTouchEnd = () => endDrag();
+
+        el.addEventListener('touchstart', onTouchStart, { passive: false });
+        el.addEventListener('touchmove', onTouchMove, { passive: false });
+        el.addEventListener('touchend', onTouchEnd);
+        return () => {
+            el.removeEventListener('touchstart', onTouchStart);
+            el.removeEventListener('touchmove', onTouchMove);
+            el.removeEventListener('touchend', onTouchEnd);
+        };
+    }, [startDrag, moveDrag, endDrag]);
+
+    // Document-level mouse listeners — so fast drags that leave the element still work
+    useEffect(() => {
+        const onMouseMove = (e) => moveDrag(e.clientX);
+        const onMouseUp = () => endDrag();
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+        return () => {
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('mouseup', onMouseUp);
+        };
+    }, [moveDrag, endDrag]);
 
     return (
         <section id="contact" className="scroll-section contact-section">
             <div className="container" style={{ position: 'relative' }}>
-                {/* Header */}
                 <div className="contact-section__header">
                     <h2 className="section-title">
                         CONTACT <span className="accent">OUR TEAM</span>
@@ -96,16 +194,24 @@ export default function Contact() {
                     </p>
                 </div>
 
-                {/* Continuous Marquee Carousel */}
-                <div className="contact-carousel" style={{ overflow: 'hidden', paddingBottom: '2rem' }}>
-                    <div className="contact-carousel__track marquee-track">
+                <div
+                    className="contact-carousel"
+                    ref={carouselRef}
+                    style={{ paddingBottom: '2rem' }}
+                    onMouseDown={(e) => startDrag(e.clientX)}
+                >
+                    <div
+                        className="contact-carousel__track"
+                        ref={trackRef}
+                        style={{ willChange: 'transform' }}
+                    >
                         {marqueeContacts.map((contact, i) => (
                             <div
                                 key={`${contact.name}-${i}`}
                                 className="contact-carousel__slide"
                                 style={{
                                     flex: '0 0 auto',
-                                    width: 'clamp(280px, 85vw, 360px)',
+                                    width: 'clamp(220px, 70vw, 280px)',
                                     marginRight: '2rem'
                                 }}
                             >
@@ -114,7 +220,6 @@ export default function Contact() {
                         ))}
                     </div>
                 </div>
-
             </div>
         </section>
     );

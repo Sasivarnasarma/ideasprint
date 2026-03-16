@@ -72,7 +72,7 @@ export default function Navbar() {
         let isMobileSize = window.innerWidth <= 768;
         let isScrolling = false;
         let scrollTimeout = null;
-        
+
         const handleResize = () => {
             isMobileSize = window.innerWidth <= 768;
             updateNavbarVisibility();
@@ -102,16 +102,15 @@ export default function Navbar() {
             }
 
             if (isMobileSize) {
-                // MOBILE LOGIC: Appear on scroll, hide when idle
-                if (isScrolling) {
+                // MOBILE LOGIC: Always visible at top of hero, else appear on scroll
+                if (window.scrollY < window.innerHeight * 0.8 || isScrolling) {
                     nav?.classList.remove('navbar-hidden');
                 } else {
                     nav?.classList.add('navbar-hidden');
                 }
             } else {
-                // DESKTOP/TABLET LOGIC: Smart hide
-                // Visible at top, on hover, OR while scrolling
-                if (window.scrollY <= 50 || mouseInTopArea || isHovered || isScrolling) {
+                // DESKTOP/TABLET LOGIC: Always visible at top of hero, top hover, OR while scrolling
+                if (window.scrollY < window.innerHeight * 0.8 || window.scrollY <= 50 || mouseInTopArea || isHovered || isScrolling) {
                     nav?.classList.remove('navbar-hidden');
                 } else {
                     nav?.classList.add('navbar-hidden');
@@ -122,7 +121,7 @@ export default function Navbar() {
         let lastUpdateTime = 0;
         const handleScrollTrigger = () => {
             isScrolling = true;
-            
+
             // Performance optimization: limit class updates during heavy scroll
             const now = Date.now();
             if (now - lastUpdateTime > 100) {
@@ -134,7 +133,7 @@ export default function Navbar() {
                     updateNavbarVisibility();
                 }
             }
-            
+
             if (scrollTimeout) clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(() => {
                 isScrolling = false;
@@ -145,7 +144,7 @@ export default function Navbar() {
         window.addEventListener('resize', handleResize);
         window.addEventListener('mousemove', handleMouseMove);
         window.addEventListener('scroll', handleScrollTrigger, { passive: true });
-        
+
         // Initial state update
         updateNavbarVisibility();
 
@@ -166,8 +165,8 @@ export default function Navbar() {
     };
 
     return (
-        <nav 
-            className={`system-nav ${isMobileMenuOpen ? 'mobile-open' : ''}`} 
+        <nav
+            className={`system-nav ${isMobileMenuOpen ? 'mobile-open' : ''}`}
             style={{ zIndex: 1001 }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}

@@ -9,19 +9,21 @@
   height: 100%;
   /* No fixed min-height — the parent controls height */
   display: flex;
-  align-items: center; /* Set to center to move the statue up */
+  align-items: center;
+  /* Set to center to move the statue up */
   justify-content: flex-end;
   background: transparent;
-  overflow: visible;    /* allow statue to bleed right edge */
+  overflow: visible;
+  /* allow statue to bleed right edge */
 
   /* Edge fades — horizontal + vertical */
   -webkit-mask-image:
-    linear-gradient(to right,  transparent 0%, black 12%, black 88%, transparent 100%),
-    linear-gradient(to top,    transparent 0%, black 20%, black 100%);
+    linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%),
+    linear-gradient(to top, transparent 0%, black 20%, black 100%);
   -webkit-mask-composite: destination-in;
   mask-image:
-    linear-gradient(to right,  transparent 0%, black 12%, black 88%, transparent 100%),
-    linear-gradient(to top,    transparent 0%, black 20%, black 100%);
+    linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%),
+    linear-gradient(to top, transparent 0%, black 20%, black 100%);
   mask-composite: intersect;
 }
 
@@ -44,9 +46,17 @@
   border-radius: 50%;
   animation: envGlowPulse 5s ease-in-out infinite alternate;
 }
+
 @keyframes envGlowPulse {
-  0%   { opacity: 0.65; transform: translateX(-50%) scale(0.96); }
-  100% { opacity: 1.00; transform: translateX(-50%) scale(1.04); }
+  0% {
+    opacity: 0.65;
+    transform: translateX(-50%) scale(0.96);
+  }
+
+  100% {
+    opacity: 1.00;
+    transform: translateX(-50%) scale(1.04);
+  }
 }
 
 /* ── Floating wrapper ── */
@@ -68,20 +78,27 @@
 */
 .statue__img {
   display: block;
-  width: 140%;       /* Grander scale */
+  width: 110%;
+  /* Grander scale — base intentionally cropped */
   max-width: none;
   height: 100%;
   max-height: none;
-  object-fit: contain;
-  object-position: right 35%; /* Shifted up from bottom right */
+  object-fit: cover;
+  object-position: right top;
+  /* Anchors top — base gets cropped at bottom */
+  transform: translateX(18%);
+  /* Shift right */
 
   mix-blend-mode: screen;
-  filter: drop-shadow(0 24px 36px rgba(0,0,0,0.55)) drop-shadow(0 0 20px rgba(3,199,179,0.22));
+  filter: drop-shadow(0 24px 36px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 20px rgba(3, 199, 179, 0.22));
 
   opacity: 0;
   transition: opacity 0.6s ease;
 }
-.statue__img--loaded { opacity: 1; }
+
+.statue__img--loaded {
+  opacity: 1;
+}
 
 /* ── Three.js mist canvas ── */
 .statue__mist-canvas {
@@ -93,6 +110,7 @@
   z-index: 3;
   pointer-events: none;
 }
+
 .statue__mist-canvas canvas {
   display: block;
   width: 100% !important;
@@ -123,11 +141,11 @@
   .statue__outer {
     -webkit-mask-image:
       linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%),
-      linear-gradient(to top,   transparent 0%, black 18%, black 100%);
+      linear-gradient(to top, transparent 0%, black 18%, black 100%);
     -webkit-mask-composite: destination-in;
     mask-image:
       linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%),
-      linear-gradient(to top,   transparent 0%, black 18%, black 100%);
+      linear-gradient(to top, transparent 0%, black 18%, black 100%);
     mask-composite: intersect;
   }
 }
@@ -136,5 +154,7 @@
    RESPONSIVE — Mobile (statue hidden in JSX anyway)
    ══════════════════════════════════════ */
 @media (max-width: 767px) {
-  .statue__mist-canvas { display: none; }
+  .statue__mist-canvas {
+    display: none;
+  }
 }
