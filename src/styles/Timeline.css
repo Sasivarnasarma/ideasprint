@@ -1,0 +1,449 @@
+/* ══════════════════════════════════════════════════════════════
+   TIMELINE — Vertical Alternating Center Axis
+   ══════════════════════════════════════════════════════════════ */
+
+.tl-vertical-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent;
+}
+
+.tl-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 5vw, 5rem);
+}
+
+.tl-heading {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.tl-eyebrow {
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    color: var(--accent);
+    opacity: 0.7;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.tl-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem) !important;
+    font-weight: 900 !important;
+    line-height: 1.1 !important;
+    letter-spacing: 2px !important;
+    margin-bottom: 0 !important;
+}
+
+/* Vertical Timeline Wrap */
+.tl-vertical-wrap {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    padding: 100px 0 0 0; /* Padding replaces first-child margin to strictly prevent CSS margin-collapse */
+}
+
+/* Center Line */
+.tl-center-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.tl-center-line-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+    transform-origin: top;
+}
+
+/* Row */
+.tl-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 80px;
+    position: relative;
+    width: 100%;
+    z-index: 2;
+}
+
+.tl-row:first-of-type {
+    margin-top: 0; /* Handled by wrapper padding */
+}
+
+.tl-row:last-child {
+    margin-bottom: 0;
+}
+
+/* Empty space for alternating layout */
+.tl-empty-space {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+/* Card Wrap */
+.tl-card-wrap {
+    flex: 0 0 50%;
+    max-width: 50%;
+    display: flex;
+}
+
+.tl-row-left {
+    flex-direction: row-reverse;
+}
+
+.tl-row-left .tl-card-wrap {
+    justify-content: flex-end;
+    padding-right: 50px;
+}
+
+.tl-row-right .tl-card-wrap {
+    justify-content: flex-start;
+    padding-left: 50px;
+}
+
+/* Marker Wrapper */
+.tl-marker-wrap {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Endpoint Markers (Start/End) */
+.tl-endpoint {
+    position: absolute;
+    left: 50%;
+    z-index: 3;
+}
+
+.tl-endpoint-start {
+    top: -20px; /* Reduced vertical pull to prevent overlapping and increase gap below text */
+    transform: translate(-50%, -50%);
+}
+
+.tl-endpoint-end {
+    bottom: 0;
+    transform: translate(-50%, 50%);
+}
+
+
+/* Marker Base */
+.tl-marker {
+    position: relative;
+    z-index: 5;
+    width: 40px;
+    height: 40px;
+    background: var(--bg-primary); /* Fully opaque so the bright progress line doesn't bleed through visually */
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%; /* Circle badge */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1;
+    padding-bottom: 2px; /* Pulls the number visually center against the solid border */
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.3s ease;
+}
+
+/* Connector Line Visual */
+.tl-row::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    /* width and side origins defined specifically below */
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.tl-row-left::before {
+    right: calc(50% + 20px); /* 20px is the radius of the marker */
+    width: 30px; /* 30px covers the exact distance to the 50px card padding */
+}
+
+.tl-row-right::before {
+    left: calc(50% + 20px);
+    width: 30px;
+}
+
+/* Marker States & Hover Highlights */
+.tl-marker-wrap.ongoing .tl-marker {
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.tl-marker-wrap.completed .tl-marker {
+    border-color: rgba(3, 199, 179, 0.5);
+    color: rgba(3, 199, 179, 0.8);
+}
+
+.tl-row:hover .tl-marker {
+    border-color: var(--accent);
+    color: var(--bg-primary);
+    background: var(--accent);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+.tl-row:hover::before {
+    background: rgba(3, 199, 179, 0.4);
+}
+
+/* Event Card */
+.tl-card {
+    background: rgba(0, 60, 55, 0.35);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(0, 255, 200, 0.25);
+    padding: 28px;
+    border-radius: 18px;
+    transition: all 0.35s ease;
+    width: 100%;
+    /* max-width removed to let it fill left/right margins identically */
+    position: relative;
+}
+
+.tl-row:hover .tl-card,
+.tl-card-wrap.tour-active .tl-card {
+    transform: translateY(-4px);
+    border-color: rgba(0, 255, 200, 0.45);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Guided Tour State Highlights */
+.tl-marker-wrap.tour-active .tl-marker {
+    background: rgba(3, 199, 179, 0.2);
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 0 20px rgba(3, 199, 179, 0.6);
+    transform: scale(1.15);
+}
+
+.tl-marker-wrap.tour-active::before {
+    background: var(--accent);
+}
+
+.tl-marker-wrap.tour-past .tl-marker {
+    border-color: rgba(3, 199, 179, 0.5);
+    color: rgba(3, 199, 179, 0.8);
+    background: var(--bg-primary);
+}
+
+.tl-marker.tour-interactive {
+    cursor: pointer;
+}
+
+.tl-marker.tour-interactive:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(3, 199, 179, 0.5);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.tl-card-date {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.tl-card-title {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.tl-card-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #cccccc;
+    margin-bottom: 0;
+}
+
+.tl-card-venue {
+    margin-top: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+
+/* Large Pulsing Start Node */
+.tl-start-pill {
+    position: relative;
+    z-index: 5;
+    background: #011E1A; 
+    border: 2px solid rgba(0, 255, 200, 0.4);
+    border-radius: 50%;
+    width: 50px; /* Slightly larger than the 40px event markers */
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 255, 200, 0.2);
+    animation: pulse-glow 2.5s infinite ease-in-out;
+}
+
+@keyframes pulse-glow {
+    0% { box-shadow: 0 0 10px rgba(0, 255, 200, 0.2), 0 0 0 0 rgba(0, 255, 200, 0.2); }
+    50% { box-shadow: 0 0 25px rgba(0, 255, 200, 0.5), 0 0 0 10px rgba(0, 255, 200, 0); }
+    100% { box-shadow: 0 0 10px rgba(0, 255, 200, 0.2), 0 0 0 0 rgba(0, 255, 200, 0); }
+}
+
+.tl-start-pill-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+    transition: all 0.3s ease;
+}
+
+.tl-start-pill:hover {
+    border-color: rgba(0, 255, 200, 0.8);
+    transform: translateY(-2px) scale(1.05);
+}
+
+.tl-start-pill.tour-active {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 30px rgba(0, 255, 200, 0.6);
+    animation: none;
+}
+
+.tl-start-pill.tour-active .tl-start-pill-dot {
+    background: var(--bg-primary);
+    box-shadow: none;
+    transform: scale(1.2);
+}
+
+/* End marker style — matches regular dots */
+.tl-marker--end {
+    font-size: 0.9rem;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .tl-vertical-wrap {
+        padding-top: 120px; /* Mobile safe buffer */
+    }
+
+    .tl-center-line {
+        left: 20px;
+        top: 15px; /* Match mobile start node's top offset so line doesn't bleed upwards */
+    }
+
+    .tl-row {
+        flex-direction: column !important;
+        align-items: flex-start;
+        margin-bottom: 40px;
+    }
+
+    .tl-empty-space {
+        display: none;
+    }
+
+    .tl-row-left, .tl-row-right {
+        flex-direction: row !important;
+    }
+
+    .tl-card-wrap {
+        flex: none !important;
+        max-width: 100% !important;
+        width: 100%;
+        padding-left: 60px !important;
+        padding-right: 0 !important;
+        justify-content: flex-start !important;
+    }
+
+    .tl-endpoint {
+        left: 20px;
+    }
+
+    .tl-endpoint-start {
+        top: 15px; /* Creates substantial mobile gap beneath text */
+    }
+
+    .tl-marker-wrap {
+        left: 20px;
+        top: 34px; /* Align precisely with the card's date text padding */
+        transform: translate(-50%, -50%);
+    }
+
+    .tl-row:first-of-type {
+        margin-top: 0; /* Handled by wrapper padding */
+    }
+
+    .tl-row::before {
+        left: 40px !important; /* Starts exactly at the edge of the marker */
+        right: auto !important;
+        width: 20px !important; /* Spans 40px to 60px where card padding starts */
+        top: 34px !important;
+        transform: translateY(-50%) !important;
+    }
+
+    .tl-row-left::before {
+        left: 40px !important;
+        right: auto !important;
+        width: 20px !important;
+    }
+
+    .tl-card {
+        max-width: 100%;
+    }
+}
+
+/* ══════════════════════════════════════
+   LARGE SCREENS & ULTRA-WIDE
+   ══════════════════════════════════════ */
+@media (min-width: 1440px) {
+    .tl-container {
+        max-width: 1500px;
+    }
+}
+
+@media (min-width: 1920px) {
+    .tl-container {
+        max-width: 1650px;
+    }
+    .tl-card-title {
+        font-size: 1.8rem;
+    }
+    .tl-card-desc {
+        font-size: 1.1rem;
+    }
+}

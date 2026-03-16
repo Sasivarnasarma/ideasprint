@@ -1,0 +1,140 @@
+/* ══════════════════════════════════════════════════════════════
+   STATUE — Fills the right hero column without overflow
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Outer container fills parent (.hero__right) which is bounded ── */
+.statue__outer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* No fixed min-height — the parent controls height */
+  display: flex;
+  align-items: center; /* Set to center to move the statue up */
+  justify-content: flex-end;
+  background: transparent;
+  overflow: visible;    /* allow statue to bleed right edge */
+
+  /* Edge fades — horizontal + vertical */
+  -webkit-mask-image:
+    linear-gradient(to right,  transparent 0%, black 12%, black 88%, transparent 100%),
+    linear-gradient(to top,    transparent 0%, black 20%, black 100%);
+  -webkit-mask-composite: destination-in;
+  mask-image:
+    linear-gradient(to right,  transparent 0%, black 12%, black 88%, transparent 100%),
+    linear-gradient(to top,    transparent 0%, black 20%, black 100%);
+  mask-composite: intersect;
+}
+
+/* ── Environmental radial glow ── */
+.statue__env-glow {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  width: 130%;
+  height: 85%;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at 50% 40%,
+      rgba(0, 255, 210, 0.18) 0%,
+      rgba(0, 255, 210, 0.08) 35%,
+      rgba(3, 199, 179, 0.03) 60%,
+      transparent 75%);
+  filter: blur(38px);
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 50%;
+  animation: envGlowPulse 5s ease-in-out infinite alternate;
+}
+@keyframes envGlowPulse {
+  0%   { opacity: 0.65; transform: translateX(-50%) scale(0.96); }
+  100% { opacity: 1.00; transform: translateX(-50%) scale(1.04); }
+}
+
+/* ── Floating wrapper ── */
+.statue__float-wrap {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+
+/* ── Statue image: key rules ──
+   - width: 100% fills the column
+   - height: 100% + object-fit: contain ensures it stays within bounds
+   - max-height: 100% prevents overflow
+*/
+.statue__img {
+  display: block;
+  width: 140%;       /* Grander scale */
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  object-fit: contain;
+  object-position: right 35%; /* Shifted up from bottom right */
+
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 24px 36px rgba(0,0,0,0.55)) drop-shadow(0 0 20px rgba(3,199,179,0.22));
+
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.statue__img--loaded { opacity: 1; }
+
+/* ── Three.js mist canvas ── */
+.statue__mist-canvas {
+  position: absolute;
+  bottom: 0;
+  left: -10%;
+  width: 120%;
+  height: 40%;
+  z-index: 3;
+  pointer-events: none;
+}
+.statue__mist-canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  background: transparent !important;
+}
+
+/* ── CSS bottom fog ── */
+.statue__fog {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 35%;
+  background: linear-gradient(to top,
+      rgba(4, 14, 12, 0.90) 0%,
+      rgba(4, 14, 12, 0.50) 30%,
+      rgba(4, 14, 12, 0.12) 60%,
+      transparent 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE — Tablet
+   ══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .statue__outer {
+    -webkit-mask-image:
+      linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%),
+      linear-gradient(to top,   transparent 0%, black 18%, black 100%);
+    -webkit-mask-composite: destination-in;
+    mask-image:
+      linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%),
+      linear-gradient(to top,   transparent 0%, black 18%, black 100%);
+    mask-composite: intersect;
+  }
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE — Mobile (statue hidden in JSX anyway)
+   ══════════════════════════════════════ */
+@media (max-width: 767px) {
+  .statue__mist-canvas { display: none; }
+}

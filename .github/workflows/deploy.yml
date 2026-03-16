@@ -1,0 +1,106 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
+        id: pnpm-cache
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Install Wrangler
+        run: npm install -g wrangler
+
+      - name: Set deployment info
+        id: deployinfo
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BRANCH="pr-${{ github.event.number }}"
+            URL="https://${BRANCH}.${{ vars.PROJECT_NAME }}.pages.dev"
+          elif [ "${{ github.event_name }}" = "push" ]; then
+            BRANCH="preview"
+            URL="https://${BRANCH}.${{ vars.PROJECT_NAME }}.pages.dev"
+          else
+            BRANCH="main"
+            URL="https://${{ vars.PROJECT_NAME }}.pages.dev"
+          fi
+
+          echo "branch=$BRANCH" >> $GITHUB_OUTPUT
+          echo "url=$URL" >> $GITHUB_OUTPUT
+
+      - name: Deploy to Cloudflare Pages
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          wrangler pages deploy ./dist \
+          --project-name=${{ vars.PROJECT_NAME }} \
+          --branch=${{ steps.deployinfo.outputs.branch }}
+
+      - name: Add summary
+        run: |
+          echo "## 🚀 Deployment URL" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "🔗 ${{ steps.deployinfo.outputs.url }}" >> $GITHUB_STEP_SUMMARY
+
+      - name: Comment PR
+        if: github.event_name == 'pull_request'
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.number }}
+          body: |
+            🚀 Preview Deployment Ready
+            🔗 ${{ steps.deployinfo.outputs.url }}
+
+      - name: Comment Commit
+        if: github.event_name != 'pull_request'
+        uses: actions/github-script@v8
+        with:
+          script: |
+            github.rest.repos.createCommitComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: context.sha,
+              body: `🚀 Cloudflare Deployment Completed!\n\n🔗 ${{ steps.deployinfo.outputs.url }}`
+            })
