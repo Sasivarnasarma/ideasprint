@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import StatueCanvas from './StatueCanvas.jsx';
+import ProposalPopup, { isSubmissionsOpen } from './ProposalPopup.jsx';
 import heroLogo from '../assets/images/logos/ideasprint-2026-logo.webp';
 import '../styles/Hero.css';
 
 export default function Hero({ visible }) {
+    const [popupOpen, setPopupOpen] = useState(false);
+    const handleClosePopup = useCallback(() => setPopupOpen(false), []);
+
+    const handleProposalClick = (e) => {
+        if (!isSubmissionsOpen()) {
+            e.preventDefault();
+            setPopupOpen(true);
+        }
+        // After March 30: default <a> behavior navigates to portal
+    };
+
     return (
         <section
             id="home"
@@ -53,6 +65,7 @@ export default function Hero({ visible }) {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="hero__btn hero__btn--primary"
+                                    onClick={handleProposalClick}
                                 >
                                     Submit Proposal
                                 </a>
@@ -88,6 +101,9 @@ export default function Hero({ visible }) {
                     </div>
                 </div>
             </div>
+
+            {/* Proposal Popup */}
+            <ProposalPopup isOpen={popupOpen} onClose={handleClosePopup} />
         </section>
     );
 }

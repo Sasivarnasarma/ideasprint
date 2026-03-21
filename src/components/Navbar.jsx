@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import StarBorder from './StarBorder.jsx';
+import ProposalPopup, { isSubmissionsOpen } from './ProposalPopup.jsx';
 import logoSrc from '../assets/images/logos/ideasprint-2026-logo.webp';
 
 export default function Navbar() {
@@ -8,6 +9,17 @@ export default function Navbar() {
     let isScrolled = useRef(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
+    const [popupOpen, setPopupOpen] = useState(false);
+    const handleClosePopup = useCallback(() => setPopupOpen(false), []);
+
+    const handleProposalClick = (e) => {
+        if (!isSubmissionsOpen()) {
+            e.preventDefault();
+            setPopupOpen(true);
+            closeMobileMenu();
+        }
+        // After March 30: default <a> behavior navigates to portal
+    };
 
     useEffect(() => {
         const nav = document.querySelector('.system-nav');
@@ -165,6 +177,7 @@ export default function Navbar() {
     };
 
     return (
+        <>
         <nav
             className={`system-nav ${isMobileMenuOpen ? 'mobile-open' : ''}`}
             style={{ zIndex: 1001 }}
@@ -183,7 +196,7 @@ export default function Navbar() {
                     <a href="#contact" className="nav-btn glow-hover">Contact</a>
                 </div>
                 <div className="nav-cta">
-                    <StarBorder as="a" href="https://isportal.hackx.lk/" target="_blank" rel="noopener noreferrer" className="star-border-primary" color="#03C7B3" speed="5s">
+                    <StarBorder as="a" href="https://isportal.hackx.lk/" target="_blank" rel="noopener noreferrer" className="star-border-primary" color="#03C7B3" speed="5s" onClick={handleProposalClick}>
                         SUBMIT PROPOSAL
                     </StarBorder>
                 </div>
@@ -202,11 +215,15 @@ export default function Navbar() {
                     <a href="#about" className="mobile-nav-btn" onClick={closeMobileMenu}>About</a>
                     <a href="#timeline" className="mobile-nav-btn" onClick={closeMobileMenu}>Timeline</a>
                     <a href="#contact" className="mobile-nav-btn" onClick={closeMobileMenu}>Contact</a>
-                    <StarBorder as="a" href="https://isportal.hackx.lk/" target="_blank" rel="noopener noreferrer" className="star-border-primary mobile-nav-register" color="#03C7B3" speed="5s" onClick={closeMobileMenu}>
+                    <StarBorder as="a" href="https://isportal.hackx.lk/" target="_blank" rel="noopener noreferrer" className="star-border-primary mobile-nav-register" color="#03C7B3" speed="5s" onClick={handleProposalClick}>
                         SUBMIT PROPOSAL
                     </StarBorder>
                 </div>
             </div>
         </nav>
+
+        {/* Proposal Popup */}
+        <ProposalPopup isOpen={popupOpen} onClose={handleClosePopup} />
+        </>
     );
 }
