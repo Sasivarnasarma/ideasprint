@@ -184,7 +184,7 @@ export default function Navbar() {
                 </div>
                 <div className="nav-cta">
                     <StarBorder as="a" href="https://isportal.hackx.lk/" target="_blank" rel="noopener noreferrer" className="star-border-primary" color="#03C7B3" speed="5s">
-                        REGISTER
+                        SUBMIT PROPOSAL
                     </StarBorder>
                 </div>
 
@@ -203,7 +203,7 @@ export default function Navbar() {
                     <a href="#timeline" className="mobile-nav-btn" onClick={closeMobileMenu}>Timeline</a>
                     <a href="#contact" className="mobile-nav-btn" onClick={closeMobileMenu}>Contact</a>
                     <StarBorder as="a" href="https://isportal.hackx.lk/" target="_blank" rel="noopener noreferrer" className="star-border-primary mobile-nav-register" color="#03C7B3" speed="5s" onClick={closeMobileMenu}>
-                        REGISTER
+                        SUBMIT PROPOSAL
                     </StarBorder>
                 </div>
             </div>

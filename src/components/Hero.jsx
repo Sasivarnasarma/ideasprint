@@ -54,7 +54,15 @@ export default function Hero({ visible }) {
                                     rel="noopener noreferrer"
                                     className="hero__btn hero__btn--primary"
                                 >
-                                    Register
+                                    Submit Proposal
+                                </a>
+                                <a
+                                    href="/assets/ideasprint-proposal-template.docx"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="hero__btn hero__btn--secondary"
+                                >
+                                    Proposal Template
                                 </a>
                                 <a
                                     href="/assets/ideasprint-delegate-booklet.pdf"
@@ -62,7 +70,7 @@ export default function Hero({ visible }) {
                                     rel="noopener noreferrer"
                                     className="hero__btn hero__btn--secondary"
                                 >
-                                    Booklet
+                                    Delegate Booklet
                                 </a>
                             </div>
 
