@@ -65,7 +65,6 @@ export default function PhasePopup({ isOpen, onClose, mode }) {
 
     useEffect(() => {
         if (!isOpen || !config) return;
-        // Immediate update
         setTimeLeft(getTimeRemaining(config.targetDate));
 
         const timer = setInterval(() => {
@@ -88,7 +87,6 @@ export default function PhasePopup({ isOpen, onClose, mode }) {
         return () => document.removeEventListener('keydown', handleEsc);
     }, [isOpen, onClose]);
 
-    // Prevent body scroll when open
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = 'hidden';
@@ -105,15 +103,12 @@ export default function PhasePopup({ isOpen, onClose, mode }) {
     return (
         <div className="phase-popup-overlay" onClick={onClose}>
             <div className={`phase-popup ${isClosing ? 'phase-popup--warning' : ''}`} onClick={(e) => e.stopPropagation()}>
-                {/* Close Button */}
                 <button className="phase-popup__close" onClick={onClose} aria-label="Close">
                     ×
                 </button>
 
-                {/* Glow accent */}
                 <div className="phase-popup__glow" />
 
-                {/* Content */}
                 <div className="phase-popup__content">
                     <div className={`phase-popup__badge ${isClosing ? 'phase-popup__badge--warning' : ''}`}>
                         <span className="phase-popup__badge-dot" />
@@ -128,7 +123,6 @@ export default function PhasePopup({ isOpen, onClose, mode }) {
                         {config.message}
                     </p>
 
-                    {/* Countdown */}
                     <div className="phase-popup__countdown">
                         <div className="phase-popup__time-block">
                             <span className="phase-popup__time-value">{String(timeLeft.days).padStart(2, '0')}</span>
@@ -151,7 +145,6 @@ export default function PhasePopup({ isOpen, onClose, mode }) {
                         </div>
                     </div>
 
-                    {/* Action Buttons */}
                     <div className="phase-popup__actions">
                         {config.showPortalBtn && (
                             <a

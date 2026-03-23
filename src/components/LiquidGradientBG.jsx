@@ -8,11 +8,11 @@ export default function LiquidGradientBG() {
                 inset: 0, 
                 zIndex: 0, 
                 pointerEvents: 'none',
-                backgroundColor: '#02110e', // Super dark base 
+                backgroundColor: '#02110e',
                 overflow: 'hidden'
             }}
         >
-            {/* Subtle atmospheric blurred glows */}
+
             <div 
                 style={{
                     position: 'absolute',
@@ -40,7 +40,7 @@ export default function LiquidGradientBG() {
                 }}
             />
             
-            {/* Very faint dark noise overlay to kill banding and add texture */}
+
             <div 
                 style={{
                     position: 'absolute',

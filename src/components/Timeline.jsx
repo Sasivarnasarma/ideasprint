@@ -3,10 +3,7 @@ import '../styles/Timeline.css';
 import iSymbol from '../assets/images/icon_info.png';
 import { EVENTS } from '../constants/eventDates.js';
 
-/**
- * Determine the status of an event based on the current date.
- * @returns {'completed' | 'ongoing' | 'upcoming'}
- */
+
 function getEventStatus(ev, now) {
     if (ev.endDate) {
         const start = new Date(ev.date);
@@ -26,15 +23,13 @@ function getEventStatus(ev, now) {
 }
 
 function Timeline() {
-    const now = new Date(); // Simulates real-time
+    const now = new Date();
 
-    /* ─── Tour & Animation States ─── */
     const [isPlaying, setIsPlaying] = useState(false);
     const [tourIndex, setTourIndex] = useState(-1);
     const tourTimerRef = useRef(null);
     const autoScrollRef = useRef(false);
 
-    /* ─── Scroll Progress Variables ─── */
     const [scrollTourProgress, setScrollTourProgress] = useState(0);
     const [scrollTourIndex, setScrollTourIndex] = useState(-1);
 
@@ -49,7 +44,6 @@ function Timeline() {
         if (tourTimerRef.current) clearInterval(tourTimerRef.current);
     };
 
-    // Calculate absolute line height iteratively strictly using React bounds
     useEffect(() => {
         const updateLineHeight = () => {
             if (wrapRef.current && lastMarkerRef.current) {
@@ -68,8 +62,8 @@ function Timeline() {
         }
 
         window.addEventListener('resize', updateLineHeight);
-        updateLineHeight(); // Initial calculaton
-        setTimeout(updateLineHeight, 300); // Re-fire after potential image load reflows
+        updateLineHeight();
+        setTimeout(updateLineHeight, 300);
 
         return () => {
             window.removeEventListener('resize', updateLineHeight);
@@ -77,7 +71,6 @@ function Timeline() {
         };
     }, []);
 
-    // Manual Scroll Progress Tracking
     useEffect(() => {
         const handleScrollProgress = () => {
             if (isPlaying || !wrapRef.current) return;
@@ -98,7 +91,6 @@ function Timeline() {
                     progress = Math.max(0, Math.min(1, progress));
                     setScrollTourProgress(progress);
 
-                    // Find active nodes for highlighting
                     let lastActiveIndex = -1;
                     rows.forEach((row, idx) => {
                         const rTop = row.getBoundingClientRect().top;
@@ -119,7 +111,6 @@ function Timeline() {
         };
     }, [isPlaying]);
 
-    // User manual scroll interrupt during tour
     useEffect(() => {
         const handleManualInteraction = () => {
             if (isPlaying && !autoScrollRef.current) {
@@ -135,14 +126,12 @@ function Timeline() {
         };
     }, [isPlaying]);
 
-    // Tour automated playback logic
     useEffect(() => {
         if (!isPlaying) {
             stopTour();
             return;
         }
 
-        // Initialize first step
         setTourIndex(0);
         scrollToStep(0);
 
@@ -208,7 +197,6 @@ function Timeline() {
                         ></div>
                     </div>
 
-                    {/* Timeline Start Marker / Glowing Pill */}
                     <div className="tl-endpoint tl-endpoint-start">
                         <div className={`tl-start-pill ${isPlaying ? 'tour-active' : 'tour-interactive'}`} onClick={handlePlayClick} title="Play Timeline Journey">
                             <img src={iSymbol} alt="Start" className="tl-start-pill-icon" />

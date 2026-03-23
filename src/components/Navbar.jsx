@@ -5,8 +5,7 @@ import logoSrc from '../assets/images/logos/ideasprint-2026-logo.webp';
 import { getPhase, PORTAL_URL, BOOKLET_URL } from '../constants/eventDates.js';
 
 export default function Navbar() {
-    let scrollTimeout = useRef(null);
-    let isHidden = useRef(false);
+    const isHidden = useRef(false);
     let isScrolled = useRef(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
@@ -61,7 +60,6 @@ export default function Navbar() {
         const handleScroll = () => {
             const scrollY = window.scrollY;
 
-            // Update scrolled appearance
             if (scrollY > 50) {
                 if (!isScrolled.current) {
                     nav?.classList.add('scrolled');
@@ -74,7 +72,6 @@ export default function Navbar() {
                 }
             }
 
-            // Highlighting active section - optimized
             let current = '';
             for (let i = sectionOffsets.length - 1; i >= 0; i--) {
                 if (scrollY >= sectionOffsets[i].top - 250) {
@@ -89,7 +86,6 @@ export default function Navbar() {
             });
         };
 
-        // Initial update and listeners
         updateOffsets();
         window.addEventListener('scroll', handleScroll, { passive: true });
         window.addEventListener('resize', updateOffsets);
@@ -103,7 +99,6 @@ export default function Navbar() {
 
     useEffect(() => {
         const nav = document.querySelector('.system-nav');
-        // MOBILE BEHAVIOR BREAKPOINT: 768px
         let isMobileSize = window.innerWidth <= 768;
         let isScrolling = false;
         let scrollTimeout = null;
@@ -116,7 +111,6 @@ export default function Navbar() {
         let mouseInTopArea = false;
         const handleMouseMove = (e) => {
             if (isMobileSize) return;
-            // Check if cursor is in top 120px
             mouseInTopArea = e.clientY <= 120;
             updateNavbarVisibility();
         };
@@ -124,27 +118,23 @@ export default function Navbar() {
         const updateNavbarVisibility = () => {
             const isTourActive = document.body.dataset.tourActive === 'true';
 
-            // High priority: Tours always hide the navbar
             if (isTourActive) {
                 nav?.classList.add('navbar-hidden');
                 return;
             }
 
-            // High priority: Mobile menu open always shows the navbar
             if (isMobileMenuOpen) {
                 nav?.classList.remove('navbar-hidden');
                 return;
             }
 
             if (isMobileSize) {
-                // MOBILE LOGIC: Always visible at top of hero, else appear on scroll
                 if (window.scrollY < window.innerHeight * 0.8 || isScrolling) {
                     nav?.classList.remove('navbar-hidden');
                 } else {
                     nav?.classList.add('navbar-hidden');
                 }
             } else {
-                // DESKTOP/TABLET LOGIC: Always visible at top of hero, top hover, OR while scrolling
                 if (window.scrollY < window.innerHeight * 0.8 || window.scrollY <= 50 || mouseInTopArea || isHovered || isScrolling) {
                     nav?.classList.remove('navbar-hidden');
                 } else {
@@ -157,13 +147,11 @@ export default function Navbar() {
         const handleScrollTrigger = () => {
             isScrolling = true;
 
-            // Performance optimization: limit class updates during heavy scroll
             const now = Date.now();
             if (now - lastUpdateTime > 100) {
                 updateNavbarVisibility();
                 lastUpdateTime = now;
             } else {
-                // Ensure it's at least shown if it was hidden
                 if (nav?.classList.contains('navbar-hidden')) {
                     updateNavbarVisibility();
                 }
@@ -173,14 +161,13 @@ export default function Navbar() {
             scrollTimeout = setTimeout(() => {
                 isScrolling = false;
                 updateNavbarVisibility();
-            }, 1000); // 1s auto-hide timer
+            }, 1000);
         };
 
         window.addEventListener('resize', handleResize);
         window.addEventListener('mousemove', handleMouseMove);
         window.addEventListener('scroll', handleScrollTrigger, { passive: true });
 
-        // Initial state update
         updateNavbarVisibility();
 
         return () => {
@@ -212,7 +199,7 @@ export default function Navbar() {
                         <img src={logoSrc} alt="ideasprint 2026" className="nav-logo-img" />
                     </div>
 
-                    {/* Desktop Links */}
+
                     <div className="nav-links">
                         <a href="#about" className="nav-btn glow-hover">About</a>
                         <a href="#timeline" className="nav-btn glow-hover">Timeline</a>
@@ -224,7 +211,7 @@ export default function Navbar() {
                         </StarBorder>
                     </div>
 
-                    {/* Mobile Hamburger Toggle */}
+
                     <div className="mobile-menu-toggle" onClick={toggleMobileMenu}>
                         <span className={`hamburger-line ${isMobileMenuOpen ? 'open' : ''}`}></span>
                         <span className={`hamburger-line ${isMobileMenuOpen ? 'open' : ''}`}></span>
@@ -232,7 +219,7 @@ export default function Navbar() {
                     </div>
                 </div>
 
-                {/* Mobile Menu Dropdown */}
+
                 <div className={`mobile-menu-dropdown ${isMobileMenuOpen ? 'open' : ''}`}>
                     <div className="mobile-menu-links">
                         <a href="#about" className="mobile-nav-btn" onClick={closeMobileMenu}>About</a>

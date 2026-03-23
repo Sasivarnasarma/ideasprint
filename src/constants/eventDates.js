@@ -1,12 +1,9 @@
-
-// ── Key Dates ──
 export const REGISTRATION_OPEN = new Date('March 17, 2026 00:00:00');
 export const REGISTRATION_CLOSE = new Date('March 24, 2026 06:00:00');
 export const TEMPLATE_RELEASE = new Date('March 25, 2026 00:00:00');
 export const PROPOSAL_OPEN = new Date('March 30, 2026 00:00:00');
 export const PROPOSAL_CLOSE = new Date('April 24, 2026 23:59:59');
 
-// ── Portal URL ──
 export const PORTAL_URL = 'https://isportal.hackx.lk/';
 export const TEMPLATE_URL = '/assets/ideasprint-proposal-template.docx';
 export const BOOKLET_URL = '/assets/ideasprint-delegate-booklet.pdf';

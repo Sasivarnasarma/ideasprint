@@ -67,10 +67,10 @@ export default function About() {
         <section id="about" className="scroll-section about-section">
             <div className="container" style={{ position: 'relative', zIndex: 2 }}>
 
-                {/* ── EDITORIAL SPLIT LAYOUT ── */}
+
                 <div className="about-split-layout">
 
-                    {/* LEFT: large title anchors outside the card */}
+
                     <div className="about-split-title-col">
                         <h2 className="split-title">
                             What is<br />
@@ -78,7 +78,7 @@ export default function About() {
                             2026?
                         </h2>
 
-                        {/* Stat pills below the title */}
+
                         <div className="about-stat-row">
                             <div className="about-stat-pill">
                                 <span className="about-stat-pill__num accent">15</span>
@@ -91,17 +91,17 @@ export default function About() {
                         </div>
                     </div>
 
-                    {/* RIGHT: glass card holds all text content */}
+
                     <div className="about-card">
-                        {/* Top left corner deco */}
+
                         <span className="about-card__corner about-card__corner--tl" />
                         <span className="about-card__corner about-card__corner--br" />
 
-                        {/* Ghost watermark */}
+
                         <span className="about-card__watermark">IS</span>
 
                         <div className="about-card__body">
-                            {/* Eye-brow label */}
+
                             <p className="about-card__tag">
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
                                     stroke="currentColor" strokeWidth="2.5"
@@ -113,7 +113,7 @@ export default function About() {
                                 About the Event
                             </p>
 
-                            {/* Paragraphs */}
+
                             <p className="about-card__desc">
                                 ideasprint 2026 marks the opening stage of <strong>hackX 11.0</strong> organized
                                 by the Industrial Management Science Students' Association.
@@ -128,7 +128,7 @@ export default function About() {
                                 develop entrepreneurial thinking, problem-solving abilities, and pitching skills.
                             </p>
 
-                            {/* Footer tag */}
+
                             <div className="about-card__footer">
                                 <span className="about-card__footer-pill">hackX 11.0</span>
                                 <span className="about-card__footer-pill">University of Kelaniya</span>
@@ -137,13 +137,13 @@ export default function About() {
                     </div>
                 </div>
 
-                {/* ── EVENT STRUCTURE ── */}
+
                 <div className="modern-event-structure">
                     <div className="text-center mb-4 section-title-glow">
                         <h2 className="section-title">EVENT <span className="accent">STRUCTURE</span></h2>
                     </div>
 
-                    {/* Phase tabs */}
+
                     <div className="feature-grid-controls mx-auto mb-5">
                         {phases.map((phase, idx) => (
                             <button
@@ -156,7 +156,7 @@ export default function About() {
                         ))}
                     </div>
 
-                    {/* Sliding panel */}
+
                     <div className="feature-grid-window mx-auto">
                         <div className="feature-grid-track" style={{ transform: `translateX(-${activePhase * 100}%)` }}>
                             {phases.map((phase, idx) => (

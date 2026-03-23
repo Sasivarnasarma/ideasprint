@@ -69,22 +69,17 @@ export default function Hero({ visible }) {
             id="home"
             className={`scroll-section hero-section${visible ? ' hero-section--visible' : ''}`}
         >
-            {/* Radial glow behind panel */}
             <div className="hero__glow" />
 
             <div style={{ height: '100%', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                {/* ═══ Hero Glass Panel ═══ */}
                 <div className="hero__panel">
-                    {/* HUD Corner Accents */}
                     <span className="hero__corner hero__corner--tl" />
                     <span className="hero__corner hero__corner--tr" />
                     <span className="hero__corner hero__corner--bl" />
                     <span className="hero__corner hero__corner--br" />
 
-                    {/* Two-column layout */}
                     <div className="hero__content">
 
-                        {/* ── LEFT: Text stack ── */}
                         <div className="hero__left">
                             <div className="hero__badge">
                                 <span className="hero__badge-dot" />
@@ -108,7 +103,6 @@ export default function Hero({ visible }) {
                             </p>
 
                             <div className="hero__buttons">
-                                {/* Phase 1 & 2: Register button */}
                                 {(phase === 1 || phase === 2) && (
                                     <a
                                         href={PORTAL_URL}
@@ -121,7 +115,6 @@ export default function Hero({ visible }) {
                                     </a>
                                 )}
 
-                                {/* Phase 3, 4 & 5: Submit Proposal button */}
                                 {(phase >= 3 && phase <= 5) && (
                                     <a
                                         href={PORTAL_URL}
@@ -134,7 +127,6 @@ export default function Hero({ visible }) {
                                     </a>
                                 )}
 
-                                {/* Phase 3, 4 & 5: Proposal Template button */}
                                 {(phase >= 3 && phase <= 5) && (
                                     <a
                                         href={TEMPLATE_URL}
@@ -146,7 +138,6 @@ export default function Hero({ visible }) {
                                     </a>
                                 )}
 
-                                {/* Delegate Booklet */}
                                 <a
                                     href={BOOKLET_URL}
                                     target="_blank"
@@ -164,7 +155,6 @@ export default function Hero({ visible }) {
                             </div>
                         </div>
 
-                        {/* ── RIGHT: Statue ── */}
                         <div className="hero__right">
                             <StatueCanvas />
                         </div>
@@ -172,7 +162,6 @@ export default function Hero({ visible }) {
                 </div>
             </div>
 
-            {/* Phase Popup */}
             {popupMode && (
                 <PhasePopup isOpen={popupOpen} onClose={handleClosePopup} mode={popupMode} />
             )}

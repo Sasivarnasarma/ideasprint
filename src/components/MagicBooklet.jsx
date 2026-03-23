@@ -4,66 +4,48 @@ import { useGLTF, Environment, Html } from '@react-three/drei';
 import * as THREE from 'three';
 import '../styles/MagicBooklet.css';
 
-// The Magic Book component
 function Book({ isHovered, setIsHovered, isClicked, setIsClicked, hasRevealed }) {
     const groupRef = useRef();
     const { scene } = useGLTF('/models/magic_book/scene.gltf');
 
-    // Base rotation speed
     const autoRotateSpeed = 0.005;
 
-    // Track entrance animation progress manually for smooth expo ease without external libs in useFrame
     const entranceProgress = useRef(0);
 
     useFrame((state, delta) => {
         const t = state.clock.getElapsedTime();
 
         if (groupRef.current) {
-            // Primary bob (0.8Hz)
             const yBob = Math.sin(t * 0.8 * Math.PI) * 0.1;
-            // Secondary ripple (1.7Hz)
             const xRipple = Math.sin(t * 1.7 * Math.PI) * 0.05;
-            // Micro-tremor (3.1Hz)
             const zTremor = Math.sin(t * 3.1 * Math.PI) * 0.02;
 
-            // Handle hover scale
             const targetScale = isHovered ? 1.08 : 1.0;
             groupRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
 
-            // Smooth position interpolation with bobbing
             groupRef.current.position.lerp(new THREE.Vector3(xRipple, yBob, zTremor), 0.1);
 
-            // Handle Entrance reveal animation
             if (hasRevealed && entranceProgress.current < 1) {
-                // simple speed modifier for ~1.2s feel
                 entranceProgress.current += delta * 1.5;
                 if (entranceProgress.current > 1) entranceProgress.current = 1;
             }
 
-            // Ease out expo custom function
             const easeOutExpo = (x) => x === 1 ? 1 : 1 - Math.pow(2, -10 * x);
             const progress = easeOutExpo(entranceProgress.current);
 
-            // Starting state: horizontal (lying flat), Front cover up (approx Math.PI / 2 on X)
-            // End state: upright (0 on X)
             const entranceBaseRotX = THREE.MathUtils.lerp(Math.PI / 2, 0, progress);
-            const entranceBaseRotY = THREE.MathUtils.lerp(Math.PI, 0, progress); // Added Y spin to make the tumble more dynamic
+            const entranceBaseRotY = THREE.MathUtils.lerp(Math.PI, 0, progress);
 
-            // Rotation handling
             if (!isHovered) {
-                // Gentle oscillatory rotation on Y axis, so we never show the back
                 if (progress === 1) {
-                    // Oscillate between -0.4 and 0.4 radians (approx 23 degrees left/right)
                     groupRef.current.rotation.y = Math.sin(t * 0.4) * 0.4;
                 } else {
                     groupRef.current.rotation.y = entranceBaseRotY;
                 }
 
-                // Set X relative to the entrance base + gentle idle tilt
                 groupRef.current.rotation.x = entranceBaseRotX + Math.sin(t * 0.5) * 0.1;
                 groupRef.current.rotation.z = THREE.MathUtils.lerp(groupRef.current.rotation.z, 0, 0.1);
             } else {
-                // Face the viewer smoothly and follow mouse slightly, with a heavier, smoother lerp
                 const targetRotY = (state.pointer.x * Math.PI) / 8;
                 const targetRotX = 0.05 - (state.pointer.y * Math.PI) / 10;
                 groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, targetRotY, 0.08);
@@ -88,7 +70,6 @@ function Book({ isHovered, setIsHovered, isClicked, setIsClicked, hasRevealed })
     );
 }
 
-// Glowing rings beneath the book
 function GlowingRings() {
     const ring1Ref = useRef();
     const ring2Ref = useRef();
@@ -96,12 +77,10 @@ function GlowingRings() {
     useFrame((state) => {
         const t = state.clock.getElapsedTime();
         if (ring1Ref.current && ring2Ref.current) {
-            // Breathing opacity/scale on ring 1
             const scale1 = 1 + Math.sin(t * 2) * 0.1;
             ring1Ref.current.scale.set(scale1, scale1, scale1);
             ring1Ref.current.material.opacity = 0.5 + Math.sin(t * 2) * 0.2;
 
-            // Pulsing outer ring 2
             const scale2 = 1.3 + Math.sin(t * 1.5 + Math.PI) * 0.15;
             ring2Ref.current.scale.set(scale2, scale2, scale2);
             ring2Ref.current.material.opacity = 0.3 + Math.sin(t * 1.5) * 0.1;
@@ -131,14 +110,13 @@ const MagicBooklet = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const sectionRef = useRef(null);
 
-    // Setup intersection observer for scroll reveal
     useEffect(() => {
         const observer = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting) {
                 setHasRevealed(true);
                 observer.disconnect();
             }
-        }, { threshold: 0.3 }); // Trigger when 30% visible
+        }, { threshold: 0.3 });
 
         if (sectionRef.current) {
             observer.observe(sectionRef.current);
@@ -149,11 +127,11 @@ const MagicBooklet = () => {
 
     return (
         <section className="magic-book-section" id="booklet" ref={sectionRef}>
-            {/* Background container */}
+
             <div className="magic-book-bg"></div>
 
             <div className="magic-book-content-wrapper">
-                {/* Glass UI Card on the Left */}
+
                 <div className={`glass-ui-container ${hasRevealed ? 'revealed' : ''}`}>
                     <div className={`glass-card ${isHovered ? 'hovered' : ''}`}>
                         <h2 className="ideasprint-title">ideasprint 2026</h2>
@@ -171,7 +149,7 @@ const MagicBooklet = () => {
                     </div>
                 </div>
 
-                {/* 3D Canvas on the Right */}
+
                 <div className="magic-book-canvas-container">
                     <Canvas camera={{ position: [0, 0, 5], fov: 45 }} gl={{ antialias: true, alpha: true }}>
                         <ambientLight intensity={0.5} />
@@ -191,7 +169,7 @@ const MagicBooklet = () => {
                 </div>
             </div>
 
-            {/* Simple PDF Modal */}
+
             {modalOpen && (
                 <div className="pdf-modal-overlay" onClick={() => setModalOpen(false)}>
                     <div className="pdf-modal-content" onClick={(e) => e.stopPropagation()}>

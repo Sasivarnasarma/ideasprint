@@ -86,7 +86,6 @@ export default function Contact() {
     const carouselRef = useRef(null);
     const trackRef = useRef(null);
 
-    // Single position state held in a ref — updated every rAF frame
     const posX = useRef(0);
     const rafId = useRef(null);
     const isDragging = useRef(false);
@@ -97,10 +96,8 @@ export default function Contact() {
         if (!trackRef.current) return;
 
         if (!isDragging.current) {
-            // Auto-scroll: advance position
             posX.current -= AUTO_SPEED;
 
-            // Seamless loop: once we've scrolled one-third of the total track, reset
             const trackWidth = trackRef.current.scrollWidth;
             const cycleWidth = trackWidth / 3;
             if (Math.abs(posX.current) >= cycleWidth) {
@@ -112,13 +109,11 @@ export default function Contact() {
         rafId.current = requestAnimationFrame(animate);
     }, []);
 
-    // Start the rAF loop on mount, clean up on unmount
     useEffect(() => {
         rafId.current = requestAnimationFrame(animate);
         return () => cancelAnimationFrame(rafId.current);
     }, [animate]);
 
-    // Touch & mouse drag handlers
     const startDrag = useCallback((clientX) => {
         isDragging.current = true;
         dragStartX.current = clientX;
@@ -137,7 +132,6 @@ export default function Contact() {
         if (carouselRef.current) carouselRef.current.style.cursor = 'grab';
     }, []);
 
-    // Non-passive native touch listeners (so we can call preventDefault)
     useEffect(() => {
         const el = carouselRef.current;
         if (!el) return;
@@ -153,7 +147,6 @@ export default function Contact() {
             if (!isDragging.current) return;
             const dx = Math.abs(e.touches[0].clientX - dragStartX.current);
             const dy = Math.abs(e.touches[0].clientY - startY);
-            // Only block page scroll for clearly horizontal gestures
             if (dx > dy) e.preventDefault();
             moveDrag(e.touches[0].clientX);
         };
@@ -170,7 +163,6 @@ export default function Contact() {
         };
     }, [startDrag, moveDrag, endDrag]);
 
-    // Document-level mouse listeners — so fast drags that leave the element still work
     useEffect(() => {
         const onMouseMove = (e) => moveDrag(e.clientX);
         const onMouseUp = () => endDrag();
