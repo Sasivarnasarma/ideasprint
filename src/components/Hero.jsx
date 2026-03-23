@@ -1,19 +1,67 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import StatueCanvas from './StatueCanvas.jsx';
-import ProposalPopup, { isSubmissionsOpen } from './ProposalPopup.jsx';
+import PhasePopup from './PhasePopup.jsx';
 import heroLogo from '../assets/images/logos/ideasprint-2026-logo.webp';
+import {
+    getPhase,
+    isWithinWarningWindow,
+    REGISTRATION_CLOSE,
+    PROPOSAL_CLOSE,
+    PORTAL_URL,
+    TEMPLATE_URL,
+    BOOKLET_URL,
+} from '../constants/eventDates.js';
 import '../styles/Hero.css';
 
 export default function Hero({ visible }) {
     const [popupOpen, setPopupOpen] = useState(false);
+    const [popupMode, setPopupMode] = useState(null);
     const handleClosePopup = useCallback(() => setPopupOpen(false), []);
 
-    const handleProposalClick = (e) => {
-        if (!isSubmissionsOpen()) {
+    const phase = getPhase();
+
+    useEffect(() => {
+        const sessionKey = phase === 2
+            ? 'ideasprint_reg_closing_shown'
+            : 'ideasprint_prop_closing_shown';
+
+        if (phase === 2 && isWithinWarningWindow(REGISTRATION_CLOSE)) {
+            if (!sessionStorage.getItem(sessionKey)) {
+                setPopupMode('registration-closing');
+                setPopupOpen(true);
+                sessionStorage.setItem(sessionKey, 'true');
+            }
+        } else if (phase === 5 && isWithinWarningWindow(PROPOSAL_CLOSE)) {
+            if (!sessionStorage.getItem(sessionKey)) {
+                setPopupMode('proposal-closing');
+                setPopupOpen(true);
+                sessionStorage.setItem(sessionKey, 'true');
+            }
+        }
+    }, [phase]);
+
+    const handlePrimaryClick = (e) => {
+        if (phase === 1) {
             e.preventDefault();
+            setPopupMode('registration-soon');
+            setPopupOpen(true);
+        } else if (phase === 3) {
+            e.preventDefault();
+            setPopupMode('template-releasing');
+            setPopupOpen(true);
+        } else if (phase === 4) {
+            e.preventDefault();
+            setPopupMode('proposal-soon');
             setPopupOpen(true);
         }
-        // After March 30: default <a> behavior navigates to portal
+    };
+
+    const handleTemplateClick = (e) => {
+        if (phase === 3) {
+            e.preventDefault();
+            setPopupMode('template-releasing');
+            setPopupOpen(true);
+        }
     };
 
     return (
@@ -60,28 +108,50 @@ export default function Hero({ visible }) {
                             </p>
 
                             <div className="hero__buttons">
+                                {/* Phase 1 & 2: Register button */}
+                                {(phase === 1 || phase === 2) && (
+                                    <a
+                                        href={PORTAL_URL}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hero__btn hero__btn--primary"
+                                        onClick={handlePrimaryClick}
+                                    >
+                                        Register
+                                    </a>
+                                )}
+
+                                {/* Phase 3, 4 & 5: Submit Proposal button */}
+                                {(phase >= 3 && phase <= 5) && (
+                                    <a
+                                        href={PORTAL_URL}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hero__btn hero__btn--primary"
+                                        onClick={handlePrimaryClick}
+                                    >
+                                        Submit Proposal
+                                    </a>
+                                )}
+
+                                {/* Phase 3, 4 & 5: Proposal Template button */}
+                                {(phase >= 3 && phase <= 5) && (
+                                    <a
+                                        href={TEMPLATE_URL}
+                                        className="hero__btn hero__btn--secondary"
+                                        onClick={handleTemplateClick}
+                                        download={phase >= 4 ? true : undefined}
+                                    >
+                                        Proposal Template
+                                    </a>
+                                )}
+
+                                {/* Delegate Booklet */}
                                 <a
-                                    href="https://isportal.hackx.lk/"
+                                    href={BOOKLET_URL}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="hero__btn hero__btn--primary"
-                                    onClick={handleProposalClick}
-                                >
-                                    Submit Proposal
-                                </a>
-                                <a
-                                    href="/assets/ideasprint-proposal-template.docx"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="hero__btn hero__btn--secondary"
-                                >
-                                    Proposal Template
-                                </a>
-                                <a
-                                    href="/assets/ideasprint-delegate-booklet.pdf"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="hero__btn hero__btn--secondary"
+                                    className={`hero__btn ${phase === 6 ? 'hero__btn--primary' : 'hero__btn--secondary'}`}
                                 >
                                     Delegate Booklet
                                 </a>
@@ -102,8 +172,10 @@ export default function Hero({ visible }) {
                 </div>
             </div>
 
-            {/* Proposal Popup */}
-            <ProposalPopup isOpen={popupOpen} onClose={handleClosePopup} />
+            {/* Phase Popup */}
+            {popupMode && (
+                <PhasePopup isOpen={popupOpen} onClose={handleClosePopup} mode={popupMode} />
+            )}
         </section>
     );
 }

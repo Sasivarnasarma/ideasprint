@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import StarBorder from './StarBorder.jsx';
-import ProposalPopup, { isSubmissionsOpen } from './ProposalPopup.jsx';
+import PhasePopup from './PhasePopup.jsx';
 import logoSrc from '../assets/images/logos/ideasprint-2026-logo.webp';
+import { getPhase, PORTAL_URL, BOOKLET_URL } from '../constants/eventDates.js';
 
 export default function Navbar() {
     let scrollTimeout = useRef(null);
@@ -10,16 +11,38 @@ export default function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
     const [popupOpen, setPopupOpen] = useState(false);
+    const [popupMode, setPopupMode] = useState(null);
     const handleClosePopup = useCallback(() => setPopupOpen(false), []);
 
-    const handleProposalClick = (e) => {
-        if (!isSubmissionsOpen()) {
+    const phase = getPhase();
+
+    const handleCtaClick = (e) => {
+        if (phase === 1) {
             e.preventDefault();
+            setPopupMode('registration-soon');
+            setPopupOpen(true);
+            closeMobileMenu();
+        } else if (phase === 3) {
+            e.preventDefault();
+            setPopupMode('template-releasing');
+            setPopupOpen(true);
+            closeMobileMenu();
+        } else if (phase === 4) {
+            e.preventDefault();
+            setPopupMode('proposal-soon');
             setPopupOpen(true);
             closeMobileMenu();
         }
-        // After March 30: default <a> behavior navigates to portal
     };
+
+    const getCtaText = () => {
+        if (phase <= 2) return 'REGISTER';
+        if (phase <= 5) return 'SUBMIT PROPOSAL';
+        return 'DELEGATE BOOKLET';
+    };
+
+    const ctaText = getCtaText();
+    const ctaHref = phase === 6 ? BOOKLET_URL : PORTAL_URL;
 
     useEffect(() => {
         const nav = document.querySelector('.system-nav');
@@ -178,52 +201,54 @@ export default function Navbar() {
 
     return (
         <>
-        <nav
-            className={`system-nav ${isMobileMenuOpen ? 'mobile-open' : ''}`}
-            style={{ zIndex: 1001 }}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-        >
-            <div className="nav-inner-content">
-                <div className="logo">
-                    <img src={logoSrc} alt="ideasprint 2026" className="nav-logo-img" />
+            <nav
+                className={`system-nav ${isMobileMenuOpen ? 'mobile-open' : ''}`}
+                style={{ zIndex: 1001 }}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+            >
+                <div className="nav-inner-content">
+                    <div className="logo">
+                        <img src={logoSrc} alt="ideasprint 2026" className="nav-logo-img" />
+                    </div>
+
+                    {/* Desktop Links */}
+                    <div className="nav-links">
+                        <a href="#about" className="nav-btn glow-hover">About</a>
+                        <a href="#timeline" className="nav-btn glow-hover">Timeline</a>
+                        <a href="#contact" className="nav-btn glow-hover">Contact</a>
+                    </div>
+                    <div className="nav-cta">
+                        <StarBorder as="a" href={ctaHref} target="_blank" rel="noopener noreferrer" className="star-border-primary" color="#03C7B3" speed="5s" onClick={handleCtaClick}>
+                            {ctaText}
+                        </StarBorder>
+                    </div>
+
+                    {/* Mobile Hamburger Toggle */}
+                    <div className="mobile-menu-toggle" onClick={toggleMobileMenu}>
+                        <span className={`hamburger-line ${isMobileMenuOpen ? 'open' : ''}`}></span>
+                        <span className={`hamburger-line ${isMobileMenuOpen ? 'open' : ''}`}></span>
+                        <span className={`hamburger-line ${isMobileMenuOpen ? 'open' : ''}`}></span>
+                    </div>
                 </div>
 
-                {/* Desktop Links */}
-                <div className="nav-links">
-                    <a href="#about" className="nav-btn glow-hover">About</a>
-                    <a href="#timeline" className="nav-btn glow-hover">Timeline</a>
-                    <a href="#contact" className="nav-btn glow-hover">Contact</a>
+                {/* Mobile Menu Dropdown */}
+                <div className={`mobile-menu-dropdown ${isMobileMenuOpen ? 'open' : ''}`}>
+                    <div className="mobile-menu-links">
+                        <a href="#about" className="mobile-nav-btn" onClick={closeMobileMenu}>About</a>
+                        <a href="#timeline" className="mobile-nav-btn" onClick={closeMobileMenu}>Timeline</a>
+                        <a href="#contact" className="mobile-nav-btn" onClick={closeMobileMenu}>Contact</a>
+                        <StarBorder as="a" href={ctaHref} target="_blank" rel="noopener noreferrer" className="star-border-primary mobile-nav-register" color="#03C7B3" speed="5s" onClick={handleCtaClick}>
+                            {ctaText}
+                        </StarBorder>
+                    </div>
                 </div>
-                <div className="nav-cta">
-                    <StarBorder as="a" href="https://isportal.hackx.lk/" target="_blank" rel="noopener noreferrer" className="star-border-primary" color="#03C7B3" speed="5s" onClick={handleProposalClick}>
-                        SUBMIT PROPOSAL
-                    </StarBorder>
-                </div>
+            </nav>
 
-                {/* Mobile Hamburger Toggle */}
-                <div className="mobile-menu-toggle" onClick={toggleMobileMenu}>
-                    <span className={`hamburger-line ${isMobileMenuOpen ? 'open' : ''}`}></span>
-                    <span className={`hamburger-line ${isMobileMenuOpen ? 'open' : ''}`}></span>
-                    <span className={`hamburger-line ${isMobileMenuOpen ? 'open' : ''}`}></span>
-                </div>
-            </div>
-
-            {/* Mobile Menu Dropdown */}
-            <div className={`mobile-menu-dropdown ${isMobileMenuOpen ? 'open' : ''}`}>
-                <div className="mobile-menu-links">
-                    <a href="#about" className="mobile-nav-btn" onClick={closeMobileMenu}>About</a>
-                    <a href="#timeline" className="mobile-nav-btn" onClick={closeMobileMenu}>Timeline</a>
-                    <a href="#contact" className="mobile-nav-btn" onClick={closeMobileMenu}>Contact</a>
-                    <StarBorder as="a" href="https://isportal.hackx.lk/" target="_blank" rel="noopener noreferrer" className="star-border-primary mobile-nav-register" color="#03C7B3" speed="5s" onClick={handleProposalClick}>
-                        SUBMIT PROPOSAL
-                    </StarBorder>
-                </div>
-            </div>
-        </nav>
-
-        {/* Proposal Popup */}
-        <ProposalPopup isOpen={popupOpen} onClose={handleClosePopup} />
+            {/* Phase Popup */}
+            {popupMode && (
+                <PhasePopup isOpen={popupOpen} onClose={handleClosePopup} mode={popupMode} />
+            )}
         </>
     );
 }
