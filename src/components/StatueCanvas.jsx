@@ -3,16 +3,12 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import '../styles/StatueCanvas.css';
 
-/* ══════════════════════════════════════════════════
-   Three.js Bottom Mist — animated energy flow that
-   hides the statue base. Lightweight custom shader.
-   ══════════════════════════════════════════════════ */
 function BottomMist() {
     const meshRef = useRef();
 
     const { uniforms, vertexShader, fragmentShader } = useMemo(() => ({
         uniforms: {
-            uTime:  { value: 0 },
+            uTime: { value: 0 },
             uColor: { value: new THREE.Color(0x03c7b3) },
         },
         vertexShader: `
@@ -87,22 +83,18 @@ function BottomMist() {
     );
 }
 
-/* ══════════════════════════════════════════════════
-   StatueCanvas — Main exported component
-   ══════════════════════════════════════════════════ */
+
 export default function StatueCanvas() {
     const floatRef = useRef(null);
     const [loaded, setLoaded] = useState(false);
     const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
 
-    // Detect mobile
     useEffect(() => {
         const handler = () => setIsMobile(window.innerWidth < 768);
         window.addEventListener('resize', handler);
         return () => window.removeEventListener('resize', handler);
     }, []);
 
-    // Float animation via RAF
     useEffect(() => {
         let animId;
         let t = 0;
@@ -120,10 +112,8 @@ export default function StatueCanvas() {
 
     return (
         <div className="statue__outer">
-            {/* Layer 1: Soft environmental glow */}
             <div className="statue__env-glow" />
 
-            {/* Layer 2: Floating statue image */}
             <div className="statue__float-wrap" ref={floatRef}>
                 <img
                     src="/assets/statue.png"
@@ -134,7 +124,6 @@ export default function StatueCanvas() {
                 />
             </div>
 
-            {/* Layer 3: Three.js animated bottom mist (desktop only) */}
             {!isMobile && (
                 <div className="statue__mist-canvas">
                     <Canvas
@@ -148,7 +137,6 @@ export default function StatueCanvas() {
                 </div>
             )}
 
-            {/* Layer 4: CSS bottom gradient (always present — fallback + extra blend) */}
             <div className="statue__fog" />
         </div>
     );

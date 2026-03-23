@@ -22,12 +22,11 @@ export default function Footer() {
 
     return (
         <footer className="site-footer" ref={footerRef} onMouseMove={handleMouseMove}>
-            {/* Spotlight glow effect reacting to cursor */}
             <div className="footer-spotlight"></div>
 
             <div className="container">
                 <div className="footer-grid">
-                    {/* Column 1: Brand & Logos */}
+
                     <div className="footer-col brand-col">
                         <img src={logoSrc} alt="ideasprint 2026" className="footer-main-logo" />
                         <p className="footer-desc">
@@ -37,7 +36,7 @@ export default function Footer() {
                         <img src={deptLogos} alt="Department Logos" className="footer-dept-logos" />
                     </div>
 
-                    {/* Column 2: Quick Links */}
+
                     <div className="footer-col links-col">
                         <h4 className="footer-heading">Quick Links</h4>
                         <div className="footer-heading-underline"></div>
@@ -49,7 +48,7 @@ export default function Footer() {
                         </ul>
                     </div>
 
-                    {/* Column 3: hackX 11.0 & Connect With Us */}
+
                     <div className="footer-col social-col">
                         <div className="hackx-footer-wrap">
                             <img src={hackxLogo} alt="hackX 11.0 Logo" className="footer-hackx-logo" />
@@ -72,7 +71,7 @@ export default function Footer() {
                 </div>
             </div>
 
-            {/* Bottom Bar */}
+
             <div className="footer-bottom">
                 <div className="container footer-bottom-flex">
                     <p className="footer-copyright-left">
@@ -83,7 +82,7 @@ export default function Footer() {
                     </p>
                 </div>
 
-                {/* Scroll to top button */}
+
                 <button className="scroll-to-top" onClick={scrollToTop} aria-label="Scroll to top">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
                 </button>

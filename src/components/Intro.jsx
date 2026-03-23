@@ -18,19 +18,19 @@ export default function Intro({ onComplete }) {
 
         tl.fromTo(textRef.current, {
             opacity: 0,
-            scale: 1.5 // Start massively zoomed IN
+            scale: 1.5
         }, {
             opacity: 1,
-            scale: 1.0, // Zoom out to normal size smoothly
-            duration: 1.2, // Faster entry
-            ease: 'expo.out' // Clean, no-jiggle deceleration
+            scale: 1.0,
+            duration: 1.2,
+            ease: 'expo.out'
         })
         .to(textRef.current, {
             opacity: 0,
-            scale: 1.5, // Zoom aggressively back IN to exit
-            duration: 0.8, // Faster exit
-            ease: 'expo.inOut' // Cinematic exit
-        }, "+=0.8") // hold slightly shorter before exiting
+            scale: 1.5,
+            duration: 0.8,
+            ease: 'expo.inOut'
+        }, "+=0.8")
         .to(containerRef.current, {
             opacity: 0,
             duration: 0.8,

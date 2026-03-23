@@ -1,23 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import '../styles/Timeline.css';
 import iSymbol from '../assets/images/icon_info.png';
+import { EVENTS } from '../constants/eventDates.js';
 
-/* ─── Event Data ─────────────────────────────────────────── */
-const EVENTS = [
-    { step: '01', date: 'March 17, 2026 00:00:00', displayDate: '17 MAR 2026', title: 'Registration Opens', desc: 'Team registration begins. Form your squad and secure your spot in the competition.' },
-    { step: '02', date: 'March 23, 2026 23:59:59', displayDate: '23 MAR 2026', title: 'Registration Closes', desc: 'Final deadline to register your team. Late entries will not be accepted.' },
-    { step: '03', date: 'March 30, 2026 00:00:00', displayDate: '30 MAR 2026', title: 'Proposal Submissions Open', desc: 'Submit your innovative proposals and pitching videos following the official template and guidelines.' },
-    { step: '04', date: 'April 24, 2026 23:59:59', displayDate: '24 APR 2026', title: 'Proposal Submissions Close', desc: 'All proposals and pitching videos must be finalized by this deadline. Evaluation begins immediately after.' },
-    { step: '05', date: 'March 12, 2026 00:00:00', endDate: 'May 27, 2026 23:59:59', displayDate: '12 MAR — 27 MAY 2026', title: 'Workshop Series', desc: 'A series of workshops designed to help participants transform early ideas into well-developed, impactful solutions.' },
-    { step: '06', date: 'May 29, 2026 00:00:00', displayDate: '29 MAY 2026', title: 'Finalists Announced', desc: 'The top 15 teams are revealed. Finalists advance to the live presentation round.' },
-    { step: '07', date: 'June 01, 2026 00:00:00', endDate: 'June 20, 2026 23:59:59', displayDate: '01 JUN — 20 JUN 2026', title: 'Industrial Mentorship', desc: 'Shortlisted finalist teams receive industry mentorship to refine their ideas, strengthen their solutions, and elevate their final pitches.' },
-    { step: '08', date: 'June 20, 2026 00:00:00', displayDate: '20 JUN 2026', title: 'Grand Finale', desc: 'Live presentations, prototype demos, and Q&A with the judging panel. The Top 5 teams advance to the Semi-Final stage of hackX 11.0.', venue: 'DIM | Multimedia Room' },
-];
 
-/**
- * Determine the status of an event based on the current date.
- * @returns {'completed' | 'ongoing' | 'upcoming'}
- */
 function getEventStatus(ev, now) {
     if (ev.endDate) {
         const start = new Date(ev.date);
@@ -37,15 +23,13 @@ function getEventStatus(ev, now) {
 }
 
 function Timeline() {
-    const now = new Date(); // Simulates real-time
+    const now = new Date();
 
-    /* ─── Tour & Animation States ─── */
     const [isPlaying, setIsPlaying] = useState(false);
     const [tourIndex, setTourIndex] = useState(-1);
     const tourTimerRef = useRef(null);
     const autoScrollRef = useRef(false);
 
-    /* ─── Scroll Progress Variables ─── */
     const [scrollTourProgress, setScrollTourProgress] = useState(0);
     const [scrollTourIndex, setScrollTourIndex] = useState(-1);
 
@@ -60,7 +44,6 @@ function Timeline() {
         if (tourTimerRef.current) clearInterval(tourTimerRef.current);
     };
 
-    // Calculate absolute line height iteratively strictly using React bounds
     useEffect(() => {
         const updateLineHeight = () => {
             if (wrapRef.current && lastMarkerRef.current) {
@@ -79,8 +62,8 @@ function Timeline() {
         }
 
         window.addEventListener('resize', updateLineHeight);
-        updateLineHeight(); // Initial calculaton
-        setTimeout(updateLineHeight, 300); // Re-fire after potential image load reflows
+        updateLineHeight();
+        setTimeout(updateLineHeight, 300);
 
         return () => {
             window.removeEventListener('resize', updateLineHeight);
@@ -88,7 +71,6 @@ function Timeline() {
         };
     }, []);
 
-    // Manual Scroll Progress Tracking
     useEffect(() => {
         const handleScrollProgress = () => {
             if (isPlaying || !wrapRef.current) return;
@@ -109,7 +91,6 @@ function Timeline() {
                     progress = Math.max(0, Math.min(1, progress));
                     setScrollTourProgress(progress);
 
-                    // Find active nodes for highlighting
                     let lastActiveIndex = -1;
                     rows.forEach((row, idx) => {
                         const rTop = row.getBoundingClientRect().top;
@@ -130,7 +111,6 @@ function Timeline() {
         };
     }, [isPlaying]);
 
-    // User manual scroll interrupt during tour
     useEffect(() => {
         const handleManualInteraction = () => {
             if (isPlaying && !autoScrollRef.current) {
@@ -146,14 +126,12 @@ function Timeline() {
         };
     }, [isPlaying]);
 
-    // Tour automated playback logic
     useEffect(() => {
         if (!isPlaying) {
             stopTour();
             return;
         }
 
-        // Initialize first step
         setTourIndex(0);
         scrollToStep(0);
 
@@ -219,7 +197,6 @@ function Timeline() {
                         ></div>
                     </div>
 
-                    {/* Timeline Start Marker / Glowing Pill */}
                     <div className="tl-endpoint tl-endpoint-start">
                         <div className={`tl-start-pill ${isPlaying ? 'tour-active' : 'tour-interactive'}`} onClick={handlePlayClick} title="Play Timeline Journey">
                             <img src={iSymbol} alt="Start" className="tl-start-pill-icon" />

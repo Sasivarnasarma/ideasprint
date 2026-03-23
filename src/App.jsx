@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 
 import Intro from './components/Intro.jsx';
 import Navbar from './components/Navbar.jsx';
@@ -12,26 +12,14 @@ import LiquidGradientBG from './components/LiquidGradientBG.jsx';
 import DotGrid from './components/DotGrid.jsx';
 import Particles from './components/Particles.jsx';
 
-// ─── TOGGLE: Set to true when contact images are ready ───
 const SHOW_CONTACT_SECTION = true;
 
 export default function App() {
     const [introComplete, setIntroComplete] = useState(false);
 
-    useEffect(() => {
-        if (!introComplete) return;
-
-        // Intro is complete, allow scrolling
-        // Removed intersection observer animations to fix layout gap issues
-        
-        return () => {
-
-        };
-    }, [introComplete]);
-
     return (
         <>
-            {/* Background layers (fixed, always visible) */}
+
             <div id="global-site-bg"></div>
             <LiquidGradientBG />
             
@@ -60,10 +48,10 @@ export default function App() {
                 />
             </div>
 
-            {/* Cinematic intro */}
+
             {!introComplete && <Intro onComplete={() => setIntroComplete(true)} />}
 
-            {/* Main site */}
+
             <main id="app">
                 <Navbar />
                 <Hero visible={introComplete} />
