@@ -75,7 +75,17 @@ IdeaSprint 2026 is a premium, high-performance landing page built for the ultima
 └── index.html       # HTML mount point
 ```
 
+## 👥 Main Contributors
+
+- [Habikugasarma](https://github.com/SarmaHK/)
+- [Tharindu](https://github.com/jtharindudhanushka)
+
 ## 🤝 Contributing
 
 This project is part of a private innovation sprint. For major changes, please open an issue first to discuss what you would like to change.
+
+## 📜 License
+
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+
 
