@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 import '../styles/Contact.css';
 import tharinduImg from '../assets/images/contacts/tharindu.jpg';
 import thiliniImg from '../assets/images/contacts/thilini.jpg';

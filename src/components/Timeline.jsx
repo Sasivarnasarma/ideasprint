@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import '../styles/Timeline.css';
 import iSymbol from '../assets/images/icon_info.png';
 import { EVENTS } from '../constants/eventDates.js';

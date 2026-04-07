@@ -44,9 +44,7 @@
     position: relative;
     width: 100%;
     margin: 0 auto;
-    padding: 100px 0 0 0;
-    /* Padding replaces first-child margin to strictly prevent CSS margin-collapse */
-}
+    padding: 100px 0 0 0;}
 
 /* Center Line */
 .tl-center-line {
@@ -138,7 +136,6 @@
 
 .tl-endpoint-start {
     top: -20px;
-    /* Reduced vertical pull to prevent overlapping and increase gap below text */
     transform: translate(-50%, -50%);
 }
 
@@ -155,10 +152,8 @@
     width: 40px;
     height: 40px;
     background: var(--bg-primary);
-    /* Fully opaque so the bright progress line doesn't bleed through visually */
     border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 50%;
-    /* Circle badge */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -167,7 +162,6 @@
     font-weight: 700;
     line-height: 1;
     padding-bottom: 2px;
-    /* Pulls the number visually center against the solid border */
     color: rgba(255, 255, 255, 0.7);
     transition: all 0.3s ease;
 }
@@ -177,7 +171,6 @@
     content: '';
     position: absolute;
     top: 50%;
-    /* width and side origins defined specifically below */
     height: 2px;
     background: rgba(255, 255, 255, 0.1);
     z-index: 1;
@@ -186,9 +179,7 @@
 
 .tl-row-left::before {
     right: calc(50% + 20px);
-    /* 20px is the radius of the marker */
     width: 30px;
-    /* 30px covers the exact distance to the 50px card padding */
 }
 
 .tl-row-right::before {
@@ -229,7 +220,6 @@
     border-radius: 18px;
     transition: all 0.35s ease;
     width: 100%;
-    /* max-width removed to let it fill left/right margins identically */
     position: relative;
 }
 
@@ -375,14 +365,11 @@
 @media (max-width: 768px) {
     .tl-vertical-wrap {
         padding-top: 120px;
-        /* Mobile safe buffer */
     }
 
     .tl-center-line {
         left: 20px;
-        top: 15px;
-        /* Match mobile start node's top offset so line doesn't bleed upwards */
-    }
+        top: 15px;    }
 
     .tl-row {
         flex-direction: column !important;
@@ -414,27 +401,22 @@
 
     .tl-endpoint-start {
         top: 15px;
-        /* Creates substantial mobile gap beneath text */
     }
 
     .tl-marker-wrap {
         left: 20px;
         top: 34px;
-        /* Align precisely with the card's date text padding */
         transform: translate(-50%, -50%);
     }
 
     .tl-row:first-of-type {
         margin-top: 0;
-        /* Handled by wrapper padding */
     }
 
     .tl-row::before {
         left: 40px !important;
-        /* Starts exactly at the edge of the marker */
         right: auto !important;
         width: 20px !important;
-        /* Spans 40px to 60px where card padding starts */
         top: 34px !important;
         transform: translateY(-50%) !important;
     }

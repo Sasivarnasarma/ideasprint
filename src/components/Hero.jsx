@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import StatueCanvas from './StatueCanvas.jsx';
 import PhasePopup from './PhasePopup.jsx';
 import heroLogo from '../assets/images/logos/ideasprint-2026-logo.webp';

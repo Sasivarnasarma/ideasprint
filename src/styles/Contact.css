@@ -26,7 +26,7 @@
   overflow: hidden;
   cursor: grab;
   user-select: none;
-  touch-action: none; /* Must be none — pan-y blocks horizontal swipe detection */
+  touch-action: none;
 }
 .contact-carousel:active { cursor: grabbing; }
 

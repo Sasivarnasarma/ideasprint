@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import '../styles/Footer.css';
 import logoSrc from '../assets/images/logos/ideasprint-2026-logo.webp';
 import deptLogos from '../assets/images/logos/department-logos.webp';

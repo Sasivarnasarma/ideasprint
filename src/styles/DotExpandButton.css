@@ -89,7 +89,6 @@
   z-index: 2;
 }
 
-/* bg expander is gone — no full fill */
 .dot-expand-bg {
   display: none;
 }

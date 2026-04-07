@@ -1,14 +1,12 @@
-import React, { useRef, useState, useMemo, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { useGLTF, Environment, Html } from '@react-three/drei';
+import { useGLTF, Environment } from '@react-three/drei';
 import * as THREE from 'three';
 import '../styles/MagicBooklet.css';
 
 function Book({ isHovered, setIsHovered, isClicked, setIsClicked, hasRevealed }) {
     const groupRef = useRef();
     const { scene } = useGLTF('/models/magic_book/scene.gltf');
-
-    const autoRotateSpeed = 0.005;
 
     const entranceProgress = useRef(0);
 

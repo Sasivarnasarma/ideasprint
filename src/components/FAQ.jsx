@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const faqData = [
     {
@@ -37,7 +37,6 @@ export default function FAQ() {
         <section id="faq" className="scroll-section faq-section-v2">
             <div className="container" style={{ position: 'relative', zIndex: 2 }}>
 
-                {/* Header */}
                 <div className="text-center mb-5">
                     <h2 className="section-title">F A <span className="accent">Q</span></h2>
                     <p className="faq-subtitle mx-auto mt-3">
@@ -45,10 +44,8 @@ export default function FAQ() {
                     </p>
                 </div>
 
-                {/* Dashboard-style Grid */}
                 <div className="faq-dashboard-grid">
 
-                    {/* Left Column: Question List (Tabs & Mobile Accordion) */}
                     <div className="faq-questions-list">
                         {faqData.map((faq) => (
                             <div key={faq.id} className="faq-accordion-container">
@@ -70,7 +67,6 @@ export default function FAQ() {
                         ))}
                     </div>
 
-                    {/* Right Column: Answer Panel (Desktop Only) */}
                     <div className="faq-answer-panel">
                         {activeFaq ? (
                             <>

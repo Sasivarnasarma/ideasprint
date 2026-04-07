@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import {
     REGISTRATION_OPEN,
     REGISTRATION_CLOSE,

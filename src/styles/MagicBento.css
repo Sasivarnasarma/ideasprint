@@ -36,7 +36,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  padding: 2px; /* reduced for buttons */
+  padding: 2px;
   background: radial-gradient(
     var(--glow-radius) circle at var(--glow-x) var(--glow-y),
     rgba(3, 199, 179, calc(var(--glow-intensity) * 0.8)) 0%,

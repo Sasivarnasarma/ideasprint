@@ -2,19 +2,16 @@
    STATUE — Fills the right hero column without overflow
    ══════════════════════════════════════════════════════════════ */
 
-/* ── Outer container fills parent (.hero__right) which is bounded ── */
+/* ── Outer container fills parent (.hero__right) ── */
 .statue__outer {
   position: relative;
   width: 100%;
   height: 100%;
-  /* No fixed min-height — the parent controls height */
   display: flex;
   align-items: center;
-  /* Set to center to move the statue up */
   justify-content: flex-end;
   background: transparent;
   overflow: visible;
-  /* allow statue to bleed right edge */
 
   /* Edge fades — horizontal + vertical */
   -webkit-mask-image:
@@ -79,15 +76,12 @@
 .statue__img {
   display: block;
   width: 110%;
-  /* Grander scale — base intentionally cropped */
   max-width: none;
   height: 100%;
   max-height: none;
   object-fit: cover;
   object-position: right top;
-  /* Anchors top — base gets cropped at bottom */
   transform: translateX(18%);
-  /* Shift right */
 
   mix-blend-mode: screen;
   filter: drop-shadow(0 24px 36px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 20px rgba(3, 199, 179, 0.22));

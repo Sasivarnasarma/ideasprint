@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import StarBorder from './StarBorder.jsx';
 import PhasePopup from './PhasePopup.jsx';
 import logoSrc from '../assets/images/logos/ideasprint-2026-logo.webp';
@@ -6,7 +6,7 @@ import { getPhase, PORTAL_URL, BOOKLET_URL } from '../constants/eventDates.js';
 
 export default function Navbar() {
     const isHidden = useRef(false);
-    let isScrolled = useRef(false);
+    const isScrolled = useRef(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
     const [popupOpen, setPopupOpen] = useState(false);

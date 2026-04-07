@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import Intro from './components/Intro.jsx';
 import Navbar from './components/Navbar.jsx';
@@ -19,10 +19,9 @@ export default function App() {
 
     return (
         <>
-
             <div id="global-site-bg"></div>
             <LiquidGradientBG />
-            
+
             <Particles
                 particleColors={['#03C7B3', '#1B5B4D', '#D1DBD8']}
                 particleCount={200}
@@ -48,9 +47,7 @@ export default function App() {
                 />
             </div>
 
-
             {!introComplete && <Intro onComplete={() => setIntroComplete(true)} />}
-
 
             <main id="app">
                 <Navbar />
