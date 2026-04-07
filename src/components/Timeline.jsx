@@ -3,7 +3,6 @@ import '../styles/Timeline.css';
 import iSymbol from '../assets/images/icon_info.png';
 import { EVENTS } from '../constants/eventDates.js';
 
-
 function getEventStatus(ev, now) {
     if (ev.endDate) {
         const start = new Date(ev.date);
@@ -49,7 +48,7 @@ function Timeline() {
             if (wrapRef.current && lastMarkerRef.current) {
                 const wrapTop = wrapRef.current.getBoundingClientRect().top;
                 const endRect = lastMarkerRef.current.getBoundingClientRect();
-                const dist = (endRect.top + (endRect.height / 2)) - wrapTop;
+                const dist = endRect.top + endRect.height / 2 - wrapTop;
                 if (dist > 0) setLineHeightPx(dist);
             }
         };
@@ -126,6 +125,17 @@ function Timeline() {
         };
     }, [isPlaying]);
 
+    const scrollToStep = (index) => {
+        autoScrollRef.current = true;
+        const el = document.getElementById(`tl-step-${index}`);
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        setTimeout(() => {
+            autoScrollRef.current = false;
+        }, 800);
+    };
+
     useEffect(() => {
         if (!isPlaying) {
             stopTour();
@@ -150,17 +160,6 @@ function Timeline() {
         return () => stopTour();
     }, [isPlaying]);
 
-    const scrollToStep = (index) => {
-        autoScrollRef.current = true;
-        const el = document.getElementById(`tl-step-${index}`);
-        if (el) {
-            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-        setTimeout(() => {
-            autoScrollRef.current = false;
-        }, 800);
-    };
-
     const handlePlayClick = () => {
         if (isPlaying) {
             stopTour();
@@ -180,25 +179,39 @@ function Timeline() {
                     </h2>
                 </div>
 
-                <div className={`tl-vertical-wrap ${isPlaying ? 'is-playing' : ''}`} data-playing={isPlaying} ref={wrapRef}>
-                    <div className="tl-center-line" style={lineHeightPx ? { height: `${lineHeightPx}px`, bottom: 'auto' } : {}}>
+                <div
+                    className={`tl-vertical-wrap ${isPlaying ? 'is-playing' : ''}`}
+                    data-playing={isPlaying}
+                    ref={wrapRef}
+                >
+                    <div
+                        className="tl-center-line"
+                        style={lineHeightPx ? { height: `${lineHeightPx}px`, bottom: 'auto' } : {}}
+                    >
                         <div
                             className="tl-center-line-progress"
                             style={{
-                                transform: `scaleY(${isPlaying
-                                    ? (tourIndex >= 0 ? (tourIndex / (EVENTS.length - 1)) : 0)
-                                    : scrollTourProgress
-                                    })`,
+                                transform: `scaleY(${
+                                    isPlaying
+                                        ? tourIndex >= 0
+                                            ? tourIndex / (EVENTS.length - 1)
+                                            : 0
+                                        : scrollTourProgress
+                                })`,
                                 opacity: isPlaying || scrollTourProgress > 0 ? 1 : 0,
                                 transition: isPlaying
                                     ? 'transform 1.5s ease-in-out, opacity 0.3s ease'
-                                    : 'transform 0.3s ease-out, opacity 0.3s ease'
+                                    : 'transform 0.3s ease-out, opacity 0.3s ease',
                             }}
                         ></div>
                     </div>
 
                     <div className="tl-endpoint tl-endpoint-start">
-                        <div className={`tl-start-pill ${isPlaying ? 'tour-active' : 'tour-interactive'}`} onClick={handlePlayClick} title="Play Timeline Journey">
+                        <div
+                            className={`tl-start-pill ${isPlaying ? 'tour-active' : 'tour-interactive'}`}
+                            onClick={handlePlayClick}
+                            title="Play Timeline Journey"
+                        >
                             <img src={iSymbol} alt="Start" className="tl-start-pill-icon" />
                         </div>
                     </div>
@@ -209,27 +222,44 @@ function Timeline() {
                         const isCompleted = status === 'completed';
                         const isOngoing = status === 'ongoing';
 
-                        const isTourActive = isPlaying ? (tourIndex === i) : (scrollTourIndex === i);
-                        const isTourPast = isPlaying ? (i <= tourIndex) : (i <= scrollTourIndex);
+                        const isTourActive = isPlaying ? tourIndex === i : scrollTourIndex === i;
+                        const isTourPast = isPlaying ? i <= tourIndex : i <= scrollTourIndex;
 
                         return (
-                            <div key={ev.step} id={`tl-step-${i}`} className={`tl-row ${isLeft ? 'tl-row-left' : 'tl-row-right'}`}>
+                            <div
+                                key={ev.step}
+                                id={`tl-step-${i}`}
+                                className={`tl-row ${isLeft ? 'tl-row-left' : 'tl-row-right'}`}
+                            >
                                 <div className="tl-empty-space" />
 
-                                <div className={`tl-marker-wrap ${isCompleted ? 'completed' : isOngoing ? 'ongoing' : ''} ${isTourActive ? 'tour-active' : ''} ${isTourPast ? 'tour-past' : ''}`} ref={i === EVENTS.length - 1 ? lastMarkerRef : null}>
+                                <div
+                                    className={`tl-marker-wrap ${isCompleted ? 'completed' : isOngoing ? 'ongoing' : ''} ${isTourActive ? 'tour-active' : ''} ${isTourPast ? 'tour-past' : ''}`}
+                                    ref={i === EVENTS.length - 1 ? lastMarkerRef : null}
+                                >
                                     <div className="tl-marker">{ev.step}</div>
                                 </div>
 
-                                <div className={`tl-card-wrap ${isTourActive ? 'tour-active' : ''}`}>
+                                <div
+                                    className={`tl-card-wrap ${isTourActive ? 'tour-active' : ''}`}
+                                >
                                     <div className="tl-card">
                                         <div className="tl-card-date">{ev.displayDate}</div>
                                         <h3 className="tl-card-title">{ev.title}</h3>
                                         <p className="tl-card-desc">{ev.desc}</p>
                                         {ev.venue && (
                                             <div className="tl-card-venue">
-                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
-                                                    stroke="currentColor" strokeWidth="2.5"
-                                                    strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '6px' }}>
+                                                <svg
+                                                    width="12"
+                                                    height="12"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    strokeWidth="2.5"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    style={{ marginRight: '6px' }}
+                                                >
                                                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                                                     <circle cx="12" cy="10" r="3" />
                                                 </svg>

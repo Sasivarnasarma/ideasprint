@@ -1,324 +1,355 @@
 .phase-popup-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(2, 15, 13, 0.75);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  animation: phaseOverlayIn 0.25s ease-out;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(2, 15, 13, 0.75);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    animation: phaseOverlayIn 0.25s ease-out;
 }
 
 @keyframes phaseOverlayIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .phase-popup {
-  position: relative;
-  width: 90%;
-  max-width: 480px;
-  padding: clamp(2rem, 5vw, 3rem);
-  border-radius: 24px;
-  background: rgba(4, 35, 30, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--accent-25);
-  box-shadow:
-    0 24px 80px rgba(0, 0, 0, 0.5),
-    0 0 40px var(--accent-08),
-    inset 0 1px 0 var(--accent-10);
-  animation: phaseSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  overflow: hidden;
+    position: relative;
+    width: 90%;
+    max-width: 480px;
+    padding: clamp(2rem, 5vw, 3rem);
+    border-radius: 24px;
+    background: rgba(4, 35, 30, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--accent-25);
+    box-shadow:
+        0 24px 80px rgba(0, 0, 0, 0.5),
+        0 0 40px var(--accent-08),
+        inset 0 1px 0 var(--accent-10);
+    animation: phaseSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
 }
 
 .phase-popup--warning {
-  box-shadow:
-    0 24px 80px rgba(0, 0, 0, 0.5),
-    0 0 40px rgba(255, 180, 50, 0.08),
-    inset 0 1px 0 var(--accent-10);
+    box-shadow:
+        0 24px 80px rgba(0, 0, 0, 0.5),
+        0 0 40px rgba(255, 180, 50, 0.08),
+        inset 0 1px 0 var(--accent-10);
 }
 
 @keyframes phaseSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px) scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .phase-popup__glow {
-  position: absolute;
-  top: -60%;
-  left: 50%;
-  width: 300px;
-  height: 300px;
-  transform: translateX(-50%);
-  background: radial-gradient(circle, var(--accent-15) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
+    position: absolute;
+    top: -60%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, var(--accent-15) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
 }
 
 .phase-popup--warning .phase-popup__glow {
-  background: radial-gradient(circle, rgba(255, 180, 50, 0.12) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(255, 180, 50, 0.12) 0%, transparent 70%);
 }
 
 .phase-popup__close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 36px;
-  height: 36px;
-  border: 1px solid var(--accent-20);
-  border-radius: 50%;
-  background: var(--accent-08);
-  color: var(--text-primary);
-  font-size: 1.3rem;
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background 0.2s, border-color 0.2s, transform 0.2s;
-  z-index: 2;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--accent-20);
+    border-radius: 50%;
+    background: var(--accent-08);
+    color: var(--text-primary);
+    font-size: 1.3rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition:
+        background 0.2s,
+        border-color 0.2s,
+        transform 0.2s;
+    z-index: 2;
 }
 
 .phase-popup__close:hover {
-  background: var(--accent-20);
-  border-color: var(--accent-40);
-  transform: scale(1.1);
+    background: var(--accent-20);
+    border-color: var(--accent-40);
+    transform: scale(1.1);
 }
 
 .phase-popup__content {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 1.2rem;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.2rem;
 }
 
 .phase-popup__badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--accent-10);
-  border: 1px solid var(--accent-35);
-  border-radius: 50px;
-  padding: 0.35rem 1rem;
-  font-family: var(--font-heading);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 3px;
-  color: var(--accent);
-  white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent-10);
+    border: 1px solid var(--accent-35);
+    border-radius: 50px;
+    padding: 0.35rem 1rem;
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--accent);
+    white-space: nowrap;
 }
 
 .phase-popup__badge--warning {
-  background: rgba(255, 180, 50, 0.1);
-  border-color: rgba(255, 180, 50, 0.35);
-  color: #ffb432;
+    background: rgba(255, 180, 50, 0.1);
+    border-color: rgba(255, 180, 50, 0.35);
+    color: #ffb432;
 }
 
 .phase-popup__badge-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent-30);
-  animation: phaseBadgePulse 2s ease-in-out infinite;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow:
+        0 0 8px var(--accent),
+        0 0 16px var(--accent-30);
+    animation: phaseBadgePulse 2s ease-in-out infinite;
 }
 
 .phase-popup__badge--warning .phase-popup__badge-dot {
-  background: #ffb432;
-  box-shadow: 0 0 8px #ffb432, 0 0 16px rgba(255, 180, 50, 0.3);
+    background: #ffb432;
+    box-shadow:
+        0 0 8px #ffb432,
+        0 0 16px rgba(255, 180, 50, 0.3);
 }
 
 @keyframes phaseBadgePulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.75); }
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(0.75);
+    }
 }
 
 .phase-popup__title {
-  font-family: var(--font-heading);
-  font-size: clamp(1.4rem, 4vw, 1.8rem);
-  font-weight: 800;
-  color: var(--text-primary);
-  letter-spacing: 1px;
-  margin: 0;
+    font-family: var(--font-heading);
+    font-size: clamp(1.4rem, 4vw, 1.8rem);
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: 1px;
+    margin: 0;
 }
 
 .phase-popup__message {
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  line-height: 1.6;
-  max-width: 380px;
-  margin: 0;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-width: 380px;
+    margin: 0;
 }
 
 .phase-popup__message strong {
-  color: var(--accent);
-  font-weight: 600;
+    color: var(--accent);
+    font-weight: 600;
 }
 
 .phase-popup--warning .phase-popup__message strong {
-  color: #ffb432;
+    color: #ffb432;
 }
 
 .phase-popup__countdown {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0.5rem 0;
 }
 
 .phase-popup__time-block {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  min-width: 56px;
-  padding: 0.6rem 0.5rem;
-  background: var(--accent-08);
-  border: 1px solid var(--accent-15);
-  border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-width: 56px;
+    padding: 0.6rem 0.5rem;
+    background: var(--accent-08);
+    border: 1px solid var(--accent-15);
+    border-radius: 12px;
 }
 
 .phase-popup--warning .phase-popup__time-block {
-  background: rgba(255, 180, 50, 0.06);
-  border-color: rgba(255, 180, 50, 0.15);
+    background: rgba(255, 180, 50, 0.06);
+    border-color: rgba(255, 180, 50, 0.15);
 }
 
 .phase-popup__time-value {
-  font-family: var(--font-heading);
-  font-size: clamp(1.4rem, 3.5vw, 1.8rem);
-  font-weight: 800;
-  color: var(--accent);
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
+    font-family: var(--font-heading);
+    font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
 }
 
 .phase-popup--warning .phase-popup__time-value {
-  color: #ffb432;
+    color: #ffb432;
 }
 
 .phase-popup__time-label {
-  font-family: var(--font-heading);
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  color: var(--text-muted);
-  text-transform: uppercase;
+    font-family: var(--font-heading);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
 }
 
 .phase-popup__time-sep {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--accent-40);
-  line-height: 1;
-  padding-bottom: 1rem;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-40);
+    line-height: 1;
+    padding-bottom: 1rem;
 }
 
 .phase-popup--warning .phase-popup__time-sep {
-  color: rgba(255, 180, 50, 0.4);
+    color: rgba(255, 180, 50, 0.4);
 }
 
 .phase-popup__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem;
-  justify-content: center;
-  width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    justify-content: center;
+    width: 100%;
 }
 
 .phase-popup__btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-family: var(--font-heading);
-  font-weight: 600;
-  font-size: 0.9rem;
-  letter-spacing: 0.5px;
-  text-decoration: none;
-  padding: 0.8rem 1.8rem;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-  white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    padding: 0.8rem 1.8rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+    white-space: nowrap;
 }
 
 .phase-popup__btn--primary {
-  background: linear-gradient(135deg, #14d8c4 0%, #0fb5a7 100%);
-  color: #022e2a;
-  border: none;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18), 0 0 12px var(--accent-10);
+    background: linear-gradient(135deg, #14d8c4 0%, #0fb5a7 100%);
+    color: #022e2a;
+    border: none;
+    box-shadow:
+        0 4px 18px rgba(0, 0, 0, 0.18),
+        0 0 12px var(--accent-10);
 }
 
 .phase-popup__btn--primary:hover {
-  transform: translateY(-2px);
-  background: linear-gradient(135deg, #1ae5d0 0%, #12c4b5 100%);
-  box-shadow: 0 10px 28px rgba(0, 255, 210, 0.22), 0 0 18px var(--accent-15);
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #1ae5d0 0%, #12c4b5 100%);
+    box-shadow:
+        0 10px 28px rgba(0, 255, 210, 0.22),
+        0 0 18px var(--accent-15);
 }
 
 .phase-popup--warning .phase-popup__btn--primary {
-  background: linear-gradient(135deg, #ffb432 0%, #f0a020 100%);
-  color: #1a0e00;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18), 0 0 12px rgba(255, 180, 50, 0.1);
+    background: linear-gradient(135deg, #ffb432 0%, #f0a020 100%);
+    color: #1a0e00;
+    box-shadow:
+        0 4px 18px rgba(0, 0, 0, 0.18),
+        0 0 12px rgba(255, 180, 50, 0.1);
 }
 
 .phase-popup--warning .phase-popup__btn--primary:hover {
-  background: linear-gradient(135deg, #ffc04d 0%, #f5b030 100%);
-  box-shadow: 0 10px 28px rgba(255, 180, 50, 0.22), 0 0 18px rgba(255, 180, 50, 0.15);
+    background: linear-gradient(135deg, #ffc04d 0%, #f5b030 100%);
+    box-shadow:
+        0 10px 28px rgba(255, 180, 50, 0.22),
+        0 0 18px rgba(255, 180, 50, 0.15);
 }
 
 .phase-popup__btn--secondary {
-  background: transparent;
-  color: #e6fefe;
-  border: 1.5px solid var(--accent-35);
-  box-shadow: 0 0 8px var(--accent-05);
+    background: transparent;
+    color: #e6fefe;
+    border: 1.5px solid var(--accent-35);
+    box-shadow: 0 0 8px var(--accent-05);
 }
 
 .phase-popup__btn--secondary:hover {
-  background: var(--accent-12);
-  border-color: var(--accent-60);
-  color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.15), 0 0 16px var(--accent-12);
+    background: var(--accent-12);
+    border-color: var(--accent-60);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.15),
+        0 0 16px var(--accent-12);
 }
 
 .phase-popup__btn:active {
-  transform: scale(0.97);
+    transform: scale(0.97);
 }
 
 @media (max-width: 480px) {
-  .phase-popup {
-    width: 95%;
-    padding: 2rem 1.5rem;
-  }
+    .phase-popup {
+        width: 95%;
+        padding: 2rem 1.5rem;
+    }
 
-  .phase-popup__time-block {
-    min-width: 48px;
-    padding: 0.5rem 0.3rem;
-  }
+    .phase-popup__time-block {
+        min-width: 48px;
+        padding: 0.5rem 0.3rem;
+    }
 
-  .phase-popup__time-value {
-    font-size: 1.2rem;
-  }
+    .phase-popup__time-value {
+        font-size: 1.2rem;
+    }
 
-  .phase-popup__actions {
-    flex-direction: column;
-  }
+    .phase-popup__actions {
+        flex-direction: column;
+    }
 
-  .phase-popup__btn {
-    width: 100%;
-  }
+    .phase-popup__btn {
+        width: 100%;
+    }
 }

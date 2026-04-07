@@ -39,7 +39,8 @@
     position: relative;
     width: 100%;
     margin: 0 auto;
-    padding: 100px 0 0 0;}
+    padding: 100px 0 0 0;
+}
 
 .tl-center-line {
     position: absolute;
@@ -75,7 +76,6 @@
 
 .tl-row:first-of-type {
     margin-top: 0;
-    
 }
 
 .tl-row:last-child {
@@ -284,7 +284,7 @@
 .tl-start-pill {
     position: relative;
     z-index: 5;
-    background: #011E1A;
+    background: #011e1a;
     border: 2px solid rgba(0, 255, 200, 0.4);
     border-radius: 50%;
     width: 50px;
@@ -300,15 +300,21 @@
 
 @keyframes pulse-glow {
     0% {
-        box-shadow: 0 0 10px rgba(0, 255, 200, 0.2), 0 0 0 0 rgba(0, 255, 200, 0.2);
+        box-shadow:
+            0 0 10px rgba(0, 255, 200, 0.2),
+            0 0 0 0 rgba(0, 255, 200, 0.2);
     }
 
     50% {
-        box-shadow: 0 0 25px rgba(0, 255, 200, 0.5), 0 0 0 10px rgba(0, 255, 200, 0);
+        box-shadow:
+            0 0 25px rgba(0, 255, 200, 0.5),
+            0 0 0 10px rgba(0, 255, 200, 0);
     }
 
     100% {
-        box-shadow: 0 0 10px rgba(0, 255, 200, 0.2), 0 0 0 0 rgba(0, 255, 200, 0);
+        box-shadow:
+            0 0 10px rgba(0, 255, 200, 0.2),
+            0 0 0 0 rgba(0, 255, 200, 0);
     }
 }
 
@@ -349,7 +355,8 @@
 
     .tl-center-line {
         left: 20px;
-        top: 15px;    }
+        top: 15px;
+    }
 
     .tl-row {
         flex-direction: column !important;

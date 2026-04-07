@@ -6,19 +6,20 @@ import '../styles/StatueCanvas.css';
 function BottomMist() {
     const meshRef = useRef();
 
-    const { uniforms, vertexShader, fragmentShader } = useMemo(() => ({
-        uniforms: {
-            uTime: { value: 0 },
-            uColor: { value: new THREE.Color(0x03c7b3) },
-        },
-        vertexShader: `
+    const { uniforms, vertexShader, fragmentShader } = useMemo(
+        () => ({
+            uniforms: {
+                uTime: { value: 0 },
+                uColor: { value: new THREE.Color(0x03c7b3) },
+            },
+            vertexShader: `
             varying vec2 vUv;
             void main() {
                 vUv = uv;
                 gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
             }
         `,
-        fragmentShader: `
+            fragmentShader: `
             uniform float uTime;
             uniform vec3 uColor;
             varying vec2 vUv;
@@ -60,7 +61,9 @@ function BottomMist() {
                 gl_FragColor = vec4(col, alpha);
             }
         `,
-    }), []);
+        }),
+        [],
+    );
 
     useFrame(({ clock }) => {
         if (meshRef.current) {
@@ -82,7 +85,6 @@ function BottomMist() {
         </mesh>
     );
 }
-
 
 export default function StatueCanvas() {
     const floatRef = useRef(null);

@@ -1,65 +1,56 @@
 :root {
-  
-  --color-darkest:  #04231E;
-  --color-dark:     #1B5B4D;
-  --color-mid:      #128C7D;
-  --color-accent:   #03C7B3;
-  --color-text:     #FBFFFE;
+    --color-darkest: #04231e;
+    --color-dark: #1b5b4d;
+    --color-mid: #128c7d;
+    --color-accent: #03c7b3;
+    --color-text: #fbfffe;
 
-  
-  --rgb-darkest:    4, 35, 30;
-  --rgb-dark:       27, 91, 77;
-  --rgb-mid:        18, 140, 125;
-  --rgb-accent:     3, 199, 179;
-  --rgb-text:       251, 255, 254;
+    --rgb-darkest: 4, 35, 30;
+    --rgb-dark: 27, 91, 77;
+    --rgb-mid: 18, 140, 125;
+    --rgb-accent: 3, 199, 179;
+    --rgb-text: 251, 255, 254;
 
-  
-  --bg-primary:     #04231E;           
-  --bg-secondary:   #04231E;           
+    --bg-primary: #04231e;
+    --bg-secondary: #04231e;
 
-  
-  --ui-panel:       rgba(4, 35, 30, 0.45);
-  --glass-bg:       rgba(27, 91, 77, 0.25);   
-  --glass-border:   rgba(3, 199, 179, 0.25);  
+    --ui-panel: rgba(4, 35, 30, 0.45);
+    --glass-bg: rgba(27, 91, 77, 0.25);
+    --glass-border: rgba(3, 199, 179, 0.25);
 
-  
-  --accent:         #03C7B3;
+    --accent: #03c7b3;
 
-  
-  --text-primary:   #FBFFFE;
-  --text-muted:     #B8C2C0;
+    --text-primary: #fbfffe;
+    --text-muted: #b8c2c0;
 
-  
-  --glow-subtle:    0 2px 8px rgba(0, 0, 0, 0.15);
-  --glow-mid:       0 4px 16px rgba(0, 0, 0, 0.2);
-  --glow-strong:    0 8px 24px rgba(0, 0, 0, 0.25);
+    --glow-subtle: 0 2px 8px rgba(0, 0, 0, 0.15);
+    --glow-mid: 0 4px 16px rgba(0, 0, 0, 0.2);
+    --glow-strong: 0 8px 24px rgba(0, 0, 0, 0.25);
 
-  
-  --accent-05:      rgba(3, 199, 179, 0.05);
-  --accent-08:      rgba(3, 199, 179, 0.08);
-  --accent-10:      rgba(3, 199, 179, 0.10);
-  --accent-12:      rgba(3, 199, 179, 0.12);
-  --accent-15:      rgba(3, 199, 179, 0.15);
-  --accent-18:      rgba(3, 199, 179, 0.18);
-  --accent-20:      rgba(3, 199, 179, 0.20);
-  --accent-25:      rgba(3, 199, 179, 0.25);
-  --accent-30:      rgba(3, 199, 179, 0.30);
-  --accent-35:      rgba(3, 199, 179, 0.35);
-  --accent-40:      rgba(3, 199, 179, 0.40);
-  --accent-50:      rgba(3, 199, 179, 0.50);
-  --accent-60:      rgba(3, 199, 179, 0.60);
-  --accent-80:      rgba(3, 199, 179, 0.80);
-  --accent-90:      rgba(3, 199, 179, 0.90);
+    --accent-05: rgba(3, 199, 179, 0.05);
+    --accent-08: rgba(3, 199, 179, 0.08);
+    --accent-10: rgba(3, 199, 179, 0.1);
+    --accent-12: rgba(3, 199, 179, 0.12);
+    --accent-15: rgba(3, 199, 179, 0.15);
+    --accent-18: rgba(3, 199, 179, 0.18);
+    --accent-20: rgba(3, 199, 179, 0.2);
+    --accent-25: rgba(3, 199, 179, 0.25);
+    --accent-30: rgba(3, 199, 179, 0.3);
+    --accent-35: rgba(3, 199, 179, 0.35);
+    --accent-40: rgba(3, 199, 179, 0.4);
+    --accent-50: rgba(3, 199, 179, 0.5);
+    --accent-60: rgba(3, 199, 179, 0.6);
+    --accent-80: rgba(3, 199, 179, 0.8);
+    --accent-90: rgba(3, 199, 179, 0.9);
 
-  --dark-05:        rgba(4, 35, 30, 0.05);
-  --dark-40:        rgba(4, 35, 30, 0.40);
-  --dark-45:        rgba(4, 35, 30, 0.45);
-  --dark-50:        rgba(4, 35, 30, 0.50);
-  --dark-60:        rgba(4, 35, 30, 0.60);
-  --dark-80:        rgba(4, 35, 30, 0.80);
-  --dark-95:        rgba(4, 35, 30, 0.95);
+    --dark-05: rgba(4, 35, 30, 0.05);
+    --dark-40: rgba(4, 35, 30, 0.4);
+    --dark-45: rgba(4, 35, 30, 0.45);
+    --dark-50: rgba(4, 35, 30, 0.5);
+    --dark-60: rgba(4, 35, 30, 0.6);
+    --dark-80: rgba(4, 35, 30, 0.8);
+    --dark-95: rgba(4, 35, 30, 0.95);
 
-  
-  --font-body:      'Metropolis', 'Inter', sans-serif;
-  --font-heading:   'Metropolis', 'Montserrat', sans-serif;
+    --font-body: 'Metropolis', 'Inter', sans-serif;
+    --font-heading: 'Metropolis', 'Montserrat', sans-serif;
 }

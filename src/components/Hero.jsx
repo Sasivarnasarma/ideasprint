@@ -21,9 +21,8 @@ export default function Hero({ visible }) {
     const phase = getPhase();
 
     useEffect(() => {
-        const sessionKey = phase === 2
-            ? 'ideasprint_reg_closing_shown'
-            : 'ideasprint_prop_closing_shown';
+        const sessionKey =
+            phase === 2 ? 'ideasprint_reg_closing_shown' : 'ideasprint_prop_closing_shown';
 
         if (phase === 2 && isWithinWarningWindow(REGISTRATION_CLOSE)) {
             if (!sessionStorage.getItem(sessionKey)) {
@@ -71,7 +70,15 @@ export default function Hero({ visible }) {
         >
             <div className="hero__glow" />
 
-            <div style={{ height: '100%', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div
+                style={{
+                    height: '100%',
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
                 <div className="hero__panel">
                     <span className="hero__corner hero__corner--tl" />
                     <span className="hero__corner hero__corner--tr" />
@@ -79,7 +86,6 @@ export default function Hero({ visible }) {
                     <span className="hero__corner hero__corner--br" />
 
                     <div className="hero__content">
-
                         <div className="hero__left">
                             <div className="hero__badge">
                                 <span className="hero__badge-dot" />
@@ -97,9 +103,10 @@ export default function Hero({ visible }) {
                             </div>
 
                             <p className="hero__desc">
-                                The Intra-Departmental Ideathon organized by the Industrial Management
-                                Science Students' Association. Collaborate, explore real-world challenges,
-                                and develop innovative technology-driven solutions.
+                                The Intra-Departmental Ideathon organized by the Industrial
+                                Management Science Students' Association. Collaborate, explore
+                                real-world challenges, and develop innovative technology-driven
+                                solutions.
                             </p>
 
                             <div className="hero__buttons">
@@ -115,7 +122,7 @@ export default function Hero({ visible }) {
                                     </a>
                                 )}
 
-                                {(phase >= 3 && phase <= 5) && (
+                                {phase >= 3 && phase <= 5 && (
                                     <a
                                         href={PORTAL_URL}
                                         target="_blank"
@@ -127,7 +134,7 @@ export default function Hero({ visible }) {
                                     </a>
                                 )}
 
-                                {(phase >= 3 && phase <= 5) && (
+                                {phase >= 3 && phase <= 5 && (
                                     <a
                                         href={TEMPLATE_URL}
                                         className="hero__btn hero__btn--secondary"

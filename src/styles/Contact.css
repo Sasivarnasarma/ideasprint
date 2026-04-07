@@ -1,168 +1,174 @@
 .contact-section {
-  display: block;         
-  overflow: hidden;
+    display: block;
+    overflow: hidden;
 }
 
 .contact-section__header {
-  text-align: center;
-  margin-bottom: 3rem;
+    text-align: center;
+    margin-bottom: 3rem;
 }
 
 .contact-section__desc {
-  font-size: clamp(0.9rem, 1.1vw, 1.05rem);
-  color: rgba(251, 255, 254, 0.65);
-  max-width: 520px;
-  margin: 0 auto;
-  line-height: 1.7;
+    font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+    color: rgba(251, 255, 254, 0.65);
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.7;
 }
 
 .contact-carousel {
-  overflow: hidden;
-  cursor: grab;
-  user-select: none;
-  touch-action: none;
+    overflow: hidden;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
 }
-.contact-carousel:active { cursor: grabbing; }
+.contact-carousel:active {
+    cursor: grabbing;
+}
 
 .contact-carousel__track {
-  display: flex;
-  width: max-content;
+    display: flex;
+    width: max-content;
 }
 
 .contact-carousel__slide {
-  padding: 0 0.75rem;
-  box-sizing: border-box;
+    padding: 0 0.75rem;
+    box-sizing: border-box;
 }
 
 .contact-card {
-  background: rgba(0, 20, 18, 0.55);
-  border: 1px solid rgba(0, 255, 200, 0.1);
-  border-radius: 20px;
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background: rgba(0, 20, 18, 0.55);
+    border: 1px solid rgba(0, 255, 200, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
 }
 .contact-card:hover {
-  border-color: rgba(0, 255, 200, 0.28);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+    border-color: rgba(0, 255, 200, 0.28);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
 }
 
 .contact-card__img-wrap {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
 }
 
 .contact-card__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  display: block;
-  transition: transform 0.5s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    transition: transform 0.5s ease;
 }
 .contact-card:hover .contact-card__img {
-  transform: scale(1.04);
+    transform: scale(1.04);
 }
 
 .contact-card__img-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
-  background: linear-gradient(to top, rgba(4, 14, 12, 0.85) 0%, transparent 100%);
-  pointer-events: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to top, rgba(4, 14, 12, 0.85) 0%, transparent 100%);
+    pointer-events: none;
 }
 
 .contact-card__body {
-  padding: 1rem 1.2rem 1.2rem;
+    padding: 1rem 1.2rem 1.2rem;
 }
 
 .contact-card__name {
-  font-family: var(--font-heading);
-  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
-  font-weight: 700;
-  color: #FBFFFE;
-  letter-spacing: 0.5px;
-  margin-bottom: 0.25rem;
+    font-family: var(--font-heading);
+    font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+    font-weight: 700;
+    color: #fbfffe;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.25rem;
 }
 
 .contact-card__role {
-  font-size: 0.82rem;
-  color: var(--accent);
-  font-weight: 600;
-  letter-spacing: 1px;
-  margin-bottom: 0.15rem;
+    font-size: 0.82rem;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 0.15rem;
 }
 
 .contact-card__event {
-  font-size: 0.78rem;
-  color: rgba(251, 255, 254, 0.5);
-  margin-bottom: 1rem;
+    font-size: 0.78rem;
+    color: rgba(251, 255, 254, 0.5);
+    margin-bottom: 1rem;
 }
 
 .contact-card__actions {
-  display: flex;
-  gap: 0.6rem;
+    display: flex;
+    gap: 0.6rem;
 }
 
 .contact-card__btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.45rem 0.9rem;
-  border-radius: 999px;
-  border: 1px solid rgba(0, 255, 200, 0.22);
-  background: rgba(3, 199, 179, 0.08);
-  color: rgba(251, 255, 254, 0.8);
-  font-size: 0.78rem;
-  font-family: var(--font-heading);
-  letter-spacing: 0.5px;
-  text-decoration: none;
-  transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 255, 200, 0.22);
+    background: rgba(3, 199, 179, 0.08);
+    color: rgba(251, 255, 254, 0.8);
+    font-size: 0.78rem;
+    font-family: var(--font-heading);
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    transition: all 0.25s ease;
 }
 .contact-card__btn svg {
-  width: 14px;
-  height: 14px;
-  flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
 }
 .contact-card__btn:hover {
-  background: rgba(3, 199, 179, 0.18);
-  border-color: rgba(0, 255, 200, 0.5);
-  color: #fff;
+    background: rgba(3, 199, 179, 0.18);
+    border-color: rgba(0, 255, 200, 0.5);
+    color: #fff;
 }
 
 .contact-carousel__dots {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
 }
 
 .contact-carousel__dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(3, 199, 179, 0.25);
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  transition: background 0.3s ease, transform 0.3s ease;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(3, 199, 179, 0.25);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition:
+        background 0.3s ease,
+        transform 0.3s ease;
 }
 .contact-carousel__dot.active {
-  background: var(--accent);
-  transform: scale(1.4);
+    background: var(--accent);
+    transform: scale(1.4);
 }
 
 @media (max-width: 767px) {
-  .contact-carousel__slide {
-    padding: 0 0.5rem;
-  }
+    .contact-carousel__slide {
+        padding: 0 0.5rem;
+    }
 
-  .contact-section__header {
-    margin-bottom: 2rem;
-  }
+    .contact-section__header {
+        margin-bottom: 2rem;
+    }
 }
