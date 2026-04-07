@@ -1,9 +1,3 @@
-/* ══════════════════════════════════════════════════════════════
-   HERO — Complete rewrite for compact, no-overflow layout
-   Key principle: section = 100dvh, panel fits inside, statue matches
-   ══════════════════════════════════════════════════════════════ */
-
-/* ── Root Section ── */
 .hero-section {
   position: relative;
   width: 100%;
@@ -20,7 +14,6 @@
   box-sizing: border-box;
 }
 
-/* ── Radial Glow Behind Panel ── */
 .hero__glow {
   position: absolute;
   top: 50%;
@@ -49,8 +42,6 @@
   }
 }
 
-/* ── Glass Panel Container ── */
-
 .hero__panel {
   position: relative;
   z-index: 5;
@@ -73,8 +64,6 @@
   padding: clamp(1.2rem, 2.5vh, 2.8rem) clamp(1.8rem, 4vw, 4rem);
 }
 
-
-
 .hero__corner {
   display: none;
 }
@@ -88,7 +77,6 @@
   gap: 0;
 }
 
-/* ── LEFT column: badge → logo → desc → buttons stacked tightly ── */
 .hero__left {
   display: flex;
   flex-direction: column;
@@ -111,7 +99,6 @@
   border: 0;
 }
 
-/* Badge */
 .hero__badge {
   display: inline-flex;
   align-items: center;
@@ -154,7 +141,6 @@
   }
 }
 
-/* Logo */
 .hero__logo-wrapper {
   width: 100%;
   max-width: clamp(240px, 35vw, 550px);
@@ -172,7 +158,6 @@
   pointer-events: none;
 }
 
-/* Description */
 .hero__desc {
   font-size: clamp(0.8rem, 1.1vw + 0.15rem, 1rem);
   color: rgba(251, 255, 254, 0.72);
@@ -185,7 +170,6 @@
   margin: 0;
 }
 
-/* Buttons */
 .hero__buttons {
   display: flex;
   flex-direction: row;
@@ -270,7 +254,6 @@
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.15), 0 0 16px rgba(3, 199, 179, 0.12);
 }
 
-/* Scroll Indicator */
 .hero-scroll-indicator {
   display: none;
   flex-direction: column;
@@ -319,11 +302,6 @@
   }
 }
 
-/* ════════════════════════════════
-   RIGHT column: Statue
-   The right column height is entirely dictated by the panel.
-   The statue fills it without overflow.
-   ════════════════════════════════ */
 .hero__right {
   height: 100%;
   display: flex;
@@ -336,9 +314,6 @@
   transform-origin: right center;
 }
 
-/* ══════════════════════════════════════
-   RESPONSIVE — Tablet ≤ 1024px
-   ══════════════════════════════════════ */
 @media (max-width: 1024px) {
   .hero__panel {
     padding: clamp(1rem, 2.5vh, 2rem) clamp(1.5rem, 3vw, 2.5rem);
@@ -357,9 +332,6 @@
   }
 }
 
-/* ══════════════════════════════════════
-   RESPONSIVE — Mobile ≤ 767px — single column
-   ══════════════════════════════════════ */
 @media (max-width: 767px) {
   .hero-section {
     height: 100dvh;
@@ -430,9 +402,6 @@
   }
 }
 
-/* ══════════════════════════════════════
-   LARGE ≥ 1440px
-   ══════════════════════════════════════ */
 @media (min-width: 1440px) {
   .hero__panel {
     max-width: 1500px;
@@ -444,9 +413,6 @@
   }
 }
 
-/* ══════════════════════════════════════
-   ULTRA-WIDE ≥ 1920px
-   ══════════════════════════════════════ */
 @media (min-width: 1920px) {
   .hero__panel {
     max-width: 1650px;

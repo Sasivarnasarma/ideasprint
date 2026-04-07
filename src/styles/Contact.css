@@ -1,13 +1,8 @@
-/* ══════════════════════════════════════════════════════════════
-   CONTACT SECTION — Paginated Carousel
-   ══════════════════════════════════════════════════════════════ */
-
 .contact-section {
-  display: block;         /* override flex from scroll-section for this layout */
+  display: block;         
   overflow: hidden;
 }
 
-/* Header */
 .contact-section__header {
   text-align: center;
   margin-bottom: 3rem;
@@ -21,7 +16,6 @@
   line-height: 1.7;
 }
 
-/* ── Carousel Viewport ── */
 .contact-carousel {
   overflow: hidden;
   cursor: grab;
@@ -40,7 +34,6 @@
   box-sizing: border-box;
 }
 
-/* ── Card ── */
 .contact-card {
   background: rgba(0, 20, 18, 0.55);
   border: 1px solid rgba(0, 255, 200, 0.1);
@@ -142,7 +135,6 @@
   color: #fff;
 }
 
-/* ── Dot Indicators ── */
 .contact-carousel__dots {
   display: flex;
   justify-content: center;
@@ -165,9 +157,6 @@
   transform: scale(1.4);
 }
 
-/* ══════════════════════════════════════
-   RESPONSIVE
-   ══════════════════════════════════════ */
 @media (max-width: 767px) {
   .contact-carousel__slide {
     padding: 0 0.5rem;

@@ -1,8 +1,3 @@
-/* ══════════════════════════════════════════════════════════════
-   STATUE — Fills the right hero column without overflow
-   ══════════════════════════════════════════════════════════════ */
-
-/* ── Outer container fills parent (.hero__right) ── */
 .statue__outer {
   position: relative;
   width: 100%;
@@ -13,7 +8,7 @@
   background: transparent;
   overflow: visible;
 
-  /* Edge fades — horizontal + vertical */
+  
   -webkit-mask-image:
     linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%),
     linear-gradient(to top, transparent 0%, black 20%, black 100%);
@@ -24,7 +19,6 @@
   mask-composite: intersect;
 }
 
-/* ── Environmental radial glow ── */
 .statue__env-glow {
   position: absolute;
   top: 5%;
@@ -56,7 +50,6 @@
   }
 }
 
-/* ── Floating wrapper ── */
 .statue__float-wrap {
   position: relative;
   z-index: 1;
@@ -68,11 +61,6 @@
   will-change: transform;
 }
 
-/* ── Statue image: key rules ──
-   - width: 100% fills the column
-   - height: 100% + object-fit: contain ensures it stays within bounds
-   - max-height: 100% prevents overflow
-*/
 .statue__img {
   display: block;
   width: 110%;
@@ -94,7 +82,6 @@
   opacity: 1;
 }
 
-/* ── Three.js mist canvas ── */
 .statue__mist-canvas {
   position: absolute;
   bottom: 0;
@@ -112,7 +99,6 @@
   background: transparent !important;
 }
 
-/* ── CSS bottom fog ── */
 .statue__fog {
   position: absolute;
   bottom: 0;
@@ -128,9 +114,6 @@
   z-index: 2;
 }
 
-/* ══════════════════════════════════════
-   RESPONSIVE — Tablet
-   ══════════════════════════════════════ */
 @media (max-width: 1024px) {
   .statue__outer {
     -webkit-mask-image:
@@ -144,9 +127,6 @@
   }
 }
 
-/* ══════════════════════════════════════
-   RESPONSIVE — Mobile (statue hidden in JSX anyway)
-   ══════════════════════════════════════ */
 @media (max-width: 767px) {
   .statue__mist-canvas {
     display: none;

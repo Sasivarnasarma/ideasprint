@@ -1,54 +1,40 @@
-/* ================================================================
-   IDEASPRINT 2026 — GLOBAL THEME
-   ================================================================
-   This is the SINGLE SOURCE OF TRUTH for all colors.
-   To change the site palette, only edit this file.
-
-   Palette (dark → light):
-     #04231E  →  Darkest background
-     #1B5B4D  →  Dark panels / mid backgrounds
-     #128C7D  →  Mid accent (borders, dividers)
-     #03C7B3  →  Bright accent (highlights, glows, CTAs)
-     #FBFFFE  →  Text / near-white
-   ================================================================ */
-
 :root {
-  /* ── Raw Palette ── */
+  
   --color-darkest:  #04231E;
   --color-dark:     #1B5B4D;
   --color-mid:      #128C7D;
   --color-accent:   #03C7B3;
   --color-text:     #FBFFFE;
 
-  /* ── Raw RGB channels (for rgba() helpers) ── */
+  
   --rgb-darkest:    4, 35, 30;
   --rgb-dark:       27, 91, 77;
   --rgb-mid:        18, 140, 125;
   --rgb-accent:     3, 199, 179;
   --rgb-text:       251, 255, 254;
 
-  /* ── Semantic Background Aliases ── */
-  --bg-primary:     #04231E;           /* Page background */
-  --bg-secondary:   #04231E;           /* Section sub-backgrounds */
+  
+  --bg-primary:     #04231E;           
+  --bg-secondary:   #04231E;           
 
-  /* ── UI / Panel System ── */
+  
   --ui-panel:       rgba(4, 35, 30, 0.45);
-  --glass-bg:       rgba(27, 91, 77, 0.25);   /* Glass card surfaces */
-  --glass-border:   rgba(3, 199, 179, 0.25);  /* Glass card borders */
+  --glass-bg:       rgba(27, 91, 77, 0.25);   
+  --glass-border:   rgba(3, 199, 179, 0.25);  
 
-  /* ── Accent ── */
+  
   --accent:         #03C7B3;
 
-  /* ── Text ── */
+  
   --text-primary:   #FBFFFE;
   --text-muted:     #B8C2C0;
 
-  /* ── Shadow Utilities (subtle, modern — for interactive elements only) ── */
+  
   --glow-subtle:    0 2px 8px rgba(0, 0, 0, 0.15);
   --glow-mid:       0 4px 16px rgba(0, 0, 0, 0.2);
   --glow-strong:    0 8px 24px rgba(0, 0, 0, 0.25);
 
-  /* ── Common rgba helpers ── */
+  
   --accent-05:      rgba(3, 199, 179, 0.05);
   --accent-08:      rgba(3, 199, 179, 0.08);
   --accent-10:      rgba(3, 199, 179, 0.10);
@@ -73,7 +59,7 @@
   --dark-80:        rgba(4, 35, 30, 0.80);
   --dark-95:        rgba(4, 35, 30, 0.95);
 
-  /* ── Typography ── */
+  
   --font-body:      'Metropolis', 'Inter', sans-serif;
   --font-heading:   'Metropolis', 'Montserrat', sans-serif;
 }

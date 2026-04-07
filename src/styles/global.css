@@ -1,5 +1,3 @@
-/* ── Palette variables are defined in theme.css (imported before this file in main.jsx) ── */
-
 html {
   scroll-behavior: smooth;
 }
@@ -28,7 +26,6 @@ svg {
   height: auto;
 }
 
-/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -46,16 +43,10 @@ svg {
   background: rgba(3, 199, 179, 0.6);
 }
 
-/* Text selection */
 ::selection {
   background: rgba(3, 199, 179, 0.25);
   color: var(--text-primary);
 }
-
-/* Global Subtly Glowing Grid Engine */
-
-
-
 
 #global-site-bg {
   position: fixed;
@@ -74,22 +65,22 @@ svg {
 
 .global-dotgrid-wrapper {
   position: absolute;
-  /* Fits exactly to hero section to prevent shadow bleeding over the About section */
+  
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
   z-index: 1;
-  /* Above global-site-bg, below #app */
+  
   pointer-events: none;
   opacity: 0.35;
-  /* Soften significantly per request */
+  
 
-  /* Vertical fade out */
+  
   mask-image: linear-gradient(to bottom, black 0%, black 80%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, black 0%, black 80%, transparent 100%);
 
-  /* Subtle futuristic motion */
+  
   animation: gridDrift 20s linear infinite;
 }
 
@@ -104,7 +95,7 @@ svg {
   }
 
   100% {
-    /* 20px matches exactly 1 cell height (dotSize 5 + gap 15) for a seamless continuous loop */
+    
     transform: translateY(-20px);
     opacity: 0.2;
   }
@@ -129,9 +120,6 @@ svg {
   overflow-x: hidden;
 }
 
-
-
-/* Typography Base */
 h1,
 h2,
 h3,
@@ -145,7 +133,6 @@ h4 {
   color: var(--accent);
 }
 
-/* Panels & Glassmorphism (Subtle) */
 .glass-panel {
   background: var(--glass-bg);
   backdrop-filter: blur(16px);
@@ -155,20 +142,19 @@ h4 {
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
 }
 
-/* Navigation - Center Floating Pill */
 .system-nav {
   position: fixed;
   top: 15px;
   left: 50%;
   transform: translate(-50%, -80px);
-  /* Initially hidden above */
+  
   width: 90%;
   max-width: 1200px;
   display: flex;
   flex-direction: column;
   z-index: 1000;
 
-  /* Futuristic Command Panel - Brand Glass Effect */
+  
   background: rgba(4, 33, 29, 0.55);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -177,7 +163,7 @@ h4 {
     0 0 15px rgba(3, 199, 179, 0.1),
     inset 0 0 8px rgba(3, 199, 179, 0.05);
 
-  /* Restored default rounding; perfectly hugs the Register button radius (20px inner + 8px outer padding) = 28px*/
+  
   border-radius: 28px;
   transition: transform 0.4s ease-out, opacity 0.4s ease-out, background 0.4s ease-out, box-shadow 0.4s, width 0.3s, max-width 0.3s;
   opacity: 0;
@@ -192,7 +178,6 @@ h4 {
   align-items: center;
 }
 
-/* Nav Scroll State (Added via JS later) */
 .system-nav.scrolled {
   opacity: 1;
   transform: translate(-50%, 0);
@@ -211,7 +196,6 @@ h4 {
   pointer-events: none;
 }
 
-/* Keep nav visible when mobile menu is open, even if navbar-hidden */
 .system-nav.mobile-open {
   opacity: 1 !important;
   transform: translate(-50%, 0) !important;
@@ -220,7 +204,7 @@ h4 {
 
 @media (max-width: 900px) {
 
-  /* Force full-screen expansion for mobile overlay */
+  
   .system-nav.mobile-open {
     top: 0 !important;
     width: 100% !important;
@@ -228,31 +212,30 @@ h4 {
     height: 100dvh !important;
     border-radius: 0 !important;
     background: rgba(4, 33, 29, 0.98) !important;
-    /* Slightly distinct solid dark teal */
+    
     backdrop-filter: blur(24px) !important;
     -webkit-backdrop-filter: blur(24px) !important;
     border: none !important;
   }
 }
 
-/* ═══ MOBILE NAVBAR AUTO-HIDE ENHANCEMENTS ═══ */
 @media (max-width: 767px) {
   .system-nav {
-    /* Smooth modern slide duration */
+    
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
       opacity 0.3s ease-out,
       background 0.3s ease-out,
       box-shadow 0.3s;
-    /* Default hidden state for mobile auto-hide logic */
+    
     transform: translate(-50%, -100px);
     opacity: 0;
-    /* Exactly mirrors the .hero__panel size */
+    
     width: 92%;
     max-width: 480px;
     border-radius: 24px;
   }
 
-  /* Force showing when visibility logic removes navbar-hidden */
+  
   .system-nav:not(.navbar-hidden) {
     transform: translate(-50%, 0) !important;
     opacity: 1 !important;
@@ -313,7 +296,6 @@ h4 {
   opacity: 1;
 }
 
-/* Touch Targets Ensure Links are clickable on mobile */
 a,
 button,
 .mobile-menu-toggle {
@@ -335,7 +317,6 @@ button,
   width: 100%;
 }
 
-/* Hover Indicators / Active link simulation */
 .nav-links a.active {
   color: var(--accent);
 
@@ -345,8 +326,6 @@ button,
   width: 100%;
 }
 
-
-/* Buttons */
 .primary-btn,
 .secondary-btn {
   font-family: var(--font-heading);
@@ -408,12 +387,11 @@ button,
   box-shadow: 0 0 8px rgba(3, 199, 179, 0.12);
 }
 
-/* Sections — consistent spacing across all screen sizes */
 .scroll-section {
   min-height: auto;
   display: flex;
   align-items: center;
-  /* Only vertical padding here, container handles horizontal bounds */
+  
   padding: clamp(3rem, 6vw, 6rem) 0;
   position: relative;
   mask-image: none;
@@ -427,13 +405,12 @@ button,
   padding: 0 clamp(1.5rem, 5vw, 5rem);
 }
 
-/* ═══ LARGE SCREENS & ULTRA-WIDE OPTIMIZATIONS ═══ */
 @media (min-width: 1440px) {
   .container {
     max-width: 1500px;
   }
 
-  /* No scroll-section override needed — clamp handles this */
+  
   h2.section-title {
     font-size: 3.8rem !important;
   }
@@ -444,7 +421,7 @@ button,
     max-width: 1650px;
   }
 
-  /* No scroll-section override needed — clamp handles this */
+  
   h2.section-title {
     font-size: 4.2rem !important;
   }
@@ -454,8 +431,6 @@ button,
   }
 }
 
-
-/* Hero Background Overlay */
 .hero-overlay {
   position: absolute;
   top: 0;
@@ -469,7 +444,6 @@ button,
   z-index: 0;
 }
 
-/* Futuristic UI Overlays (Faint grid and ring) */
 .hero-section::before {
   content: '';
   position: absolute;
@@ -487,7 +461,6 @@ button,
   display: none;
 }
 
-/* Hero Particles */
 .hero-particles {
   position: absolute;
   top: 0;
@@ -540,7 +513,6 @@ button,
   }
 }
 
-/* Hero scanning ring — second inner ring */
 .hero-scan-ring {
   position: absolute;
   right: 15%;
@@ -555,7 +527,6 @@ button,
   animation: slowPulseRing 6s ease-in-out infinite alternate-reverse;
 }
 
-/* Hero glowing node dots */
 .hero-node {
   position: absolute;
   width: 6px;
@@ -582,12 +553,10 @@ button,
   }
 }
 
-/* Vertical Transition Fade into next section (#04231E) */
 .hero-bottom-fade {
   display: none;
 }
 
-/* Subtle ambient pulse for hero */
 .ocean-motion {
   position: absolute;
   bottom: 0px;
@@ -662,9 +631,6 @@ button,
   gap: 1.5rem;
 }
 
-
-
-/* ── Hero Badge ── */
 .hero-badge {
   display: inline-flex;
   align-items: center;
@@ -705,7 +671,6 @@ button,
   }
 }
 
-/* ── Section Label & Title Underline ── */
 .section-label {
   font-family: var(--font-heading);
   font-size: 0.75rem;
@@ -725,7 +690,6 @@ button,
   margin-bottom: 2rem;
 }
 
-/* Button Shimmer Effect */
 .primary-btn.hero-btn::after {
   content: '';
   position: absolute;
@@ -741,11 +705,10 @@ button,
   left: 150%;
 }
 
-
 .section-title {
   font-size: 3rem;
   margin-bottom: 2rem;
-  /* was 3.5rem — too much gap after title */
+  
   font-weight: 900;
 }
 
@@ -756,7 +719,6 @@ button,
   line-height: 1.8;
 }
 
-/* Elegant Cards */
 .grid-cards {
   display: grid;
   gap: 2rem;
@@ -822,10 +784,6 @@ button,
   word-spacing: -0.04em;
 }
 
-/* ══════════════════════════════════════════════════════════════
-   ABOUT — Editorial Split Layout
-   ══════════════════════════════════════════════════════════════ */
-
 .about-split-layout {
   display: grid;
   grid-template-columns: 1fr 1.45fr;
@@ -835,7 +793,6 @@ button,
   margin-bottom: 5rem;
 }
 
-/* ── LEFT: title column ── */
 .about-split-title-col {
   min-width: 0;
   display: flex;
@@ -876,7 +833,6 @@ button,
   letter-spacing: 1px;
 }
 
-/* Stat pills row */
 .about-stat-row {
   display: flex;
   gap: 1rem;
@@ -914,7 +870,6 @@ button,
   text-transform: none;
 }
 
-/* ── RIGHT: glass card ── */
 .about-card {
   position: relative;
   overflow: hidden;
@@ -933,7 +888,6 @@ button,
   box-shadow: 0 20px 56px rgba(0, 0, 0, 0.4);
 }
 
-/* Corner decorations */
 .about-card__corner {
   position: absolute;
   width: 14px;
@@ -964,7 +918,6 @@ button,
   height: 20px;
 }
 
-/* Ghost watermark */
 .about-card__watermark {
   position: absolute;
   bottom: -1.5rem;
@@ -986,7 +939,6 @@ button,
   padding: 2.8rem 3rem;
 }
 
-/* Tag badge */
 .about-card__tag {
   display: inline-flex;
   align-items: center;
@@ -1000,7 +952,6 @@ button,
   margin-bottom: 2.2rem;
 }
 
-/* Paragraph text */
 .about-card__desc {
   font-size: clamp(0.95rem, 1.4vw, 1.1rem);
   color: rgba(183, 197, 194, 0.85);
@@ -1022,7 +973,6 @@ button,
   font-weight: 600;
 }
 
-/* Footer pills row */
 .about-card__footer {
   display: flex;
   gap: 0.6rem;
@@ -1045,7 +995,6 @@ button,
   padding: 0.28rem 0.85rem;
 }
 
-/* ── Responsive ── */
 @media (max-width: 1024px) {
   .about-split-layout {
     grid-template-columns: 1fr;
@@ -1079,7 +1028,7 @@ button,
 
   .about-stat-pill {
     flex: 1;
-    /* stretches evenly between the two */
+    
     width: 100%;
     align-items: center;
     text-align: center;
@@ -1156,7 +1105,6 @@ button,
   opacity: 0.55;
 }
 
-/* List style variant */
 .list-style .tech-card {
   padding: 2rem;
   border-left: 2px solid var(--glass-border);
@@ -1178,7 +1126,6 @@ button,
   opacity: 0.7;
 }
 
-/* Timeline Grid Layout */
 .timeline-section {
   position: relative;
   overflow: hidden;
@@ -1190,23 +1137,16 @@ button,
   z-index: 3;
 }
 
-/* ============================================================
-   About Section — same background treatment as Timeline
-   ============================================================ */
 .about-section {
   position: relative;
   overflow: hidden;
   background: transparent;
 }
 
-
-
 .about-section .container {
   position: relative;
   z-index: 3;
 }
-
-
 
 .about-bg-grid {
   position: absolute;
@@ -1242,11 +1182,6 @@ button,
   opacity: 0;
 }
 
-
-
-
-
-/* Enhanced grid texture (z:1, above the ::after vignette) */
 .timeline-bg-grid {
   position: absolute;
   top: 0;
@@ -1262,7 +1197,6 @@ button,
   -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%);
 }
 
-/* Animated horizontal scan light */
 .timeline-scan-light {
   position: absolute;
   left: 0;
@@ -1307,7 +1241,6 @@ button,
   margin: 0 auto;
 }
 
-/* Countdown UI */
 .countdown-wrapper {
   margin-bottom: 5rem;
   z-index: 2;
@@ -1472,9 +1405,6 @@ button,
   background: rgba(3, 199, 179, 0.1) !important;
 }
 
-/* Text Glow Utility reserved for future */
-
-/* Form UI */
 .contact-form {
   display: flex;
   flex-direction: column;
@@ -1505,7 +1435,6 @@ button,
   opacity: 0.4;
 }
 
-/* ── Contact Section — atmospheric bg same as About/Timeline ── */
 .contact-section {
   position: relative;
   overflow: hidden;
@@ -1516,8 +1445,6 @@ button,
   position: relative;
   z-index: 3;
 }
-
-
 
 .contact-bg-grid {
   position: absolute;
@@ -1548,7 +1475,6 @@ button,
   opacity: 0;
 }
 
-/* ── Contact Grid Layout ── */
 .contact-grid {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
@@ -1631,8 +1557,6 @@ button,
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
-/* ── System input upgrade ── */
-
 .system-footer {
   padding: 4rem 0 2rem 0;
   background: rgba(0, 0, 0, 0.4);
@@ -1655,7 +1579,6 @@ button,
   margin: 2rem auto;
 }
 
-/* ── Mobile Menu Variables / Defaults ── */
 .mobile-menu-toggle {
   display: none;
   flex-direction: column;
@@ -1704,25 +1627,25 @@ button,
   opacity: 1;
   pointer-events: auto;
   flex-grow: 1;
-  /* fills remaining height so links can center */
+  
 }
 
 .mobile-menu-links {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Center align links */
+  
   justify-content: center;
-  /* Vertically center in fullscreen mode */
+  
   gap: 0;
   text-align: center;
   width: 100%;
   height: 100%;
   padding: 1rem 2rem 5rem 2rem;
-  /* Give links some breathing room on edge */
+  
   border-top: 1px solid rgba(0, 255, 200, 0.1);
 
-  /* Initial state for smooth cascade slide-in */
+  
   transform: translateY(20px);
   opacity: 0;
   transition: transform 0.4s ease-out, opacity 0.4s ease-out;
@@ -1732,14 +1655,14 @@ button,
   transform: translateY(0);
   opacity: 1;
   transition-delay: 0.15s;
-  /* Wait briefly for navbar to expand */
+  
 }
 
 .mobile-nav-register {
   margin-top: 1.5rem;
   width: 100%;
   max-width: none;
-  /* Make button truly 100% width */
+  
 }
 
 .mobile-nav-register .inner-content {
@@ -1750,7 +1673,7 @@ button,
 .mobile-nav-btn {
   font-family: var(--font-heading);
   font-size: 1.8rem;
-  /* enlarged for fullscreen legibility */
+  
   font-weight: 700;
   color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
@@ -1760,13 +1683,13 @@ button,
   width: 100%;
   padding: 1.5rem 0;
   border-bottom: 1px solid rgba(3, 199, 179, 0.15);
-  /* Subtle separator */
+  
 }
 
 .mobile-nav-btn:hover {
   color: var(--accent);
   transform: translateY(-3px);
-  /* tiny slide action */
+  
 }
 
 .mobile-register-btn {
@@ -1814,10 +1737,10 @@ button,
     display: flex;
   }
 
-  /* ── Mobile Margins & Spacing ── */
+  
   .scroll-section {
     padding: 2rem 1.5rem;
-    /* was 2.5rem */
+    
   }
 
   .container {
@@ -1834,7 +1757,7 @@ button,
     padding: 0 0.5rem;
   }
 
-  /* Cards with margins */
+  
   .three-cols {
     grid-template-columns: 1fr;
     gap: 1.2rem;
@@ -1847,7 +1770,7 @@ button,
     border-radius: 14px;
   }
 
-  /* Stat pills layout */
+  
   .about-stats-row {
     flex-direction: column;
     gap: 1rem;
@@ -1861,7 +1784,7 @@ button,
     border-radius: 14px;
   }
 
-  /* About section */
+  
   .about-text-center {
     text-align: center;
     padding: 0 0.5rem;
@@ -1871,14 +1794,14 @@ button,
     max-width: 100%;
   }
 
-  /* Contact */
+  
   .contact-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
     padding: 0 0.25rem;
   }
 
-  /* Hero section */
+  
   .hero-section {
     padding: 4rem 2rem;
     min-height: 100vh;
@@ -1893,7 +1816,7 @@ button,
     padding: 0 0.5rem;
   }
 
-  /* Footer */
+  
   .system-footer {
     padding: 3rem 2rem 2rem;
   }
@@ -1952,16 +1875,10 @@ button,
   }
 }
 
-/* ================================================================
-   CINEMATIC INTRO OVERLAY
-   ================================================================ */
-
-/* Lock scroll during intro */
 body.intro-active {
   overflow: hidden;
 }
 
-/* Full-screen intro container */
 #intro-overlay {
   position: fixed;
   inset: 0;
@@ -1974,7 +1891,6 @@ body.intro-active {
   will-change: opacity;
 }
 
-/* Faint grid within intro */
 .intro-grid {
   position: absolute;
   inset: 0;
@@ -1987,14 +1903,12 @@ body.intro-active {
   opacity: 0.7;
 }
 
-/* Particles canvas */
 #intro-particles-canvas {
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
 
-/* Ambient glow hub at center */
 #intro-overlay::before {
   content: '';
   position: absolute;
@@ -2003,7 +1917,6 @@ body.intro-active {
   pointer-events: none;
 }
 
-/* Shared scene container */
 .intro-scene {
   position: absolute;
   inset: 0;
@@ -2014,7 +1927,6 @@ body.intro-active {
   pointer-events: none;
 }
 
-/* ---- Scene 1 & 2: Tagline ---- */
 .intro-tagline {
   display: flex;
   flex-direction: column;
@@ -2046,7 +1958,6 @@ body.intro-active {
   display: block;
 }
 
-/* ---- Scan light (Scene 2) ---- */
 .intro-scan-light {
   position: absolute;
   top: 0;
@@ -2064,7 +1975,6 @@ body.intro-active {
   pointer-events: none;
 }
 
-/* ---- Scene 3: Main Title ---- */
 .intro-main-title {
   display: flex;
   flex-direction: column;
@@ -2098,7 +2008,6 @@ body.intro-active {
   text-align: center;
 }
 
-/* Glow pulse on title year */
 @keyframes introPulseGlow {
 
   0%,
@@ -2111,25 +2020,20 @@ body.intro-active {
   animation: introPulseGlow 1.2s ease-in-out infinite;
 }
 
-/* ================================================================
-   TRANSMISSION CONTACT SECTION
-   ================================================================ */
-
 .contact-section-v2 {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 36px 0 48px;
-  /* was 50px/60px */
+  
   overflow: hidden;
 }
-
 
 .team-header-container {
   text-align: center;
   margin-bottom: 24px;
-  /* was 36px */
+  
 }
 
 .team-header-container .section-title {
@@ -2156,10 +2060,6 @@ body.intro-active {
   letter-spacing: -0.01em;
   word-spacing: -0.04em;
 }
-
-/* ================================================================
-   FAQ SECTION
-   ================================================================ */
 
 .faq-section {
   position: relative;
@@ -2318,10 +2218,6 @@ body.intro-active {
   margin: 0;
 }
 
-/* ================================================================
-   FOOTER SECTION
-   ================================================================ */
-
 .footer-section {
   position: relative;
   width: 100%;
@@ -2364,7 +2260,6 @@ body.intro-active {
   }
 }
 
-
 .footer-content p {
   color: #A6B0AD;
   font-family: var(--font-body);
@@ -2402,8 +2297,6 @@ body.intro-active {
   }
 }
 
-
-
 .section-divider {
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(3, 199, 179, 0.5), transparent);
@@ -2411,10 +2304,6 @@ body.intro-active {
   position: relative;
   z-index: 10;
 }
-
-/* ================================================================
-   ABOUT & PREVIOUS EVENTS
-   ================================================================ */
 
 .about-intro-container {
   display: flex;
@@ -2495,7 +2384,6 @@ body.intro-active {
   letter-spacing: 1px;
 }
 
-/* ── About Content ── */
 .about-intro-container {
   display: flex;
   flex-direction: column;
@@ -2534,10 +2422,6 @@ body.intro-active {
   margin: 0;
 }
 
-/* ================================================================
-   EVENT STRUCTURE (Modern Feature Grid)
-   ================================================================ */
-
 .modern-event-structure {
   position: relative;
   width: 100%;
@@ -2549,7 +2433,6 @@ body.intro-active {
   text-shadow: none;
 }
 
-/* Phase Controls (Pill Buttons) */
 .feature-grid-controls {
   display: flex;
   justify-content: center;
@@ -2584,7 +2467,6 @@ body.intro-active {
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
 }
 
-/* Feature Grid Window and Track */
 .feature-grid-window {
   overflow: hidden;
   width: 100%;
@@ -2603,12 +2485,11 @@ body.intro-active {
   flex: 0 0 100%;
   width: 100%;
   padding: 0;
-  /* Padding is handled by the global .container */
+  
   opacity: 1;
   transition: opacity 0.5s ease;
 }
 
-/* Phase Titles inside Slide */
 .feature-phase-header {
   animation: fadeInDown 0.5s ease backwards;
 }
@@ -2632,32 +2513,28 @@ body.intro-active {
   text-transform: none;
 }
 
-/* Dynamic CSS Grid Columns — single consistent system */
 .feature-cards-grid {
   display: grid;
-  /* auto-fit: cards grow equally to fill the row. Min 220px prevents squashing. */
+  
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
   width: 100%;
   margin: 0 auto;
   align-items: stretch;
-  /* equal heights */
+  
 }
 
-/* Explicit 4-col lock for phase-01 (4 items) on large screens */
 .feature-cards-grid.grid-cols-4 {
   grid-template-columns: repeat(4, 1fr);
   width: 100%;
 }
 
-/* Explicit 5-col for phase-02 (5 items) */
 .feature-cards-grid.grid-cols-5 {
   grid-template-columns: repeat(5, 1fr);
-  /* Fits all 5 side-by-side gracefully */
+  
   width: 100%;
 }
 
-/* Tablet: collapse to 2 cols */
 @media (max-width: 1100px) {
 
   .feature-cards-grid.grid-cols-4,
@@ -2665,8 +2542,6 @@ body.intro-active {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-
-/* Mobile: collapse to 1 col */
 
 @media (max-width: 540px) {
 
@@ -2707,7 +2582,6 @@ body.intro-active {
   height: 32px;
 }
 
-/* Mobile styles for feature grid */
 @media (max-width: 768px) {
 
   .feature-cards-grid.grid-cols-4,
@@ -2786,14 +2660,6 @@ body.intro-active {
   }
 }
 
-
-
-
-
-/* ================================================================
-   NAVBAR LOGO IMAGE
-   ================================================================ */
-
 .nav-logo-img {
   height: 32px;
   width: auto;
@@ -2802,10 +2668,6 @@ body.intro-active {
   filter: brightness(1.1);
 }
 
-/* ================================================================
-   HERO TITLE — two-line tweak
-   ================================================================ */
-
 .hero-title {
   line-height: 1.05;
 }
@@ -2813,10 +2675,6 @@ body.intro-active {
 .hero-desc {
   margin-bottom: 2.2rem;
 }
-
-/* ================================================================
-   INTRO — Logo Grid-Fill Animation
-   ================================================================ */
 
 .intro-logo-reveal {
   position: relative;
@@ -2872,15 +2730,10 @@ body.intro-active {
   margin: 0;
 }
 
-/* ================================================================
-   FAQ SECTION — Modern Two-Column Dashboard
-   ================================================================ */
-
 .faq-section-v2 {
   position: relative;
 }
 
-/* Smooth gradient overlay to blend perfectly into the Footer */
 .faq-section-v2::after {
   content: '';
   position: absolute;
@@ -2890,7 +2743,7 @@ body.intro-active {
   height: 160px;
   background: linear-gradient(to bottom, transparent 0%, var(--bg-primary) 100%);
   z-index: 1;
-  /* Below content, above base bg */
+  
   pointer-events: none;
 }
 
@@ -2901,18 +2754,16 @@ body.intro-active {
   text-align: center;
 }
 
-/* Dashboard Grid Layout */
 .faq-dashboard-grid {
   display: grid;
   grid-template-columns: 1fr 1.6fr;
   gap: 40px;
   align-items: center;
-  /* Vertically center the right answer card relative to the left question list */
+  
   margin-top: 24px;
-  /* was 36px */
+  
 }
 
-/* Left Column: Question Tabs */
 .faq-questions-list {
   display: flex;
   flex-direction: column;
@@ -2956,7 +2807,6 @@ body.intro-active {
   line-height: 1.4;
 }
 
-/* Mobile Accordion Only Elements (Hidden on Desktop) */
 .faq-tab-icon {
   display: none;
   color: var(--accent);
@@ -2994,7 +2844,6 @@ body.intro-active {
   color: #a3b3b0;
 }
 
-/* Right Column: Answer Panel */
 .faq-answer-panel {
   background: rgba(0, 60, 55, 0.35);
   backdrop-filter: blur(14px);
@@ -3022,19 +2871,18 @@ body.intro-active {
   margin: 0;
 }
 
-/* Responsive adjustments */
 @media (max-width: 992px) {
   .faq-dashboard-grid {
     grid-template-columns: 1fr;
     gap: 0;
   }
 
-  /* Hide Desktop Answer Panel */
+  
   .faq-answer-panel {
     display: none;
   }
 
-  /* Enable Mobile Accordion */
+  
   .faq-tab-icon {
     display: flex;
     align-items: center;
@@ -3066,12 +2914,6 @@ body.intro-active {
     margin-bottom: 12px;
   }
 }
-
-
-
-/* ================================================================
-   SECTION SPACING POLISH
-   ================================================================ */
 
 .about-description {
   font-size: 1.1rem;
@@ -3117,8 +2959,6 @@ body.intro-active {
   display: block;
 }
 
-
-
 .section-title {
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 900;
@@ -3137,11 +2977,6 @@ body.intro-active {
   letter-spacing: -0.01em;
   word-spacing: -0.04em;
 }
-
-
-/* ================================================================
-   INTRO — Scramble Text Scene
-   ================================================================ */
 
 .intro-container-new {
   position: fixed;
@@ -3174,10 +3009,6 @@ body.intro-active {
   margin: 0;
   text-shadow: none;
 }
-
-/* ================================================================
-   FOOTER
-   ================================================================ */
 
 .simple-footer {
   position: relative;
@@ -3237,9 +3068,6 @@ body.intro-active {
   margin: 0;
 }
 
-/* ================================================================
-   SMOOTH WAVE BACKGROUND (Replaces Grid)
-   ================================================================ */
 #smooth-wave-bg {
   position: fixed;
   inset: 0;
@@ -3275,10 +3103,6 @@ body.intro-active {
   opacity: 0.7;
 }
 
-
-/* ================================================================
-   CONTACT SECTION — Hover Card Grid
-   ================================================================ */
 .team-section-desc {
   max-width: 650px;
   color: #B7C5C2;
@@ -3288,7 +3112,6 @@ body.intro-active {
   margin: 0 auto;
 }
 
-/* Infinite horizontal marquee wrap */
 .team-marquee-outer {
   position: relative;
   width: 100%;
@@ -3318,7 +3141,6 @@ body.intro-active {
   will-change: transform;
 }
 
-/* Base card overrides for marquee */
 .team-hover-card {
   position: relative;
   width: 300px;
@@ -3352,7 +3174,6 @@ body.intro-active {
   transform: scale(1.1);
 }
 
-/* Subtle persistent gradient for legibility */
 .team-hover-base-overlay {
   position: absolute;
   inset: 0;
@@ -3361,7 +3182,6 @@ body.intro-active {
   z-index: 1;
 }
 
-/* Hover overlay: subtle gradient to ensure background darkens slightly */
 .team-hover-details {
   position: absolute;
   inset: 0;
@@ -3379,7 +3199,6 @@ body.intro-active {
   opacity: 1;
 }
 
-/* Glass Information Panel */
 .team-hover-info {
   padding: 22px 28px;
   width: 100%;
@@ -3402,7 +3221,6 @@ body.intro-active {
   transform: translateY(0);
 }
 
-/* Staggered Content Animation */
 .team-hover-name,
 .team-hover-role-stack,
 .team-hover-icons {
@@ -3496,9 +3314,6 @@ body.intro-active {
   color: #fff;
 }
 
-/* ══════════════════════════════════════════════════════════════
-   MOBILE OVERRIDES FOR CONTACT CAROUSEL (≤ 767px)
-   ══════════════════════════════════════════════════════════════ */
 @media (max-width: 767px) {
   .team-marquee-outer {
     cursor: default;
@@ -3530,7 +3345,7 @@ body.intro-active {
     border-color: rgba(0, 255, 200, 0.25);
   }
 
-  /* Make glass panel permanently visible without breaking the grid */
+  
   .team-hover-details {
     opacity: 1 !important;
     background: none;

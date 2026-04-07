@@ -1,7 +1,3 @@
-/* ══════════════════════════════════════════════════════════════
-   TIMELINE — Vertical Alternating Center Axis
-   ══════════════════════════════════════════════════════════════ */
-
 .tl-vertical-section {
     display: flex;
     flex-direction: column;
@@ -39,14 +35,12 @@
     margin-bottom: 0 !important;
 }
 
-/* Vertical Timeline Wrap */
 .tl-vertical-wrap {
     position: relative;
     width: 100%;
     margin: 0 auto;
     padding: 100px 0 0 0;}
 
-/* Center Line */
 .tl-center-line {
     position: absolute;
     left: 50%;
@@ -69,7 +63,6 @@
     transform-origin: top;
 }
 
-/* Row */
 .tl-row {
     display: flex;
     justify-content: center;
@@ -82,20 +75,18 @@
 
 .tl-row:first-of-type {
     margin-top: 0;
-    /* Handled by wrapper padding */
+    
 }
 
 .tl-row:last-child {
     margin-bottom: 0;
 }
 
-/* Empty space for alternating layout */
 .tl-empty-space {
     flex: 0 0 50%;
     max-width: 50%;
 }
 
-/* Card Wrap */
 .tl-card-wrap {
     flex: 0 0 50%;
     max-width: 50%;
@@ -116,7 +107,6 @@
     padding-left: 50px;
 }
 
-/* Marker Wrapper */
 .tl-marker-wrap {
     position: absolute;
     left: 50%;
@@ -127,7 +117,6 @@
     justify-content: center;
 }
 
-/* Endpoint Markers (Start/End) */
 .tl-endpoint {
     position: absolute;
     left: 50%;
@@ -144,8 +133,6 @@
     transform: translate(-50%, 50%);
 }
 
-
-/* Marker Base */
 .tl-marker {
     position: relative;
     z-index: 5;
@@ -166,7 +153,6 @@
     transition: all 0.3s ease;
 }
 
-/* Connector Line Visual */
 .tl-row::before {
     content: '';
     position: absolute;
@@ -187,7 +173,6 @@
     width: 30px;
 }
 
-/* Marker States & Hover Highlights */
 .tl-marker-wrap.ongoing .tl-marker {
     border-color: var(--accent);
     color: var(--accent);
@@ -210,7 +195,6 @@
     background: rgba(3, 199, 179, 0.4);
 }
 
-/* Event Card */
 .tl-card {
     background: rgba(0, 60, 55, 0.35);
     backdrop-filter: blur(14px);
@@ -230,7 +214,6 @@
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
 }
 
-/* Guided Tour State Highlights */
 .tl-marker-wrap.tour-active .tl-marker {
     background: rgba(3, 199, 179, 0.2);
     border-color: var(--accent);
@@ -298,7 +281,6 @@
     border-radius: 4px;
 }
 
-/* Large Pulsing Start Node */
 .tl-start-pill {
     position: relative;
     z-index: 5;
@@ -356,12 +338,10 @@
     transform: scale(1.15);
 }
 
-/* End marker style — matches regular dots */
 .tl-marker--end {
     font-size: 0.9rem;
 }
 
-/* Responsiveness */
 @media (max-width: 768px) {
     .tl-vertical-wrap {
         padding-top: 120px;
@@ -432,9 +412,6 @@
     }
 }
 
-/* ══════════════════════════════════════
-   LARGE SCREENS & ULTRA-WIDE
-   ══════════════════════════════════════ */
 @media (min-width: 1440px) {
     .tl-container {
         max-width: 1500px;

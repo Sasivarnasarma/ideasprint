@@ -54,7 +54,6 @@
   border-color: rgba(3, 199, 179, 0.35);
 }
 
-/* Primary variant */
 .star-border-primary .inner-content {
   background: #03C7B3;
   color: var(--bg-primary);
