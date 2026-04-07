@@ -3,7 +3,7 @@
 # 🚀 ideasprint 2026 | Inspire Innovation
 
 <a href="https://ideasprint.hackx.lk/">
-  <img src="public/assets/ideasprint-2026-logo.webp" alt="ideasprint 2026 Logo" width="300" />
+  <img src="public/assets/ideasprint.png" alt="ideasprint 2026 Logo" width="500" />
 </a>
 
 <br />
@@ -145,6 +145,10 @@ ideasprint/
 
 <br />
 
-## 📜 License
+## 📜 License & Copyright
 
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+This project's source code is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+
+> [!WARNING]
+> **Asset Copyright**
+> All imagery, graphics, and logos (including the ideasprint and hackX branding) included in this repository are strictly copyrighted. They may **not** be used, copied, distributed, or modified without explicit written permission from the Industrial Management Science Students' Association.
