@@ -1,12 +1,11 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import StarBorder from './StarBorder.jsx';
 import PhasePopup from './PhasePopup.jsx';
 import logoSrc from '../assets/images/logos/ideasprint-2026-logo.webp';
 import { getPhase, PORTAL_URL, BOOKLET_URL } from '../constants/eventDates.js';
 
 export default function Navbar() {
-    const isHidden = useRef(false);
-    let isScrolled = useRef(false);
+    const isScrolled = useRef(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
     const [popupOpen, setPopupOpen] = useState(false);
@@ -50,11 +49,15 @@ export default function Navbar() {
         let linkElements = [];
 
         const updateOffsets = () => {
-            sectionOffsets = sectionIds.map(id => {
-                const el = document.getElementById(id);
-                return el ? { id, top: el.offsetTop } : null;
-            }).filter(Boolean);
-            linkElements = Array.from(document.querySelectorAll('.nav-links a, .mobile-menu-links a'));
+            sectionOffsets = sectionIds
+                .map((id) => {
+                    const el = document.getElementById(id);
+                    return el ? { id, top: el.offsetTop } : null;
+                })
+                .filter(Boolean);
+            linkElements = Array.from(
+                document.querySelectorAll('.nav-links a, .mobile-menu-links a'),
+            );
         };
 
         const handleScroll = () => {
@@ -135,7 +138,13 @@ export default function Navbar() {
                     nav?.classList.add('navbar-hidden');
                 }
             } else {
-                if (window.scrollY < window.innerHeight * 0.8 || window.scrollY <= 50 || mouseInTopArea || isHovered || isScrolling) {
+                if (
+                    window.scrollY < window.innerHeight * 0.8 ||
+                    window.scrollY <= 50 ||
+                    mouseInTopArea ||
+                    isHovered ||
+                    isScrolling
+                ) {
                     nav?.classList.remove('navbar-hidden');
                 } else {
                     nav?.classList.add('navbar-hidden');
@@ -199,18 +208,31 @@ export default function Navbar() {
                         <img src={logoSrc} alt="ideasprint 2026" className="nav-logo-img" />
                     </div>
 
-
                     <div className="nav-links">
-                        <a href="#about" className="nav-btn glow-hover">About</a>
-                        <a href="#timeline" className="nav-btn glow-hover">Timeline</a>
-                        <a href="#contact" className="nav-btn glow-hover">Contact</a>
+                        <a href="#about" className="nav-btn glow-hover">
+                            About
+                        </a>
+                        <a href="#timeline" className="nav-btn glow-hover">
+                            Timeline
+                        </a>
+                        <a href="#contact" className="nav-btn glow-hover">
+                            Contact
+                        </a>
                     </div>
                     <div className="nav-cta">
-                        <StarBorder as="a" href={ctaHref} target="_blank" rel="noopener noreferrer" className="star-border-primary" color="#03C7B3" speed="5s" onClick={handleCtaClick}>
+                        <StarBorder
+                            as="a"
+                            href={ctaHref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="star-border-primary"
+                            color="#03C7B3"
+                            speed="5s"
+                            onClick={handleCtaClick}
+                        >
                             {ctaText}
                         </StarBorder>
                     </div>
-
 
                     <div className="mobile-menu-toggle" onClick={toggleMobileMenu}>
                         <span className={`hamburger-line ${isMobileMenuOpen ? 'open' : ''}`}></span>
@@ -219,13 +241,27 @@ export default function Navbar() {
                     </div>
                 </div>
 
-
                 <div className={`mobile-menu-dropdown ${isMobileMenuOpen ? 'open' : ''}`}>
                     <div className="mobile-menu-links">
-                        <a href="#about" className="mobile-nav-btn" onClick={closeMobileMenu}>About</a>
-                        <a href="#timeline" className="mobile-nav-btn" onClick={closeMobileMenu}>Timeline</a>
-                        <a href="#contact" className="mobile-nav-btn" onClick={closeMobileMenu}>Contact</a>
-                        <StarBorder as="a" href={ctaHref} target="_blank" rel="noopener noreferrer" className="star-border-primary mobile-nav-register" color="#03C7B3" speed="5s" onClick={handleCtaClick}>
+                        <a href="#about" className="mobile-nav-btn" onClick={closeMobileMenu}>
+                            About
+                        </a>
+                        <a href="#timeline" className="mobile-nav-btn" onClick={closeMobileMenu}>
+                            Timeline
+                        </a>
+                        <a href="#contact" className="mobile-nav-btn" onClick={closeMobileMenu}>
+                            Contact
+                        </a>
+                        <StarBorder
+                            as="a"
+                            href={ctaHref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="star-border-primary mobile-nav-register"
+                            color="#03C7B3"
+                            speed="5s"
+                            onClick={handleCtaClick}
+                        >
                             {ctaText}
                         </StarBorder>
                     </div>

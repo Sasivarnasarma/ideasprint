@@ -1,11 +1,11 @@
 .particles-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 2; /* Below content but above base BG layers */
-  pointer-events: none; /* Let all clicks pass straight through! */
-  opacity: 0.45; /* Increased opacity for more visible ambient particles */
-  mix-blend-mode: screen; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.45;
+    mix-blend-mode: screen;
 }

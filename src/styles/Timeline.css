@@ -1,7 +1,3 @@
-/* ══════════════════════════════════════════════════════════════
-   TIMELINE — Vertical Alternating Center Axis
-   ══════════════════════════════════════════════════════════════ */
-
 .tl-vertical-section {
     display: flex;
     flex-direction: column;
@@ -39,16 +35,13 @@
     margin-bottom: 0 !important;
 }
 
-/* Vertical Timeline Wrap */
 .tl-vertical-wrap {
     position: relative;
     width: 100%;
     margin: 0 auto;
     padding: 100px 0 0 0;
-    /* Padding replaces first-child margin to strictly prevent CSS margin-collapse */
 }
 
-/* Center Line */
 .tl-center-line {
     position: absolute;
     left: 50%;
@@ -71,7 +64,6 @@
     transform-origin: top;
 }
 
-/* Row */
 .tl-row {
     display: flex;
     justify-content: center;
@@ -84,20 +76,17 @@
 
 .tl-row:first-of-type {
     margin-top: 0;
-    /* Handled by wrapper padding */
 }
 
 .tl-row:last-child {
     margin-bottom: 0;
 }
 
-/* Empty space for alternating layout */
 .tl-empty-space {
     flex: 0 0 50%;
     max-width: 50%;
 }
 
-/* Card Wrap */
 .tl-card-wrap {
     flex: 0 0 50%;
     max-width: 50%;
@@ -118,7 +107,6 @@
     padding-left: 50px;
 }
 
-/* Marker Wrapper */
 .tl-marker-wrap {
     position: absolute;
     left: 50%;
@@ -129,7 +117,6 @@
     justify-content: center;
 }
 
-/* Endpoint Markers (Start/End) */
 .tl-endpoint {
     position: absolute;
     left: 50%;
@@ -138,7 +125,6 @@
 
 .tl-endpoint-start {
     top: -20px;
-    /* Reduced vertical pull to prevent overlapping and increase gap below text */
     transform: translate(-50%, -50%);
 }
 
@@ -147,18 +133,14 @@
     transform: translate(-50%, 50%);
 }
 
-
-/* Marker Base */
 .tl-marker {
     position: relative;
     z-index: 5;
     width: 40px;
     height: 40px;
     background: var(--bg-primary);
-    /* Fully opaque so the bright progress line doesn't bleed through visually */
     border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 50%;
-    /* Circle badge */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -167,17 +149,14 @@
     font-weight: 700;
     line-height: 1;
     padding-bottom: 2px;
-    /* Pulls the number visually center against the solid border */
     color: rgba(255, 255, 255, 0.7);
     transition: all 0.3s ease;
 }
 
-/* Connector Line Visual */
 .tl-row::before {
     content: '';
     position: absolute;
     top: 50%;
-    /* width and side origins defined specifically below */
     height: 2px;
     background: rgba(255, 255, 255, 0.1);
     z-index: 1;
@@ -186,9 +165,7 @@
 
 .tl-row-left::before {
     right: calc(50% + 20px);
-    /* 20px is the radius of the marker */
     width: 30px;
-    /* 30px covers the exact distance to the 50px card padding */
 }
 
 .tl-row-right::before {
@@ -196,7 +173,6 @@
     width: 30px;
 }
 
-/* Marker States & Hover Highlights */
 .tl-marker-wrap.ongoing .tl-marker {
     border-color: var(--accent);
     color: var(--accent);
@@ -219,7 +195,6 @@
     background: rgba(3, 199, 179, 0.4);
 }
 
-/* Event Card */
 .tl-card {
     background: rgba(0, 60, 55, 0.35);
     backdrop-filter: blur(14px);
@@ -229,7 +204,6 @@
     border-radius: 18px;
     transition: all 0.35s ease;
     width: 100%;
-    /* max-width removed to let it fill left/right margins identically */
     position: relative;
 }
 
@@ -240,7 +214,6 @@
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
 }
 
-/* Guided Tour State Highlights */
 .tl-marker-wrap.tour-active .tl-marker {
     background: rgba(3, 199, 179, 0.2);
     border-color: var(--accent);
@@ -308,11 +281,10 @@
     border-radius: 4px;
 }
 
-/* Large Pulsing Start Node */
 .tl-start-pill {
     position: relative;
     z-index: 5;
-    background: #011E1A;
+    background: #011e1a;
     border: 2px solid rgba(0, 255, 200, 0.4);
     border-radius: 50%;
     width: 50px;
@@ -328,15 +300,21 @@
 
 @keyframes pulse-glow {
     0% {
-        box-shadow: 0 0 10px rgba(0, 255, 200, 0.2), 0 0 0 0 rgba(0, 255, 200, 0.2);
+        box-shadow:
+            0 0 10px rgba(0, 255, 200, 0.2),
+            0 0 0 0 rgba(0, 255, 200, 0.2);
     }
 
     50% {
-        box-shadow: 0 0 25px rgba(0, 255, 200, 0.5), 0 0 0 10px rgba(0, 255, 200, 0);
+        box-shadow:
+            0 0 25px rgba(0, 255, 200, 0.5),
+            0 0 0 10px rgba(0, 255, 200, 0);
     }
 
     100% {
-        box-shadow: 0 0 10px rgba(0, 255, 200, 0.2), 0 0 0 0 rgba(0, 255, 200, 0);
+        box-shadow:
+            0 0 10px rgba(0, 255, 200, 0.2),
+            0 0 0 0 rgba(0, 255, 200, 0);
     }
 }
 
@@ -366,22 +344,18 @@
     transform: scale(1.15);
 }
 
-/* End marker style — matches regular dots */
 .tl-marker--end {
     font-size: 0.9rem;
 }
 
-/* Responsiveness */
 @media (max-width: 768px) {
     .tl-vertical-wrap {
         padding-top: 120px;
-        /* Mobile safe buffer */
     }
 
     .tl-center-line {
         left: 20px;
         top: 15px;
-        /* Match mobile start node's top offset so line doesn't bleed upwards */
     }
 
     .tl-row {
@@ -414,27 +388,22 @@
 
     .tl-endpoint-start {
         top: 15px;
-        /* Creates substantial mobile gap beneath text */
     }
 
     .tl-marker-wrap {
         left: 20px;
         top: 34px;
-        /* Align precisely with the card's date text padding */
         transform: translate(-50%, -50%);
     }
 
     .tl-row:first-of-type {
         margin-top: 0;
-        /* Handled by wrapper padding */
     }
 
     .tl-row::before {
         left: 40px !important;
-        /* Starts exactly at the edge of the marker */
         right: auto !important;
         width: 20px !important;
-        /* Spans 40px to 60px where card padding starts */
         top: 34px !important;
         transform: translateY(-50%) !important;
     }
@@ -450,9 +419,6 @@
     }
 }
 
-/* ══════════════════════════════════════
-   LARGE SCREENS & ULTRA-WIDE
-   ══════════════════════════════════════ */
 @media (min-width: 1440px) {
     .tl-container {
         max-width: 1500px;
