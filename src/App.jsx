@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Intro from './components/Intro.jsx';
 import Navbar from './components/Navbar.jsx';
@@ -16,6 +16,20 @@ const SHOW_CONTACT_SECTION = true;
 
 export default function App() {
     const [introComplete, setIntroComplete] = useState(false);
+
+    useEffect(() => {
+        if (!introComplete) return;
+        const hash = window.location.hash;
+        if (!hash) return;
+
+        const timer = setTimeout(() => {
+            const el = document.querySelector(hash);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }, 300);
+        return () => clearTimeout(timer);
+    }, [introComplete]);
 
     return (
         <>
