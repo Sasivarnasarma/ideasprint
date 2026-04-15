@@ -7,6 +7,7 @@ import {
     PROPOSAL_CLOSE,
     PORTAL_URL,
     TEMPLATE_URL,
+    PITCHING_GUIDE_URL,
     EVENTS,
     getTimeRemaining,
 } from '../constants/eventDates.js';
@@ -84,16 +85,32 @@ const MODE_CONFIG = {
         showPortalBtn: true,
         portalBtnText: 'Submit Now',
     },
+    'pitching-reminder': {
+        badge: "DON'T MISS THIS",
+        title: 'Pitching Video Guide',
+        message: (
+            <>
+                Your template is downloading. Before you start, check out the{' '}
+                <strong>Pitching Video Guide</strong> to see how your video should be structured and
+                what to include.
+            </>
+        ),
+        targetDate: null,
+        showTemplateBtn: false,
+        showPortalBtn: false,
+        showPitchingGuide: true,
+    },
 };
 
-export default function PhasePopup({ isOpen, onClose, mode }) {
+export default function PhasePopup({ isOpen, onClose, mode, onTemplateDownload }) {
     const config = MODE_CONFIG[mode];
+    const hasCountdown = config?.targetDate != null;
     const [timeLeft, setTimeLeft] = useState(() =>
-        config ? getTimeRemaining(config.targetDate) : null,
+        config && hasCountdown ? getTimeRemaining(config.targetDate) : null,
     );
 
     useEffect(() => {
-        if (!isOpen || !config) return;
+        if (!isOpen || !config || !hasCountdown) return;
         setTimeLeft(getTimeRemaining(config.targetDate));
 
         const timer = setInterval(() => {
@@ -105,7 +122,7 @@ export default function PhasePopup({ isOpen, onClose, mode }) {
             setTimeLeft(remaining);
         }, 1000);
         return () => clearInterval(timer);
-    }, [isOpen, config, onClose]);
+    }, [isOpen, config, hasCountdown, onClose]);
 
     useEffect(() => {
         if (!isOpen) return;
@@ -127,7 +144,8 @@ export default function PhasePopup({ isOpen, onClose, mode }) {
         };
     }, [isOpen]);
 
-    if (!isOpen || !config || !timeLeft) return null;
+    if (!isOpen || !config) return null;
+    if (hasCountdown && !timeLeft) return null;
 
     const isClosing = mode.includes('closing');
 
@@ -155,35 +173,37 @@ export default function PhasePopup({ isOpen, onClose, mode }) {
 
                     <p className="phase-popup__message">{config.message}</p>
 
-                    <div className="phase-popup__countdown">
-                        <div className="phase-popup__time-block">
-                            <span className="phase-popup__time-value">
-                                {String(timeLeft.days).padStart(2, '0')}
-                            </span>
-                            <span className="phase-popup__time-label">Days</span>
+                    {hasCountdown && timeLeft && (
+                        <div className="phase-popup__countdown">
+                            <div className="phase-popup__time-block">
+                                <span className="phase-popup__time-value">
+                                    {String(timeLeft.days).padStart(2, '0')}
+                                </span>
+                                <span className="phase-popup__time-label">Days</span>
+                            </div>
+                            <span className="phase-popup__time-sep">:</span>
+                            <div className="phase-popup__time-block">
+                                <span className="phase-popup__time-value">
+                                    {String(timeLeft.hours).padStart(2, '0')}
+                                </span>
+                                <span className="phase-popup__time-label">Hours</span>
+                            </div>
+                            <span className="phase-popup__time-sep">:</span>
+                            <div className="phase-popup__time-block">
+                                <span className="phase-popup__time-value">
+                                    {String(timeLeft.minutes).padStart(2, '0')}
+                                </span>
+                                <span className="phase-popup__time-label">Min</span>
+                            </div>
+                            <span className="phase-popup__time-sep">:</span>
+                            <div className="phase-popup__time-block">
+                                <span className="phase-popup__time-value">
+                                    {String(timeLeft.seconds).padStart(2, '0')}
+                                </span>
+                                <span className="phase-popup__time-label">Sec</span>
+                            </div>
                         </div>
-                        <span className="phase-popup__time-sep">:</span>
-                        <div className="phase-popup__time-block">
-                            <span className="phase-popup__time-value">
-                                {String(timeLeft.hours).padStart(2, '0')}
-                            </span>
-                            <span className="phase-popup__time-label">Hours</span>
-                        </div>
-                        <span className="phase-popup__time-sep">:</span>
-                        <div className="phase-popup__time-block">
-                            <span className="phase-popup__time-value">
-                                {String(timeLeft.minutes).padStart(2, '0')}
-                            </span>
-                            <span className="phase-popup__time-label">Min</span>
-                        </div>
-                        <span className="phase-popup__time-sep">:</span>
-                        <div className="phase-popup__time-block">
-                            <span className="phase-popup__time-value">
-                                {String(timeLeft.seconds).padStart(2, '0')}
-                            </span>
-                            <span className="phase-popup__time-label">Sec</span>
-                        </div>
-                    </div>
+                    )}
 
                     <div className="phase-popup__actions">
                         {config.showPortalBtn && (
@@ -201,6 +221,11 @@ export default function PhasePopup({ isOpen, onClose, mode }) {
                                 href={TEMPLATE_URL}
                                 className="phase-popup__btn phase-popup__btn--secondary"
                                 download
+                                onClick={() => {
+                                    if (onTemplateDownload) {
+                                        setTimeout(() => onTemplateDownload(), 500);
+                                    }
+                                }}
                             >
                                 <svg
                                     width="16"
@@ -216,7 +241,29 @@ export default function PhasePopup({ isOpen, onClose, mode }) {
                                     <polyline points="7 10 12 15 17 10" />
                                     <line x1="12" y1="15" x2="12" y2="3" />
                                 </svg>
-                                Download Template
+                                Proposal Template
+                            </a>
+                        )}
+                        {config.showPitchingGuide && (
+                            <a
+                                href={PITCHING_GUIDE_URL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="phase-popup__btn phase-popup__btn--primary"
+                            >
+                                <svg
+                                    width="16"
+                                    height="16"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2.5"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                >
+                                    <polygon points="5 3 19 12 5 21 5 3" />
+                                </svg>
+                                View Video Guide
                             </a>
                         )}
                     </div>

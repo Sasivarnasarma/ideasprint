@@ -270,7 +270,15 @@ export default function Navbar() {
 
             {/* Phase Popup */}
             {popupMode && (
-                <PhasePopup isOpen={popupOpen} onClose={handleClosePopup} mode={popupMode} />
+                <PhasePopup
+                    isOpen={popupOpen}
+                    onClose={handleClosePopup}
+                    mode={popupMode}
+                    onTemplateDownload={() => {
+                        setPopupMode('pitching-reminder');
+                        setPopupOpen(true);
+                    }}
+                />
             )}
         </>
     );

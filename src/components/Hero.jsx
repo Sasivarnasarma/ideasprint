@@ -60,7 +60,17 @@ export default function Hero({ visible }) {
             e.preventDefault();
             setPopupMode('template-releasing');
             setPopupOpen(true);
+        } else if (phase >= 4 && phase <= 5) {
+            setTimeout(() => {
+                setPopupMode('pitching-reminder');
+                setPopupOpen(true);
+            }, 500);
         }
+    };
+
+    const handleTemplateDownload = () => {
+        setPopupMode('pitching-reminder');
+        setPopupOpen(true);
     };
 
     return (
@@ -170,7 +180,12 @@ export default function Hero({ visible }) {
             </div>
 
             {popupMode && (
-                <PhasePopup isOpen={popupOpen} onClose={handleClosePopup} mode={popupMode} />
+                <PhasePopup
+                    isOpen={popupOpen}
+                    onClose={handleClosePopup}
+                    mode={popupMode}
+                    onTemplateDownload={handleTemplateDownload}
+                />
             )}
         </section>
     );

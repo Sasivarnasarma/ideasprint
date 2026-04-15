@@ -6,6 +6,7 @@ export const PROPOSAL_CLOSE = new Date('April 24, 2026 23:59:59');
 
 export const PORTAL_URL = 'https://isportal.hackx.lk/';
 export const TEMPLATE_URL = '/assets/ideasprint-proposal-template.docx';
+export const PITCHING_GUIDE_URL = '/assets/ideasprint-pitching-video-guide.pdf';
 export const BOOKLET_URL = '/assets/ideasprint-delegate-booklet.pdf';
 
 const WARNING_DAYS = 3;
