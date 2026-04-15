@@ -54,8 +54,8 @@
     box-sizing: border-box;
 
     background: rgba(0, 20, 20, 0.45);
-    backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
 
     border: 1px solid rgba(0, 255, 200, 0.15);
     border-radius: 28px;

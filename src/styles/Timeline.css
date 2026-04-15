@@ -197,8 +197,8 @@
 
 .tl-card {
     background: rgba(0, 60, 55, 0.35);
-    backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
     border: 1px solid rgba(0, 255, 200, 0.25);
     padding: 28px;
     border-radius: 18px;

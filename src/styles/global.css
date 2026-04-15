@@ -131,8 +131,8 @@ h4 {
 
 .glass-panel {
     background: var(--glass-bg);
-    backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
     border-radius: 20px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
@@ -151,8 +151,8 @@ h4 {
     z-index: 1000;
 
     background: rgba(4, 33, 29, 0.55);
-    backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
     border: 1px solid rgba(3, 199, 179, 0.3);
     box-shadow:
         0 10px 40px rgba(0, 0, 0, 0.5),
@@ -185,8 +185,8 @@ h4 {
     pointer-events: auto;
 
     background: rgba(4, 33, 29, 0.92);
-    backdrop-filter: blur(24px) saturate(200%);
     -webkit-backdrop-filter: blur(24px) saturate(200%);
+    backdrop-filter: blur(24px) saturate(200%);
     border-color: rgba(3, 199, 179, 0.5);
     box-shadow:
         0 12px 45px rgba(0, 0, 0, 0.7),
@@ -215,8 +215,8 @@ h4 {
         border-radius: 0 !important;
         background: rgba(4, 33, 29, 0.98) !important;
 
-        backdrop-filter: blur(24px) !important;
         -webkit-backdrop-filter: blur(24px) !important;
+        backdrop-filter: blur(24px) !important;
         border: none !important;
     }
 }
@@ -843,8 +843,8 @@ button,
     flex-direction: column;
     gap: 2px;
     background: rgba(0, 60, 55, 0.35);
-    backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
     border: 1px solid rgba(0, 255, 200, 0.25);
     border-radius: 14px;
     padding: 0.9rem 1.3rem;
@@ -2358,8 +2358,8 @@ body.intro-active {
 
 .event-card {
     background: rgba(18, 19, 18, 0.45);
-    backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
     border: 1px solid rgba(3, 199, 179, 0.25);
     border-radius: 16px;
     overflow: hidden;
@@ -3375,8 +3375,8 @@ body.intro-active {
         transform: none !important;
         padding: 18px 22px;
         background: rgba(11, 24, 21, 0.65);
-        backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
         border-top: 1px solid rgba(0, 255, 200, 0.2);
     }
 

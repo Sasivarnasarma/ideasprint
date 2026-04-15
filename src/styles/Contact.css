@@ -41,8 +41,8 @@
     border: 1px solid rgba(0, 255, 200, 0.1);
     border-radius: 20px;
     overflow: hidden;
-    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     transition:
         border-color 0.3s ease,
         box-shadow 0.3s ease;
