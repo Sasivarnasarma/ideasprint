@@ -2,7 +2,7 @@ export const REGISTRATION_OPEN = new Date('March 17, 2026 00:00:00');
 export const REGISTRATION_CLOSE = new Date('March 24, 2026 06:00:00');
 export const TEMPLATE_RELEASE = new Date('March 25, 2026 00:00:00');
 export const PROPOSAL_OPEN = new Date('March 30, 2026 00:00:00');
-export const PROPOSAL_CLOSE = new Date('April 23, 2026 23:59:59');
+export const PROPOSAL_CLOSE = new Date('April 25, 2026 23:59:59');
 
 export const PORTAL_URL = 'https://isportal.hackx.lk/';
 export const TEMPLATE_URL = '/assets/ideasprint-proposal-template.docx';
@@ -63,7 +63,7 @@ export const EVENTS = [
     {
         step: '04',
         date: PROPOSAL_CLOSE.toISOString(),
-        displayDate: '23rd April 2026',
+        displayDate: '25th April 2026',
         title: 'Proposal Submissions Close',
         desc: 'All proposals and pitching videos must be finalized by this deadline. Evaluation begins immediately after.',
     },
