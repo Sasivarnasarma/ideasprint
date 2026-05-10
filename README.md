@@ -100,6 +100,17 @@ You need to have Node and `pnpm` installed on your machine.
 
 You can now view the project locally at `http://localhost:5173/`.
 
+### Docker Setup
+
+A complete, production-ready Docker setup is included for this project. It uses a multi-stage build (Node for building, Nginx for serving) to ensure a lightweight and secure final image.
+
+To start the application using Docker Compose, run:
+```bash
+docker-compose up -d --build
+```
+
+The application will be accessible at `http://localhost:8080/`.
+
 <br />
 
 ## 💻 Available Scripts
