@@ -3,8 +3,8 @@ export const REGISTRATION_CLOSE = new Date('March 24, 2026 06:00:00');
 export const TEMPLATE_RELEASE = new Date('March 25, 2026 00:00:00');
 export const PROPOSAL_OPEN = new Date('March 30, 2026 00:00:00');
 export const PROPOSAL_CLOSE = new Date('April 25, 2026 23:59:59');
-export const PRESENTATION_OPEN = new Date('June 13, 2026 00:00:00');
-export const PRESENTATION_CLOSE = new Date('June 13, 2026 23:59:00');
+export const PRESENTATION_OPEN = new Date('June 16, 2026 00:00:00');
+export const PRESENTATION_CLOSE = new Date('June 17, 2026 23:59:00');
 
 export const PORTAL_URL = 'https://isportal.hackx.lk/';
 export const TEMPLATE_URL = '/assets/ideasprint-proposal-template.docx';
