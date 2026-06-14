@@ -7,6 +7,8 @@ import {
     isWithinWarningWindow,
     REGISTRATION_CLOSE,
     PROPOSAL_CLOSE,
+    PRESENTATION_OPEN,
+    PRESENTATION_CLOSE,
     PORTAL_URL,
     TEMPLATE_URL,
     BOOKLET_URL,
@@ -20,21 +22,33 @@ export default function Hero({ visible }) {
 
     const phase = getPhase();
 
-    useEffect(() => {
-        const sessionKey =
-            phase === 2 ? 'ideasprint_reg_closing_shown' : 'ideasprint_prop_closing_shown';
+    // Show presentation button only 3 days before it opens or during open period
+    const now = new Date();
+    const presWarningStart = new Date(PRESENTATION_OPEN);
+    presWarningStart.setDate(presWarningStart.getDate() - 3);
+    const showPresentation = now >= presWarningStart && phase <= 7;
 
+    useEffect(() => {
         if (phase === 2 && isWithinWarningWindow(REGISTRATION_CLOSE)) {
-            if (!sessionStorage.getItem(sessionKey)) {
+            const key = 'ideasprint_reg_closing_shown';
+            if (!sessionStorage.getItem(key)) {
                 setPopupMode('registration-closing');
                 setPopupOpen(true);
-                sessionStorage.setItem(sessionKey, 'true');
+                sessionStorage.setItem(key, 'true');
             }
         } else if (phase === 5 && isWithinWarningWindow(PROPOSAL_CLOSE)) {
-            if (!sessionStorage.getItem(sessionKey)) {
+            const key = 'ideasprint_prop_closing_shown';
+            if (!sessionStorage.getItem(key)) {
                 setPopupMode('proposal-closing');
                 setPopupOpen(true);
-                sessionStorage.setItem(sessionKey, 'true');
+                sessionStorage.setItem(key, 'true');
+            }
+        } else if (phase === 7 && isWithinWarningWindow(PRESENTATION_CLOSE)) {
+            const key = 'ideasprint_pres_closing_shown';
+            if (!sessionStorage.getItem(key)) {
+                setPopupMode('presentation-closing');
+                setPopupOpen(true);
+                sessionStorage.setItem(key, 'true');
             }
         }
     }, [phase]);
@@ -51,6 +65,14 @@ export default function Hero({ visible }) {
         } else if (phase === 4) {
             e.preventDefault();
             setPopupMode('proposal-soon');
+            setPopupOpen(true);
+        }
+    };
+
+    const handlePresentationClick = (e) => {
+        if (phase === 6) {
+            e.preventDefault();
+            setPopupMode('presentation-soon');
             setPopupOpen(true);
         }
     };
@@ -155,11 +177,23 @@ export default function Hero({ visible }) {
                                     </a>
                                 )}
 
+                                {showPresentation && (phase === 6 || phase === 7) && (
+                                    <a
+                                        href={PORTAL_URL}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hero__btn hero__btn--primary"
+                                        onClick={handlePresentationClick}
+                                    >
+                                        Submit Presentation
+                                    </a>
+                                )}
+
                                 <a
                                     href={BOOKLET_URL}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className={`hero__btn ${phase === 6 ? 'hero__btn--primary' : 'hero__btn--secondary'}`}
+                                    className={`hero__btn ${(phase === 8 || (phase === 6 && !showPresentation)) ? 'hero__btn--primary' : 'hero__btn--secondary'}`}
                                 >
                                     Delegate Booklet
                                 </a>

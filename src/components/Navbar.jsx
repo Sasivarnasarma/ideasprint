@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import StarBorder from './StarBorder.jsx';
 import PhasePopup from './PhasePopup.jsx';
 import logoSrc from '../assets/images/logos/ideasprint-2026-logo.webp';
-import { getPhase, PORTAL_URL, BOOKLET_URL } from '../constants/eventDates.js';
+import { getPhase, PORTAL_URL, BOOKLET_URL, PRESENTATION_OPEN } from '../constants/eventDates.js';
 
 export default function Navbar() {
     const isScrolled = useRef(false);
@@ -13,6 +13,12 @@ export default function Navbar() {
     const handleClosePopup = useCallback(() => setPopupOpen(false), []);
 
     const phase = getPhase();
+
+    // Show presentation CTA only 3 days before it opens
+    const now = new Date();
+    const presWarningStart = new Date(PRESENTATION_OPEN);
+    presWarningStart.setDate(presWarningStart.getDate() - 3);
+    const showPresentation = now >= presWarningStart && phase <= 7;
 
     const handleCtaClick = (e) => {
         if (phase === 1) {
@@ -30,17 +36,23 @@ export default function Navbar() {
             setPopupMode('proposal-soon');
             setPopupOpen(true);
             closeMobileMenu();
+        } else if (phase === 6 && showPresentation) {
+            e.preventDefault();
+            setPopupMode('presentation-soon');
+            setPopupOpen(true);
+            closeMobileMenu();
         }
     };
 
     const getCtaText = () => {
         if (phase <= 2) return 'REGISTER';
         if (phase <= 5) return 'SUBMIT PROPOSAL';
+        if (showPresentation) return 'SUBMIT PRESENTATION';
         return 'DELEGATE BOOKLET';
     };
 
     const ctaText = getCtaText();
-    const ctaHref = phase === 6 ? BOOKLET_URL : PORTAL_URL;
+    const ctaHref = (phase === 8 || !showPresentation && phase === 6) ? BOOKLET_URL : PORTAL_URL;
 
     useEffect(() => {
         const nav = document.querySelector('.system-nav');

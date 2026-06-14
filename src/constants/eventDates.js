@@ -3,6 +3,8 @@ export const REGISTRATION_CLOSE = new Date('March 24, 2026 06:00:00');
 export const TEMPLATE_RELEASE = new Date('March 25, 2026 00:00:00');
 export const PROPOSAL_OPEN = new Date('March 30, 2026 00:00:00');
 export const PROPOSAL_CLOSE = new Date('April 25, 2026 23:59:59');
+export const PRESENTATION_OPEN = new Date('June 13, 2026 00:00:00');
+export const PRESENTATION_CLOSE = new Date('June 13, 2026 23:59:00');
 
 export const PORTAL_URL = 'https://isportal.hackx.lk/';
 export const TEMPLATE_URL = '/assets/ideasprint-proposal-template.docx';
@@ -17,7 +19,9 @@ export function getPhase(now = new Date()) {
     if (now < TEMPLATE_RELEASE) return 3;
     if (now < PROPOSAL_OPEN) return 4;
     if (now <= PROPOSAL_CLOSE) return 5;
-    return 6;
+    if (now < PRESENTATION_OPEN) return 6;
+    if (now <= PRESENTATION_CLOSE) return 7;
+    return 8;
 }
 
 export function getTimeRemaining(targetDate, now = new Date()) {
@@ -85,15 +89,15 @@ export const EVENTS = [
     {
         step: '07',
         date: 'June 01, 2026 00:00:00',
-        endDate: 'June 20, 2026 23:59:59',
-        displayDate: '01st June — 20th June 2026',
+        endDate: 'June 19, 2026 23:59:59',
+        displayDate: '01st June — 19th June 2026',
         title: 'Industrial Mentorship',
         desc: 'Shortlisted finalist teams receive industry mentorship to refine their ideas, strengthen their solutions, and elevate their final pitches.',
     },
     {
         step: '08',
-        date: 'June 20, 2026 00:00:00',
-        displayDate: '20th June 2026',
+        date: 'June 19, 2026 00:00:00',
+        displayDate: '19th June 2026',
         title: 'Grand Finale',
         desc: 'Live presentations, prototype demos, and Q&A with the judging panel. The Top 5 teams advance to the Semi-Final stage of hackX 11.0.',
         venue: 'DIM | Multimedia Room',

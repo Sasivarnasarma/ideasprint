@@ -5,6 +5,8 @@ import {
     TEMPLATE_RELEASE,
     PROPOSAL_OPEN,
     PROPOSAL_CLOSE,
+    PRESENTATION_OPEN,
+    PRESENTATION_CLOSE,
     PORTAL_URL,
     TEMPLATE_URL,
     PITCHING_GUIDE_URL,
@@ -82,6 +84,35 @@ const MODE_CONFIG = {
         ),
         targetDate: PROPOSAL_CLOSE,
         showTemplateBtn: true,
+        showPortalBtn: true,
+        portalBtnText: 'Submit Now',
+    },
+    'presentation-soon': {
+        badge: 'FINALISTS ONLY',
+        title: 'Presentation Submission',
+        message: (
+            <>
+                Presentation submissions for finalists open on{' '}
+                <strong>{formatDate(PRESENTATION_OPEN)}</strong>. Finalists, get your
+                presentations ready!
+            </>
+        ),
+        targetDate: PRESENTATION_OPEN,
+        showTemplateBtn: false,
+        showPortalBtn: false,
+    },
+    'presentation-closing': {
+        badge: 'CLOSING SOON',
+        title: 'Finalist Presentation Closing',
+        message: (
+            <>
+                Finalist presentation submissions close on{' '}
+                <strong>{formatDate(PRESENTATION_CLOSE)}</strong>. Submit your presentation
+                before the deadline!
+            </>
+        ),
+        targetDate: PRESENTATION_CLOSE,
+        showTemplateBtn: false,
         showPortalBtn: true,
         portalBtnText: 'Submit Now',
     },
